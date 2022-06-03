@@ -1,4 +1,3 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'session.freezed.dart';
@@ -6,7 +5,6 @@ part 'session.g.dart';
 
 @freezed
 class Session with _$Session {
-
   Session._();
 
   factory Session({
@@ -16,7 +14,6 @@ class Session with _$Session {
     @JsonKey(name: 'completed_at') required DateTime? completedAt,
   }) = _Session;
 
-  factory Session.fromJson(Map<String, dynamic> json) => _$SessionFromJson(json);
-
-
+  factory Session.fromJson(Map<String, dynamic> json) =>
+      _$SessionFromJson(json);
 }

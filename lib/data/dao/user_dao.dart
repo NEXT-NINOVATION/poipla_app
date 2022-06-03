@@ -18,5 +18,4 @@ class UserDao implements UserRepository {
     final token = res['token'];
     await tokenService.save(token: token);
   }
-
 }

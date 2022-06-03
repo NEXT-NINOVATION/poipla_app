@@ -14,16 +14,14 @@ abstract class PoiplaApiService {
 
   @POST('/register')
   Future<Map<String, dynamic>> register();
-
 }
 
-PoiplaApiService create(TokenService service, {String baseUrl = 'https://poipla.yumekiti.net/api'}) {
+PoiplaApiService create(TokenService service,
+    {String baseUrl = 'https://poipla.yumekiti.net/api'}) {
   final dio = Dio();
-  
-  dio.interceptors.add(InterceptorsWrapper(
-    onRequest: (options, handler) async  {
-      options.headers['Authorization'] = "Bearer Token ${await service.get()}";
-    }
-  ));
+
+  dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
+    options.headers['Authorization'] = "Bearer Token ${await service.get()}";
+  }));
   return PoiplaApiService(dio, baseUrl: baseUrl);
 }

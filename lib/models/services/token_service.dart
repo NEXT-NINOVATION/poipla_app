@@ -1,6 +1,4 @@
-
 class TokenService {
-
   Future<void> save({required String? token}) {
     throw UnimplementedError();
   }

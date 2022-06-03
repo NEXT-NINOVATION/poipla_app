@@ -1,10 +1,7 @@
-
 import 'package:poipla_app/models/services/token_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceTokenService implements TokenService {
-
-
   @override
   Future<String?> get() async {
     final preferences = await SharedPreferences.getInstance();
@@ -16,5 +13,4 @@ class SharedPreferenceTokenService implements TokenService {
     final preferences = await SharedPreferences.getInstance();
     preferences.setString('USER_TOKEN', token ?? '');
   }
-
 }
