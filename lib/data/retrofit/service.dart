@@ -12,6 +12,9 @@ abstract class PoiplaApiService {
   @GET('/me')
   Future<User> getMe();
 
+  @POST('/register')
+  Future<Map<String, dynamic>> register();
+
 }
 
 PoiplaApiService create(TokenService service, {String baseUrl = 'https://poipla.yumekiti.net/api'}) {
