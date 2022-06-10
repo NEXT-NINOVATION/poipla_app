@@ -1,21 +1,11 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:poipla_app/data/dao/user_dao.dart';
 import 'package:poipla_app/data/retrofit/service.dart';
-import 'package:poipla_app/models/services/token_service.dart';
+import 'package:poipla_app/providers/token_providers.dart';
 
-class TestToken implements TokenService {
-  String? token;
-  @override
-  Future<String?> get() async {
-    return token;
-  }
-
-  @override
-  Future<void> save({required String? token}) async {
-    this.token = token;
-  }
-
-}
 void main() {
   final token = TestToken();
   final apiService = create(token);
@@ -27,6 +17,15 @@ void main() {
 
     final reMe = await userDAO.findMe();
     expect(me, equals(reMe));
+    log('me$reMe');
   });
 
+  test('未認証時のエラー', () async {
+    token.save(token: null);
+    expect(() async {
+      await userDAO.findMe();
+    },
+        throwsA(
+            predicate((e) => e is DioError && e.response?.statusCode == 401)));
+  });
 }
