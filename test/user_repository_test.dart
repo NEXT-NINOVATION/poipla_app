@@ -6,7 +6,6 @@ import 'package:poipla_app/data/dao/user_dao.dart';
 import 'package:poipla_app/data/retrofit/service.dart';
 import 'package:poipla_app/providers/token_providers.dart';
 
-
 void main() {
   final token = TestToken();
   final apiService = create(token);
@@ -25,7 +24,8 @@ void main() {
     token.save(token: null);
     expect(() async {
       await userDAO.findMe();
-    }, throwsA(predicate((e) => e is DioError && e.response?.statusCode == 401)));
-
+    },
+        throwsA(
+            predicate((e) => e is DioError && e.response?.statusCode == 401)));
   });
 }

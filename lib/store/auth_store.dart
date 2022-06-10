@@ -6,8 +6,11 @@ import 'package:poipla_app/models/entities/user/user.dart';
 import 'package:poipla_app/models/repositories/user_repository.dart';
 
 enum AuthType {
-  loading, unauthorized, authorized,
+  loading,
+  unauthorized,
+  authorized,
 }
+
 class AuthStore extends ChangeNotifier {
   AuthStore({required this.userRepository});
 
@@ -15,17 +18,19 @@ class AuthStore extends ChangeNotifier {
   AuthType type = AuthType.loading;
   User? currentUser;
 
-
   Future<bool> fetch() async {
     try {
       currentUser = await userRepository.findMe();
       type = AuthType.authorized;
-    } on DioError catch(e) {
+    } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         type = AuthType.unauthorized;
         return true;
       } else {
-        log('error', error: e,);
+        log(
+          'error',
+          error: e,
+        );
         rethrow;
       }
     } finally {
@@ -36,7 +41,8 @@ class AuthStore extends ChangeNotifier {
 
   Future<void> register() async {
     await userRepository.register();
-    fetch();
+    currentUser = await userRepository.findMe();
+    type = AuthType.authorized;
+    notifyListeners();
   }
-
 }

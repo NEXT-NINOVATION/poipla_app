@@ -22,31 +22,32 @@ class MyApp extends StatelessWidget {
 }
 
 final routerProvider = Provider((ref) {
-
   final authState = ref.read(authStoreProvider);
   return GoRouter(
     routes: [
-      GoRoute(path: '/splash', builder: (context, state) => ExampleSplashScreen()),
-      GoRoute(path: '/', builder: (context, state) => const HomeScreen(title: 'にのさんのおうち')),
-      GoRoute(path: '/register', builder: (context, state) => ExampleRegisterScreen()),
+      GoRoute(
+          path: '/splash', builder: (context, state) => ExampleSplashScreen()),
+      GoRoute(
+          path: '/',
+          builder: (context, state) => const HomeScreen(title: 'にのさんのおうち')),
+      GoRoute(
+          path: '/register',
+          builder: (context, state) => const ExampleRegisterScreen()),
     ],
     redirect: (state) {
-
-      if (state.subloc != '/register' && authState.type == AuthType.unauthorized) {
+      if (state.subloc != '/register' &&
+          authState.type == AuthType.unauthorized) {
         return '/register';
       }
       if (state.subloc != '/splash' && authState.type == AuthType.loading) {
         return '/splash';
       }
-      if (['/splash', '/register'].contains(state.subloc) && authState.type == AuthType.authorized) {
-        return '/';
-      }
       return null;
     },
     refreshListenable: authState,
   );
-
 });
+
 class RouterApp extends ConsumerWidget {
   const RouterApp({Key? key}) : super(key: key);
   @override
@@ -56,7 +57,8 @@ class RouterApp extends ConsumerWidget {
     ref.watch(authStoreProvider);
     final router = ref.read(routerProvider);
     return MaterialApp.router(
-      routeInformationParser: router.routeInformationParser, routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
       theme: ThemeData(
         fontFamily: "LightNovelPOPv2",
       ),
@@ -72,21 +74,34 @@ class ExampleSplashScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: Text('Splash'),),
-      body: const Center(child: CircularProgressIndicator(),),
+      appBar: AppBar(
+        title: Text('Splash'),
+      ),
+      body: const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }
 
-
 class ExampleRegisterScreen extends ConsumerWidget {
+  const ExampleRegisterScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register'),),
-      body: Center(child: TextButton(onPressed: () {
-        ref.read(authStoreProvider).register();
-      }, child: const Text('登録')),),
+      appBar: AppBar(
+        title: const Text('Register'),
+      ),
+      body: Center(
+        child: TextButton(
+            onPressed: () {
+              ref.read(authStoreProvider).register().then((value) {
+                GoRouter.of(context).push('/');
+              });
+            },
+            child: const Text('登録')),
+      ),
     );
   }
 }

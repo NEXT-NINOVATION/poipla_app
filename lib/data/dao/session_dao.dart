@@ -7,12 +7,12 @@ class SessionDao implements SessionRepository {
   SessionDao({required this.apiService});
   @override
   Future<void> complete(Session session) {
-    return apiService.completeSession(session.dustBoxId.toString(), session.id.toString());
+    return apiService.completeSession(
+        session.dustBoxId.toString(), session.id.toString());
   }
 
   @override
   Future<Session> create({required int dustBoxId}) {
     return apiService.createSession(dustBoxId.toString());
   }
-
 }

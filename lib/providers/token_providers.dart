@@ -13,7 +13,6 @@ class TestToken implements TokenService {
   Future<void> save({required String? token}) async {
     this.token = token;
   }
-
 }
 
 final tokenProvider = Provider<TokenService>((ref) {
