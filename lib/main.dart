@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/providers/user_provider.dart';
+import 'package:poipla_app/screens/change_costume/change_costume_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
 import 'package:poipla_app/store/auth_store.dart';
 
@@ -33,6 +34,10 @@ final routerProvider = Provider((ref) {
       GoRoute(
           path: '/register',
           builder: (context, state) => const ExampleRegisterScreen()),
+      GoRoute(
+        path: '/change_costume',
+        builder: (context, state) => const ChangeCostumeScreen(),
+      )
     ],
     redirect: (state) {
       if (state.subloc != '/register' &&
@@ -97,7 +102,7 @@ class ExampleRegisterScreen extends ConsumerWidget {
         child: TextButton(
             onPressed: () {
               ref.read(authStoreProvider).register().then((value) {
-                GoRouter.of(context).push('/');
+                GoRouter.of(context).go('/');
               });
             },
             child: const Text('登録')),
