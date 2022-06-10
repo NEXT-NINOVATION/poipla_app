@@ -29,7 +29,12 @@ PoiplaApiService create(TokenService service,
   final dio = Dio();
 
   dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
-    options.headers['Authorization'] = "Bearer ${await service.get()}";
+    final token = await service.get();
+    if (token != null) {
+      options.headers['Authorization'] = "Bearer $token";
+    }
+    options.headers['Accept'] = 'application/json';
+
     handler.next(options);
   }));
   return PoiplaApiService(dio, baseUrl: baseUrl);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:poipla_app/models/entities/user/user.dart';
@@ -23,6 +25,7 @@ class AuthStore extends ChangeNotifier {
         type = AuthType.unauthorized;
         return true;
       } else {
+        log('error', error: e,);
         rethrow;
       }
     } finally {
