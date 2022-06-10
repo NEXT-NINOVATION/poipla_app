@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
+import 'package:poipla_app/models/entities/token/token.dart';
 import 'package:poipla_app/models/services/token_service.dart';
 import 'package:poipla_app/models/entities/user/user.dart';
 import 'package:retrofit/http.dart';
@@ -14,7 +15,7 @@ abstract class PoiplaApiService {
   Future<User> getMe();
 
   @POST('/register')
-  Future<Map<String, dynamic>> register();
+  Future<Token> register();
 
   @POST('/dust-boxes/{boxId}/sessions')
   Future<Session> createSession(@Path('boxId') String boxId);
@@ -28,7 +29,8 @@ PoiplaApiService create(TokenService service,
   final dio = Dio();
 
   dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
-    options.headers['Authorization'] = "Bearer Token ${await service.get()}";
+    options.headers['Authorization'] = "Bearer ${await service.get()}";
+    handler.next(options);
   }));
   return PoiplaApiService(dio, baseUrl: baseUrl);
 }
