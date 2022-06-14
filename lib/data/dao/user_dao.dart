@@ -18,4 +18,13 @@ class UserDao implements UserRepository {
     final token = res.token;
     await tokenService.save(token: token);
   }
+
+  @override
+  Future<User> update({required String name, int? costumeId}) async {
+    final res = await service.updateUser({
+      'name': name,
+      if (costumeId != null) 'costume_id': costumeId,
+    });
+    return res;
+  }
 }
