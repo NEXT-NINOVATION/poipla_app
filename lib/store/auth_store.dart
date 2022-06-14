@@ -9,6 +9,8 @@ enum AuthType {
   loading,
   unauthorized,
   authorized,
+  start,
+  tutorial
 }
 
 class AuthStore extends ChangeNotifier {
@@ -25,6 +27,7 @@ class AuthStore extends ChangeNotifier {
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         type = AuthType.unauthorized;
+        await start();
         return true;
       } else {
         log(
@@ -39,10 +42,18 @@ class AuthStore extends ChangeNotifier {
     return false;
   }
 
+  Future<void> start() async {
+    if (type != AuthType.unauthorized) {
+      return;
+    }
+    type = AuthType.start;
+    notifyListeners();
+  }
+
   Future<void> register() async {
     await userRepository.register();
     currentUser = await userRepository.findMe();
-    type = AuthType.authorized;
+    type = AuthType.tutorial;
     notifyListeners();
   }
 }
