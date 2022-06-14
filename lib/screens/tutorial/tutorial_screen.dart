@@ -5,6 +5,8 @@ import 'package:poipla_app/screens/bubble.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/screens/app_button.dart';
 
+import '../home/home_screen.dart';
+
 class TutorialScreen extends StatefulWidget {
   TutorialScreen({Key? key}) : super(key: key);
 
@@ -17,12 +19,28 @@ class _TutorialScreenState extends State<TutorialScreen> {
   var focusNode = FocusNode();
   bool showTextFieldFlag = false;
   double bottomMargin = 120;
+  bool bgKeyboardFlag = false;
 
   // 吹き出し表示/非表示フラグ
   bool showSpeechBalloonFlag = true;
 
+  bool showHistoryFlag = false;
+
+  String fishSvgName = "fish_default.svg";
+  String buttonText = "こたえる";
+  int index = 0;
+  int funcKey = 0;
+
   @override
   Widget build(BuildContext context) {
+    // セリフ
+    List<String> wordsList = [
+      "こんにちは、ぼくは\n〇〇。\nきみのおなまえは？",
+      "〇〇〇〇、よろしくね！\nじつは、〇〇〇〇に\nおねがいがあるんだ…。",
+      "おうちのうみが、毎日たくさ\nんのごみであふれて住みにく\nくなっちゃったんだ",
+      "というわけで、ぼくといっ\nしょにうみをきれいにする\nお手伝いをしてほしいんだ！",
+      "ありがとう！じゃあ、ぼくの\nおうちに案内するね。〇〇〇\n〇、これからよろしくね！",
+    ];
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
@@ -41,6 +59,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             Container(
@@ -48,8 +67,9 @@ class _TutorialScreenState extends State<TutorialScreen> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
+                  const Bubble(),
                   SvgPicture.asset(
-                    "assets/svg/fish.svg",
+                    "assets/svg/$fishSvgName",
                     width: deviceW * 0.7,
                   ),
                   Container(
@@ -95,9 +115,9 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(bottom: 10),
-                      child: const Text(
-                        "こんにちは、ぼくは\n〇〇。\nきみのおなまえは？",
-                        style: TextStyle(
+                      child: Text(
+                        wordsList[index],
+                        style: const TextStyle(
                           color: kFontColor,
                           fontSize: 20,
                         ),
@@ -107,48 +127,140 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Bubble(),
-                Container(
-                  margin: EdgeInsets.only(bottom: bottomMargin),
-                  child: Column(
-                    children: [
-                      // Visibility(
-                      //   visible: showTextFieldFlag,
-                      //   child: Container(
-                      //     margin: const EdgeInsets.only(bottom: 40),
-                      //     width: deviceW * 0.7,
-                      //     child: TextField(
-                      //       focusNode: focusNode,
-                      //       maxLength: 8,
-                      //       maxLengthEnforcement: MaxLengthEnforcement.none,
-                      //       decoration: const InputDecoration(
-                      //         border: InputBorder.none,
-                      //         filled: true,
-                      //         fillColor: Colors.white,
-                      //         hintText: "八文字まで入力可",
-                      //         counterText: "",
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      GestureDetector(
-                        onTap: () {
-                          // setState(() {
-                          //   bottomMargin = 40;
-                          //   showSpeechBalloonFlag = false;
-                          //   showTextFieldFlag = true;
-                          // });
-                          // FocusScope.of(context).requestFocus(focusNode);
-                        },
-                        child: const AppButton(text: "こたえる"),
+            Visibility(
+              visible: bgKeyboardFlag,
+              child: Container(
+                color: Colors.black38,
+              ),
+            ),
+            Positioned(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              left: 0,
+              right: 0,
+              child: Container(
+                margin: EdgeInsets.only(bottom: bottomMargin),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Visibility(
+                      visible: showTextFieldFlag,
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 40),
+                        width: deviceW * 0.7,
+                        child: TextField(
+                          focusNode: focusNode,
+                          maxLength: 8,
+                          maxLengthEnforcement: MaxLengthEnforcement.none,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: "八文字まで入力可",
+                            counterText: "",
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (funcKey == 0) {
+                            bottomMargin = 50;
+                            showSpeechBalloonFlag = false;
+                            showTextFieldFlag = true;
+                            bgKeyboardFlag = true;
+                            buttonText = "これにする！";
+                            funcKey++;
+                          } else if (funcKey == 1) {
+                            fishSvgName = "fish_worry.svg";
+                            bottomMargin = 120;
+                            showSpeechBalloonFlag = true;
+                            showTextFieldFlag = false;
+                            bgKeyboardFlag = false;
+                            buttonText = "なあに？";
+                            funcKey++;
+                            index++;
+                          } else if (funcKey == 2) {
+                            buttonText = "そうなの？";
+                            funcKey++;
+                            index++;
+                          } else if (funcKey == 3) {
+                            fishSvgName = "fish_default.svg";
+                            buttonText = "いいよ！";
+                            funcKey++;
+                            index++;
+                            showHistoryFlag = true;
+                          } else if (funcKey == 4) {
+                            buttonText = "よろしくね";
+                            index = 4;
+                            funcKey++;
+                          } else {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HomeScreen(title: "にの"),
+                                ),
+                                (_) => false);
+                          }
+                        });
+                        FocusScope.of(context).requestFocus(focusNode);
+                      },
+                      child: AppButton(text: buttonText),
+                    ),
+                  ],
                 ),
-              ],
+              ),
+            ),
+            Visibility(
+              visible: showHistoryFlag,
+              child: Container(
+                width: deviceW,
+                height: deviceH,
+                color: kBgColorYellow,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "歴史!",
+                          style: TextStyle(
+                            color: kFontColor,
+                            fontSize: 28,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          width: deviceW * 0.7,
+                          child: const Text(
+                            "みんなが使っているストローやスーパーの袋、ペットボトルは正しく処理されないと街にごみとして残り続けます。ごみは川に流れてやがて、海にたどりつきます。消える事がなく、捨て続けると〇〇が大人になる頃にはプラスチックごみで海が溢れかえって僕たちのお家がなくなるよ！助けてー",
+                            style: TextStyle(
+                              color: kFontColor,
+                              fontSize: 20,
+                              height: 1.5,
+                            ),
+                            softWrap: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      margin: const EdgeInsets.only(bottom: 120),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            showHistoryFlag = false;
+                          });
+                        },
+                        child: const AppButton(text: "わかった！"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
