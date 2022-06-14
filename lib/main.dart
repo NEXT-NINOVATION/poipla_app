@@ -6,6 +6,7 @@ import 'package:poipla_app/screens/change_costume/change_costume_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
 import 'package:poipla_app/screens/splash_screen.dart';
 import 'package:poipla_app/screens/start_screen.dart';
+import 'package:poipla_app/screens/tutorial/tutorial_screen.dart';
 
 import 'package:poipla_app/store/auth_store.dart';
 
@@ -31,24 +32,29 @@ final routerProvider = Provider((ref) {
   return GoRouter(
     routes: [
       GoRoute(
-          path: '/splash', builder: (context, state) => ExampleSplashScreen()),
+          path: '/splash', builder: (context, state) => const SplashScreen()),
       GoRoute(
           path: '/',
           builder: (context, state) => const HomeScreen(title: 'にのさんのおうち')),
       GoRoute(
-          path: '/register',
-          builder: (context, state) => const ExampleRegisterScreen()),
-      GoRoute(
         path: '/change_costume',
         builder: (context, state) => const ChangeCostumeScreen(),
-      )
+      ),
+      GoRoute(
+        path: '/start',
+        builder: (context, state) => const StartScreen(),
+      ),
+      GoRoute(path: '/tutorials', builder: (context, state) => TutorialScreen()),
     ],
     redirect: (state) {
-      if (state.subloc != '/register' &&
-          authState.type == AuthType.unauthorized) {
-        return '/register';
+      if (state.subloc != '/start' &&
+          authState.type == AppStateType.start) {
+        return '/start';
       }
-      if (state.subloc != '/splash' && authState.type == AuthType.loading) {
+      if (state.subloc != '/tutorials' && authState.type == AppStateType.tutorial) {
+        return '/tutorials';
+      }
+      if (state.subloc != '/splash' && authState.type == AppStateType.loading) {
         return '/splash';
       }
       return null;
@@ -79,19 +85,6 @@ final _fetchAuthInfoFutureProvider = FutureProvider.autoDispose((ref) {
   return ref.read(authStoreProvider).fetch();
 });
 
-class ExampleSplashScreen extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Splash'),
-      ),
-      body: const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-}
 
 class ExampleRegisterScreen extends ConsumerWidget {
   const ExampleRegisterScreen({Key? key}) : super(key: key);
