@@ -195,13 +195,14 @@ class _TutorialScreenState extends State<TutorialScreen> {
                             index = 4;
                             funcKey++;
                           } else {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const HomeScreen(title: "にの"),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(
+                                  title: "にの",
                                 ),
-                                (_) => false);
+                              ),
+                            );
                           }
                         });
                         FocusScope.of(context).requestFocus(focusNode);
