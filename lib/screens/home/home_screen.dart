@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:poipla_app/providers/user_provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final name = ref.watch(authStoreProvider).currentUser?.name ?? '';
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -31,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            widget.title,
+            '$nameさんのおうち',
             style: const TextStyle(
               color: kFontColor,
             ),
