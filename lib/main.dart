@@ -4,7 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/change_costume/change_costume_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
+import 'package:poipla_app/screens/splash_screen.dart';
+import 'package:poipla_app/screens/start_screen.dart';
+
 import 'package:poipla_app/store/auth_store.dart';
+
 
 void main() {
   runApp(const MyApp());
