@@ -23,6 +23,9 @@ abstract class PoiplaApiService {
   @PUT('/dust-boxes/{boxId}/sessions/{sessionId}')
   Future<void> completeSession(
       @Path('boxId') String boxId, @Path('sessionId') String sessionId);
+
+  @PUT('/me')
+  Future<User> updateUser(@Body() Map<String, dynamic> body);
 }
 
 PoiplaApiService create(TokenService service,
