@@ -45,4 +45,9 @@ class AuthStore extends ChangeNotifier {
     type = AuthType.authorized;
     notifyListeners();
   }
+
+  Future<void> updateName({required String name}) async {
+    currentUser = await userRepository.update(name: name);
+    notifyListeners();
+  }
 }
