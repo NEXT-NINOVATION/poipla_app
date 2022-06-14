@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            widget.title,
+            "${widget.title}のおうち",
             style: const TextStyle(
               color: kFontColor,
             ),
