@@ -1,4 +1,3 @@
-
 import 'package:poipla_app/models/entities/session/session.dart';
 
 class SessionRepository {

@@ -15,7 +15,7 @@ class UserDao implements UserRepository {
   @override
   Future<void> register() async {
     final res = await service.register();
-    final token = res['token'];
+    final token = res.token;
     await tokenService.save(token: token);
   }
 }
