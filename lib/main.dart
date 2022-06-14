@@ -48,13 +48,13 @@ final routerProvider = Provider((ref) {
     ],
     redirect: (state) {
       if (state.subloc != '/start' &&
-          authState.type == AuthType.start) {
+          authState.type == AppStateType.start) {
         return '/start';
       }
-      if (state.subloc != '/tutorials' && authState.type == AuthType.tutorial) {
+      if (state.subloc != '/tutorials' && authState.type == AppStateType.tutorial) {
         return '/tutorials';
       }
-      if (state.subloc != '/splash' && authState.type == AuthType.loading) {
+      if (state.subloc != '/splash' && authState.type == AppStateType.loading) {
         return '/splash';
       }
       return null;
