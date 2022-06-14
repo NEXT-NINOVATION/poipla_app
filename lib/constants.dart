@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // カラー変数
 const kAppBarColor = Color(0xFFFFA63E);
-const kFontColor = Color(0xFF403F4C);
+const kFontColor = Color(0xFFFFFFFF);
 const kFontColorBlue = Color(0xFF207CAF);
 const kFontColorImportant = Color(0xFF207CAF);
 const kBackgroundColors = [Color(0xFFB6E9EB), Color(0xFF207CAF)];
