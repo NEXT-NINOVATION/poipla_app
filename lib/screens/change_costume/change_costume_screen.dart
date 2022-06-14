@@ -4,7 +4,7 @@ import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/database.dart';
 
 class ChangeCostumeScreen extends StatefulWidget {
-  ChangeCostumeScreen({Key? key}) : super(key: key);
+  const ChangeCostumeScreen({Key? key}) : super(key: key);
 
   @override
   State<ChangeCostumeScreen> createState() => _ChangeCostumeScreenState();
@@ -13,7 +13,6 @@ class ChangeCostumeScreen extends StatefulWidget {
 class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var point = 120;
 
     return Container(
