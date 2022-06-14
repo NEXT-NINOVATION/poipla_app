@@ -1,13 +1,14 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/bubble.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/screens/app_button.dart';
 
-import '../home/home_screen.dart';
 
 class TutorialScreen extends ConsumerStatefulWidget {
   const TutorialScreen({Key? key}) : super(key: key);
@@ -217,13 +218,8 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                             index = 4;
                             funcKey++;
                           } else {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const HomeScreen(title: "にの"),
-                                ),
-                                (_) => false);
+                            ref.read(authStoreProvider).completeTutorial();
+                            GoRouter.of(context).go('/');
                           }
                         });
                         FocusScope.of(context).requestFocus(focusNode);
