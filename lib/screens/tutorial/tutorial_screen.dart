@@ -39,13 +39,14 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(authStoreProvider).currentUser;
     // セリフ
     List<String> wordsList = [
       "こんにちは、ぼくは\n〇〇。\nきみのおなまえは？",
-      "〇〇〇〇、よろしくね！\nじつは、〇〇〇〇に\nおねがいがあるんだ…。",
+      "${currentUser?.name}、よろしくね！\nじつは、${currentUser?.name}に\nおねがいがあるんだ…。",
       "おうちのうみが、毎日たくさ\nんのごみであふれて住みにく\nくなっちゃったんだ",
       "というわけで、ぼくといっ\nしょにうみをきれいにする\nお手伝いをしてほしいんだ！",
-      "ありがとう！じゃあ、ぼくの\nおうちに案内するね。〇〇〇\n〇、これからよろしくね！",
+      "ありがとう！じゃあ、ぼくの\nおうちに案内するね。${currentUser?.name}、\nこれからよろしくね！",
     ];
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
