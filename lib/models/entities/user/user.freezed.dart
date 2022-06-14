@@ -28,7 +28,7 @@ mixin _$User {
   @JsonKey(name: 'total_pet')
   int get totalPet => throw _privateConstructorUsedError;
   @JsonKey(name: 'costume_id')
-  int get costumeId => throw _privateConstructorUsedError;
+  int? get costumeId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +46,7 @@ abstract class $UserCopyWith<$Res> {
       int point,
       String? name,
       @JsonKey(name: 'total_pet') int totalPet,
-      @JsonKey(name: 'costume_id') int costumeId});
+      @JsonKey(name: 'costume_id') int? costumeId});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       costumeId: costumeId == freezed
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -112,7 +112,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       int point,
       String? name,
       @JsonKey(name: 'total_pet') int totalPet,
-      @JsonKey(name: 'costume_id') int costumeId});
+      @JsonKey(name: 'costume_id') int? costumeId});
 }
 
 /// @nodoc
@@ -162,7 +162,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       costumeId: costumeId == freezed
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -197,7 +197,7 @@ class _$_User extends _User {
   final int totalPet;
   @override
   @JsonKey(name: 'costume_id')
-  final int costumeId;
+  final int? costumeId;
 
   @override
   String toString() {
@@ -249,7 +249,7 @@ abstract class _User extends User {
       required final int point,
       required final String? name,
       @JsonKey(name: 'total_pet') required final int totalPet,
-      @JsonKey(name: 'costume_id') required final int costumeId}) = _$_User;
+      @JsonKey(name: 'costume_id') required final int? costumeId}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -269,7 +269,7 @@ abstract class _User extends User {
   int get totalPet => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'costume_id')
-  int get costumeId => throw _privateConstructorUsedError;
+  int? get costumeId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

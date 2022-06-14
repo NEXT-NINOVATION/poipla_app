@@ -13,7 +13,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       point: json['point'] as int,
       name: json['name'] as String?,
       totalPet: json['total_pet'] as int,
-      costumeId: json['costume_id'] as int,
+      costumeId: json['costume_id'] as int?,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
