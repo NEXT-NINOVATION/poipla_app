@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/constants.dart';
+import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/bubble.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/screens/app_button.dart';
 
 import '../home/home_screen.dart';
 
-class TutorialScreen extends StatefulWidget {
-  TutorialScreen({Key? key}) : super(key: key);
+class TutorialScreen extends ConsumerStatefulWidget {
+  const TutorialScreen({Key? key}) : super(key: key);
 
   @override
-  State<TutorialScreen> createState() => _TutorialScreenState();
+  ConsumerState<TutorialScreen> createState() => _TutorialScreenState();
 }
 
-class _TutorialScreenState extends State<TutorialScreen> {
+class _TutorialScreenState extends ConsumerState<TutorialScreen> {
   // TextFieldのキーボード表示用
   var focusNode = FocusNode();
   bool showTextFieldFlag = false;
@@ -30,6 +32,10 @@ class _TutorialScreenState extends State<TutorialScreen> {
   String buttonText = "こたえる";
   int index = 0;
   int funcKey = 0;
+
+  final inputNameController = TextEditingController();
+
+  bool isUserNameUpdated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -151,6 +157,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                           focusNode: focusNode,
                           maxLength: 8,
                           maxLengthEnforcement: MaxLengthEnforcement.none,
+                          controller: inputNameController,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             filled: true,
@@ -163,7 +170,30 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        if (funcKey == 1) {
+                          ref.read(authStoreProvider).updateName(name: inputNameController.text).then((value) {
+                            setState(() {
+
+                                fishSvgName = "fish_worry.svg";
+                                bottomMargin = 120;
+                                showSpeechBalloonFlag = true;
+                                showTextFieldFlag = false;
+                                bgKeyboardFlag = false;
+                                buttonText = "なあに？";
+                                funcKey++;
+                                index++;
+                                isUserNameUpdated = true;
+
+                            });
+                          });
+                          return;
+                        }
+
+
                         setState(() {
+                          if (!isUserNameUpdated && funcKey > 0) {
+                            return;
+                          }
                           if (funcKey == 0) {
                             bottomMargin = 50;
                             showSpeechBalloonFlag = false;
@@ -171,15 +201,6 @@ class _TutorialScreenState extends State<TutorialScreen> {
                             bgKeyboardFlag = true;
                             buttonText = "これにする！";
                             funcKey++;
-                          } else if (funcKey == 1) {
-                            fishSvgName = "fish_worry.svg";
-                            bottomMargin = 120;
-                            showSpeechBalloonFlag = true;
-                            showTextFieldFlag = false;
-                            bgKeyboardFlag = false;
-                            buttonText = "なあに？";
-                            funcKey++;
-                            index++;
                           } else if (funcKey == 2) {
                             buttonText = "そうなの？";
                             funcKey++;
