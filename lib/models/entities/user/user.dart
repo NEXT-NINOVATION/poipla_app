@@ -11,8 +11,9 @@ class User with _$User {
     required int level,
     required int exp,
     required int point,
+    required String? name,
     @JsonKey(name: 'total_pet') required int totalPet,
-    @JsonKey(name: 'costume_id') required int costumeId,
+    @JsonKey(name: 'costume_id') required int? costumeId,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

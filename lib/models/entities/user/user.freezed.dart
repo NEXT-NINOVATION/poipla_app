@@ -24,10 +24,11 @@ mixin _$User {
   int get level => throw _privateConstructorUsedError;
   int get exp => throw _privateConstructorUsedError;
   int get point => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_pet')
   int get totalPet => throw _privateConstructorUsedError;
   @JsonKey(name: 'costume_id')
-  int get costumeId => throw _privateConstructorUsedError;
+  int? get costumeId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,8 +44,9 @@ abstract class $UserCopyWith<$Res> {
       int level,
       int exp,
       int point,
+      String? name,
       @JsonKey(name: 'total_pet') int totalPet,
-      @JsonKey(name: 'costume_id') int costumeId});
+      @JsonKey(name: 'costume_id') int? costumeId});
 }
 
 /// @nodoc
@@ -61,6 +63,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? level = freezed,
     Object? exp = freezed,
     Object? point = freezed,
+    Object? name = freezed,
     Object? totalPet = freezed,
     Object? costumeId = freezed,
   }) {
@@ -81,6 +84,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       totalPet: totalPet == freezed
           ? _value.totalPet
           : totalPet // ignore: cast_nullable_to_non_nullable
@@ -88,7 +95,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       costumeId: costumeId == freezed
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -103,8 +110,9 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       int level,
       int exp,
       int point,
+      String? name,
       @JsonKey(name: 'total_pet') int totalPet,
-      @JsonKey(name: 'costume_id') int costumeId});
+      @JsonKey(name: 'costume_id') int? costumeId});
 }
 
 /// @nodoc
@@ -122,6 +130,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? level = freezed,
     Object? exp = freezed,
     Object? point = freezed,
+    Object? name = freezed,
     Object? totalPet = freezed,
     Object? costumeId = freezed,
   }) {
@@ -142,6 +151,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       totalPet: totalPet == freezed
           ? _value.totalPet
           : totalPet // ignore: cast_nullable_to_non_nullable
@@ -149,7 +162,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       costumeId: costumeId == freezed
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -162,6 +175,7 @@ class _$_User extends _User {
       required this.level,
       required this.exp,
       required this.point,
+      required this.name,
       @JsonKey(name: 'total_pet') required this.totalPet,
       @JsonKey(name: 'costume_id') required this.costumeId})
       : super._();
@@ -177,15 +191,17 @@ class _$_User extends _User {
   @override
   final int point;
   @override
+  final String? name;
+  @override
   @JsonKey(name: 'total_pet')
   final int totalPet;
   @override
   @JsonKey(name: 'costume_id')
-  final int costumeId;
+  final int? costumeId;
 
   @override
   String toString() {
-    return 'User(id: $id, level: $level, exp: $exp, point: $point, totalPet: $totalPet, costumeId: $costumeId)';
+    return 'User(id: $id, level: $level, exp: $exp, point: $point, name: $name, totalPet: $totalPet, costumeId: $costumeId)';
   }
 
   @override
@@ -197,6 +213,7 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.exp, exp) &&
             const DeepCollectionEquality().equals(other.point, point) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.totalPet, totalPet) &&
             const DeepCollectionEquality().equals(other.costumeId, costumeId));
   }
@@ -209,6 +226,7 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(exp),
       const DeepCollectionEquality().hash(point),
+      const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(totalPet),
       const DeepCollectionEquality().hash(costumeId));
 
@@ -229,8 +247,9 @@ abstract class _User extends User {
       required final int level,
       required final int exp,
       required final int point,
+      required final String? name,
       @JsonKey(name: 'total_pet') required final int totalPet,
-      @JsonKey(name: 'costume_id') required final int costumeId}) = _$_User;
+      @JsonKey(name: 'costume_id') required final int? costumeId}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -244,11 +263,13 @@ abstract class _User extends User {
   @override
   int get point => throw _privateConstructorUsedError;
   @override
+  String? get name => throw _privateConstructorUsedError;
+  @override
   @JsonKey(name: 'total_pet')
   int get totalPet => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'costume_id')
-  int get costumeId => throw _privateConstructorUsedError;
+  int? get costumeId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

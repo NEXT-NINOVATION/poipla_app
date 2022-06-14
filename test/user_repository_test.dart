@@ -28,4 +28,10 @@ void main() {
         throwsA(
             predicate((e) => e is DioError && e.response?.statusCode == 401)));
   });
+
+  test('ユーザー名の更新テスト', () async {
+    await userDAO.register();
+    final me = await userDAO.update(name: 'test-user');
+    expect(me.name, equals('test-user'));
+  });
 }

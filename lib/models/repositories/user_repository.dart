@@ -8,4 +8,8 @@ class UserRepository {
   Future<void> register() {
     throw UnimplementedError();
   }
+
+  Future<User> update({required String name, int? costumeId}) {
+    throw UnimplementedError();
+  }
 }
