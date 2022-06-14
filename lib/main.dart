@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/providers/user_provider.dart';
-import 'package:poipla_app/screens/change_costume/change_costume_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
+import 'package:poipla_app/screens/shop/shop_screen.dart';
 import 'package:poipla_app/screens/splash_screen.dart';
 import 'package:poipla_app/screens/start_screen.dart';
 import 'package:poipla_app/screens/tutorial/tutorial_screen.dart';
 
 import 'package:poipla_app/store/auth_store.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -37,21 +36,22 @@ final routerProvider = Provider((ref) {
           path: '/',
           builder: (context, state) => const HomeScreen(title: 'にのさんのおうち')),
       GoRoute(
-        path: '/change_costume',
-        builder: (context, state) => const ChangeCostumeScreen(),
+        path: '/shop',
+        builder: (context, state) => const ShopScreen(),
       ),
       GoRoute(
         path: '/start',
         builder: (context, state) => const StartScreen(),
       ),
-      GoRoute(path: '/tutorials', builder: (context, state) => TutorialScreen()),
+      GoRoute(
+          path: '/tutorials', builder: (context, state) => TutorialScreen()),
     ],
     redirect: (state) {
-      if (state.subloc != '/start' &&
-          authState.type == AppStateType.start) {
+      if (state.subloc != '/start' && authState.type == AppStateType.start) {
         return '/start';
       }
-      if (state.subloc != '/tutorials' && authState.type == AppStateType.tutorial) {
+      if (state.subloc != '/tutorials' &&
+          authState.type == AppStateType.tutorial) {
         return '/tutorials';
       }
       if (state.subloc != '/splash' && authState.type == AppStateType.loading) {
@@ -84,7 +84,6 @@ class RouterApp extends ConsumerWidget {
 final _fetchAuthInfoFutureProvider = FutureProvider.autoDispose((ref) {
   return ref.read(authStoreProvider).fetch();
 });
-
 
 class ExampleRegisterScreen extends ConsumerWidget {
   const ExampleRegisterScreen({Key? key}) : super(key: key);
