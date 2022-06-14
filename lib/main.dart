@@ -3,6 +3,8 @@ import 'package:poipla_app/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/screens/change_costume/change_costume_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
+import 'package:poipla_app/screens/splash_screen.dart';
+import 'package:poipla_app/screens/start_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: "LightNovelPOPv2",
         ),
-        home: const HomeScreen(title: 'にのさんのおうち'),
+        home: const StartScreen(),
       ),
     );
   }
