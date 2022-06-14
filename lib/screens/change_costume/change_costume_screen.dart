@@ -65,7 +65,7 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                     Text(
                       "$point",
                       style: const TextStyle(
-                        color: kFontColorOrange,
+                        color: kFontColorImportant,
                         fontSize: 32,
                       ),
                     ),
