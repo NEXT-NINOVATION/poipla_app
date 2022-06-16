@@ -3,14 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/database.dart';
 
-class ChangeCostumeScreen extends StatefulWidget {
-  const ChangeCostumeScreen({Key? key}) : super(key: key);
+class ShopScreen extends StatefulWidget {
+  const ShopScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChangeCostumeScreen> createState() => _ChangeCostumeScreenState();
+  State<ShopScreen> createState() => _ShopScreen();
 }
 
-class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
+class _ShopScreen extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     var point = 120;
@@ -49,8 +49,9 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                 width: 200,
                 height: 40,
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(4)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(4),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -65,7 +66,7 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                     Text(
                       "$point",
                       style: const TextStyle(
-                        color: kFontColorOrange,
+                        color: kFontColorImportant,
                         fontSize: 32,
                       ),
                     ),

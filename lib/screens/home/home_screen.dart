@@ -3,6 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bordered_text/bordered_text.dart';
+import 'package:poipla_app/screens/home/components/adventure_button.dart';
+import 'package:poipla_app/screens/home/components/change_costume_button.dart';
+import 'package:poipla_app/screens/home/components/setting_button.dart';
+import 'package:poipla_app/screens/home/components/shop_button.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -16,6 +21,10 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    // デバイスサイズ
+    double deviceW = MediaQuery.of(context).size.width;
+    double deviceH = MediaQuery.of(context).size.height;
+    
     final authStore = ref.watch(authStoreProvider);
     return Container(
       decoration: const BoxDecoration(
@@ -40,23 +49,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           backgroundColor: kAppBarColor,
           elevation: 0.0,
+          actions: const [
+            SettingButton(),
+          ],
         ),
         body: Stack(
           children: [
             Center(
-              child: SizedBox(
+              child: Container(
+                margin: const EdgeInsets.only(right: 180, bottom: 20),
                 // Fix
                 height: 200,
                 child: Stack(
                   children: [
-                    Container(
-                      width: 200,
-                      height: 200,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xFFD9D9D9),
-                      ),
-                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -86,90 +91,90 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Align(
+                Container(
                   alignment: Alignment.centerLeft,
-                  child: Container(
-                    margin: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Column(
+                  margin: const EdgeInsets.only(top: 25, left: 15),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 72,
+                        height: 72,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFE6A6),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        child: Column(
                           children: [
                             Container(
-                              width: 48,
-                              height: 48,
+                              width: 40,
+                              height: 40,
                               margin: const EdgeInsets.only(bottom: 3.0),
                               child: SvgPicture.asset(
                                 "assets/svg/present.svg",
-                                color: kIconColor,
                               ),
                             ),
-                            const Text(
-                              "プレゼント",
-                              style: TextStyle(
-                                color: kFontColor,
+                            BorderedText(
+                              strokeWidth: 2,
+                              strokeColor: Colors.white,
+                              child: const Text(
+                                "プレゼント",
+                                style: TextStyle(
+                                    color: kFontColorBlue, fontSize: 12),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8.0),
-                        Stack(
-                          alignment: Alignment.bottomCenter,
+                      ),
+                      const SizedBox(height: 8.0),
+                      Container(
+                        width: 72,
+                        height: 72,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFE6A6),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        child: Column(
                           children: [
                             Container(
-                              width: 48,
-                              height: 48,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFD9D9D9),
-                                  borderRadius: BorderRadius.circular(4.0)),
+                              width: 40,
+                              height: 40,
+                              margin: const EdgeInsets.only(bottom: 3.0),
+                              child: SvgPicture.asset(
+                                "assets/svg/qr.svg",
+                              ),
                             ),
-                            const Text(
-                              "QR",
-                              style: TextStyle(color: kFontColor),
+                            BorderedText(
+                              strokeWidth: 2,
+                              strokeColor: Colors.white,
+                              child: const Text(
+                                "QR",
+                                style: TextStyle(
+                                  color: kFontColorBlue,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                ),
+                SvgPicture.asset(
+                  "assets/svg/fish_default.svg",
+                  width: deviceW * 0.6,
                 ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 80),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFFD9D9D9),
-                        ),
-                      ),
-                      Container(
-                        width: 120,
-                        height: 120,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFFD9D9D9),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          GoRouter.of(context).push('/change_costume');
-                        },
-                        child: Container(
-                          width: 90,
-                          height: 90,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(0xFFD9D9D9),
-                          ),
-                          child: const Center(
-                            child: Text("きせかえ"),
-                          ),
-                        ),
-                      ),
+                    children: const [
+                      ShopButton(),
+                      AdventureButton(),
+                      ChangeCostumeButton(),
                     ],
                   ),
                 ),
