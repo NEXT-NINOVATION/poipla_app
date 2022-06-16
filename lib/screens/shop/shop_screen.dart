@@ -31,9 +31,9 @@ class _ShopScreen extends State<ShopScreen> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: const Text(
-            "きせかえ",
+            "ショップ",
             style: TextStyle(
-              color: kFontColor,
+              color: kAppBarFontColor,
             ),
           ),
           backgroundColor: kAppBarColor,
