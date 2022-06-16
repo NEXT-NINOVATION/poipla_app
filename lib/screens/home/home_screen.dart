@@ -13,7 +13,6 @@ import 'package:poipla_app/providers/user_provider.dart';
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
@@ -24,7 +23,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
-    
+
     final authStore = ref.watch(authStoreProvider);
     return Container(
       decoration: const BoxDecoration(
@@ -44,7 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           title: Text(
             "${authStore.currentUser?.name}のおうち",
             style: const TextStyle(
-              color: kFontColor,
+              color: kAppBarFontColor,
             ),
           ),
           backgroundColor: kAppBarColor,

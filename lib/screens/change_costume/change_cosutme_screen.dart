@@ -41,7 +41,7 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
           title: const Text(
             "きせかえ",
             style: TextStyle(
-              color: Colors.white,
+              color: kAppBarFontColor,
             ),
           ),
           backgroundColor: kAppBarColor,
@@ -57,7 +57,6 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // たつみに教える
                 GestureDetector(
                   onTap: () {
                     // 画面遷移
@@ -94,7 +93,6 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                   (index) => GestureDetector(
                     onTap: () {
                       setState(() {
-                        // たつみに教える
                         fishCosIndex = index;
                       });
                     },
@@ -126,7 +124,6 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                               ),
                             ],
                           ),
-                          // たつみに教える
                           index == fishCosIndex
                               ? Stack(
                                   clipBehavior: Clip.none,
