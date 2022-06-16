@@ -34,7 +34,7 @@ final routerProvider = Provider((ref) {
           path: '/splash', builder: (context, state) => const SplashScreen()),
       GoRoute(
           path: '/',
-          builder: (context, state) => const HomeScreen(title: 'にのさんのおうち')),
+          builder: (context, state) => const HomeScreen()),
       GoRoute(
         path: '/shop',
         builder: (context, state) => const ShopScreen(),

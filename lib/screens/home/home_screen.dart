@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,23 +8,24 @@ import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
+import 'package:poipla_app/providers/user_provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
-  final String title;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
-
+    
+    final authStore = ref.watch(authStoreProvider);
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -40,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            "${widget.title}のおうち",
+            "${authStore.currentUser?.name}のおうち",
             style: const TextStyle(
               color: kFontColor,
             ),
