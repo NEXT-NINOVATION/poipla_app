@@ -20,7 +20,7 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
   Widget build(BuildContext context) {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
-    for (var row in myCostumeList) {}
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -55,15 +55,27 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
               "assets/svg/${myCostumeList[fishCosIndex].fish_image}",
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: deviceW * 0.40,
-                  child: const AppButton(text: "きまり！", isPos: true),
+                // たつみに教える
+                GestureDetector(
+                  onTap: () {
+                    // 画面遷移
+                  },
+                  child: SizedBox(
+                    width: deviceW * 0.40,
+                    child: const AppButton(text: "きまり！", isPos: true),
+                  ),
                 ),
-                SizedBox(
-                  width: deviceW * 0.40,
-                  child: const AppButton(text: "やめる", isPos: false),
+                SizedBox(width: deviceW * 0.05),
+                GestureDetector(
+                  onTap: () {
+                    // 画面遷移
+                  },
+                  child: SizedBox(
+                    width: deviceW * 0.40,
+                    child: const AppButton(text: "やめる", isPos: false),
+                  ),
                 ),
               ],
             ),
@@ -82,6 +94,7 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                   (index) => GestureDetector(
                     onTap: () {
                       setState(() {
+                        // たつみに教える
                         fishCosIndex = index;
                       });
                     },
@@ -113,14 +126,26 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                               ),
                             ],
                           ),
-                          Stack(
-                            children: [
-                              Container(
-                                color: Colors.black38,
-                              ),
-                              SvgPicture.asset("assets/svg/check.svg"),
-                            ],
-                          ),
+                          // たつみに教える
+                          index == fishCosIndex
+                              ? Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        color: Colors.black38,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: -8,
+                                      left: -8,
+                                      child: SvgPicture.asset(
+                                          "assets/svg/check.svg"),
+                                    ),
+                                  ],
+                                )
+                              : Container(),
                         ],
                       ),
                     ),
