@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:poipla_app/constants.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({Key? key, required this.text}) : super(key: key);
+  const AppButton({
+    Key? key,
+    required this.text,
+    required this.isPos,
+  }) : super(key: key);
 
   final String text;
-
+  final bool isPos;
   @override
   Widget build(BuildContext context) {
     // 文字列とボタンデザインをStackする
@@ -18,21 +22,27 @@ class AppButton extends StatelessWidget {
           height: 60,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            boxShadow: const [
+            boxShadow: [
               // ボタン下部
               BoxShadow(
-                color: Color(0xFFF0B215),
-                offset: Offset(0, 8),
+                color: isPos == true
+                    ? const Color(0xFFF0B215)
+                    : const Color(0xFF76C8D9),
+                offset: const Offset(0, 8),
               ),
               // ボタン上部
               BoxShadow(
-                color: Color(0xFFFFF4D9),
+                color: isPos == true
+                    ? const Color(0xFFFFF4D9)
+                    : const Color(0xFFEAFEFF),
               ),
               // ボタン中部
               BoxShadow(
-                color: Color(0xFFFFCD4E),
+                color: isPos == true
+                    ? const Color(0xFFFFCD4E)
+                    : const Color(0xFF94EDFF),
                 blurRadius: 1,
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -44,18 +54,22 @@ class AppButton extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 20.0, top: 1.0),
                 width: 15.0,
                 height: 15.0,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFFFFF4D9),
+                  color: isPos == true
+                      ? const Color(0xFFFFF4D9)
+                      : const Color(0xFFEAFEFF),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.only(right: 10.0, top: 1.0),
                 width: 8.0,
                 height: 8.0,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFFFFF4D9),
+                  color: isPos == true
+                      ? const Color(0xFFFFF4D9)
+                      : const Color(0xFFEAFEFF),
                 ),
               ),
             ],

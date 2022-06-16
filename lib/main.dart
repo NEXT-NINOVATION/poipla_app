@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/providers/user_provider.dart';
+import 'package:poipla_app/screens/change_costume/change_cosutme_screen.dart';
+import 'package:poipla_app/screens/shop/shop_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
 import 'package:poipla_app/screens/shop/shop_screen.dart';
 import 'package:poipla_app/screens/splash_screen.dart';
@@ -32,9 +34,7 @@ final routerProvider = Provider((ref) {
     routes: [
       GoRoute(
           path: '/splash', builder: (context, state) => const SplashScreen()),
-      GoRoute(
-          path: '/',
-          builder: (context, state) => const HomeScreen()),
+      GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
       GoRoute(
         path: '/shop',
         builder: (context, state) => const ShopScreen(),
