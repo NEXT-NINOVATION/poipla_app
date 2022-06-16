@@ -47,7 +47,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   SvgPicture.asset(
-                    "assets/svg/fish.svg",
+                    "assets/svg/fish_default.svg",
                   ),
                 ],
               ),

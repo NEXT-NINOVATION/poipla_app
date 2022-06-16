@@ -49,8 +49,9 @@ class _ShopScreen extends State<ShopScreen> {
                 width: 200,
                 height: 40,
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(4)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(4),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -65,7 +66,7 @@ class _ShopScreen extends State<ShopScreen> {
                     Text(
                       "$point",
                       style: const TextStyle(
-                        color: kFontColorOrange,
+                        color: kFontColorImportant,
                         fontSize: 32,
                       ),
                     ),
