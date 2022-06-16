@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +7,6 @@ import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/bubble.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/screens/app_button.dart';
-
 
 class TutorialScreen extends ConsumerStatefulWidget {
   const TutorialScreen({Key? key}) : super(key: key);
@@ -173,24 +171,24 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                     GestureDetector(
                       onTap: () {
                         if (funcKey == 1) {
-                          ref.read(authStoreProvider).updateName(name: inputNameController.text).then((value) {
+                          ref
+                              .read(authStoreProvider)
+                              .updateName(name: inputNameController.text)
+                              .then((value) {
                             setState(() {
-
-                                fishSvgName = "fish_worry.svg";
-                                bottomMargin = 120;
-                                showSpeechBalloonFlag = true;
-                                showTextFieldFlag = false;
-                                bgKeyboardFlag = false;
-                                buttonText = "なあに？";
-                                funcKey++;
-                                index++;
-                                isUserNameUpdated = true;
-
+                              fishSvgName = "fish_worry.svg";
+                              bottomMargin = 120;
+                              showSpeechBalloonFlag = true;
+                              showTextFieldFlag = false;
+                              bgKeyboardFlag = false;
+                              buttonText = "なあに？";
+                              funcKey++;
+                              index++;
+                              isUserNameUpdated = true;
                             });
                           });
                           return;
                         }
-
 
                         setState(() {
                           if (!isUserNameUpdated && funcKey > 0) {
@@ -224,7 +222,10 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                         });
                         FocusScope.of(context).requestFocus(focusNode);
                       },
-                      child: AppButton(text: buttonText),
+                      child: AppButton(
+                        text: buttonText,
+                        isPos: true,
+                      ),
                     ),
                   ],
                 ),
@@ -273,7 +274,10 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                             showHistoryFlag = false;
                           });
                         },
-                        child: const AppButton(text: "わかった！"),
+                        child: const AppButton(
+                          text: "わかった！",
+                          isPos: true,
+                        ),
                       ),
                     ),
                   ],

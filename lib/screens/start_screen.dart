@@ -47,7 +47,10 @@ class StartScreen extends ConsumerWidget {
                 onTap: () {
                   ref.read(authStoreProvider).register();
                 },
-                child: const AppButton(text: "はじめる"),
+                child: const AppButton(
+                  text: "はじめる",
+                  isPos: true,
+                ),
               ),
             ),
           ],
