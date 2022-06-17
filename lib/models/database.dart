@@ -128,3 +128,36 @@ List<String> myCostumeFishList = [
   "fish_octopus.svg",
   "fish_octopus.svg",
 ];
+
+class Present {
+  final String title, image, detail;
+
+  Present({
+    required this.title,
+    required this.image,
+    required this.detail,
+  });
+}
+
+List<Present> myPresentList = [
+  Present(
+    title: "シャチホコ",
+    image: "shachihoko.svg",
+    detail: "ぼうけんでゲット！",
+  ),
+  Present(
+    title: "シャチホコ",
+    image: "shachihoko.svg",
+    detail: "ぼうけんでゲット！",
+  ),
+  Present(
+    title: "シャチホコ",
+    image: "shachihoko.svg",
+    detail: "ぼうけんでゲット！",
+  ),
+  Present(
+    title: "シャチホコ",
+    image: "shachihoko.svg",
+    detail: "ぼうけんでゲット！",
+  ),
+];
