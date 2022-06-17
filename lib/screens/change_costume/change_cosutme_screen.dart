@@ -138,7 +138,8 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                                       top: -8,
                                       left: -8,
                                       child: SvgPicture.asset(
-                                          "assets/svg/check.svg"),
+                                        "assets/svg/check.svg",
+                                      ),
                                     ),
                                   ],
                                 )
