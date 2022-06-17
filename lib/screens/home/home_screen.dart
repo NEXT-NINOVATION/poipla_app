@@ -7,6 +7,7 @@ import 'package:bordered_text/bordered_text.dart';
 import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
 import 'package:poipla_app/screens/home/components/present_modal.dart';
+import 'package:poipla_app/screens/home/components/qr_modal.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
 import 'package:poipla_app/providers/user_provider.dart';
@@ -137,36 +138,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 8.0),
-                      Container(
-                        width: 72,
-                        height: 72,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFE6A6),
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              margin: const EdgeInsets.only(bottom: 3.0),
-                              child: SvgPicture.asset(
-                                "assets/svg/qr.svg",
-                              ),
-                            ),
-                            BorderedText(
-                              strokeWidth: 2,
-                              strokeColor: Colors.white,
-                              child: const Text(
-                                "QR",
-                                style: TextStyle(
-                                  color: kFontColorBlue,
-                                  fontSize: 12,
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (BuildContext context) => QRModal(),
+                          );
+                        },
+                        child: Container(
+                          width: 72,
+                          height: 72,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFE6A6),
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                margin: const EdgeInsets.only(bottom: 3.0),
+                                child: SvgPicture.asset(
+                                  "assets/svg/qr.svg",
                                 ),
                               ),
-                            ),
-                          ],
+                              BorderedText(
+                                strokeWidth: 2,
+                                strokeColor: Colors.white,
+                                child: const Text(
+                                  "QR",
+                                  style: TextStyle(
+                                    color: kFontColorBlue,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
