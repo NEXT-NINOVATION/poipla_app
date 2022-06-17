@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
+import 'package:poipla_app/screens/home/components/present_modal.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
 import 'package:poipla_app/providers/user_provider.dart';
@@ -95,34 +96,44 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   margin: const EdgeInsets.only(top: 25, left: 15),
                   child: Column(
                     children: [
-                      Container(
-                        width: 72,
-                        height: 72,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFE6A6),
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              margin: const EdgeInsets.only(bottom: 3.0),
-                              child: SvgPicture.asset(
-                                "assets/svg/present.svg",
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (BuildContext context) => PresentModal(),
+                          );
+                        },
+                        child: Container(
+                          width: 72,
+                          height: 72,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFE6A6),
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                margin: const EdgeInsets.only(bottom: 3.0),
+                                child: SvgPicture.asset(
+                                  "assets/svg/present.svg",
+                                ),
                               ),
-                            ),
-                            BorderedText(
-                              strokeWidth: 2,
-                              strokeColor: Colors.white,
-                              child: const Text(
-                                "プレゼント",
-                                style: TextStyle(
-                                    color: kFontColorBlue, fontSize: 12),
+                              BorderedText(
+                                strokeWidth: 2,
+                                strokeColor: Colors.white,
+                                child: const Text(
+                                  "プレゼント",
+                                  style: TextStyle(
+                                      color: kFontColorBlue, fontSize: 12),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(height: 8.0),
