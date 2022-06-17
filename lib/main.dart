@@ -5,7 +5,6 @@ import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/change_costume/change_cosutme_screen.dart';
 import 'package:poipla_app/screens/shop/shop_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
-import 'package:poipla_app/screens/shop/shop_screen.dart';
 import 'package:poipla_app/screens/splash_screen.dart';
 import 'package:poipla_app/screens/start_screen.dart';
 import 'package:poipla_app/screens/tutorial/tutorial_screen.dart';
