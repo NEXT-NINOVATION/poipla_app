@@ -9,6 +9,7 @@ import 'package:poipla_app/screens/home/components/change_costume_button.dart';
 import 'package:poipla_app/screens/home/components/present_modal.dart';
 import 'package:poipla_app/screens/home/components/qr_modal.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
+import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 
@@ -50,8 +51,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           backgroundColor: kAppBarColor,
           elevation: 0.0,
-          actions: const [
-            SettingButton(),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) => SettingModal(),
+                );
+              },
+              child: const SettingButton(),
+            ),
           ],
         ),
         body: Stack(
