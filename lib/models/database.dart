@@ -108,17 +108,14 @@ List<MyCostume> myCostumeList = [
   ),
   MyCostume(
     costume_name: "クジラ",
-    image: "octopus.svg",
-    fish_image: "fish_octopus.svg",
+    image: "whale.svg",
+    fish_image: "fish_whale.svg",
   ),
   MyCostume(
     costume_name: "かめ",
-    image: "octopus.svg",
-    fish_image: "fish_octopus.svg",
+    image: "turtle.svg",
+    fish_image: "fish_turtle.svg",
   ),
-  // MyCostume(costume_name: "たこ", image: "octopus.svg"),
-  // MyCostume(costume_name: "たこ", image: "octopus.svg"),
-  // MyCostume(costume_name: "たこ", image: "octopus.svg"),
 ];
 
 List<String> myCostumeFishList = [
