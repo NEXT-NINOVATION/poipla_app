@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/models/database.dart';
-import '../custom_back_button.dart';
+import 'package:poipla_app/screens/custom_back_button.dart';
 
 class ChangeCostumeScreen extends StatefulWidget {
   ChangeCostumeScreen({Key? key}) : super(key: key);
