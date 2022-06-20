@@ -30,7 +30,8 @@ class AdventureResultModal extends StatelessWidget {
         right: 15,
       ),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32.0)), //this right here
+        borderRadius: BorderRadius.circular(32.0),
+      ), //this right here
       child: SizedBox(
         width: deviceW,
         height: deviceH,
@@ -90,14 +91,14 @@ class AdventureResultModal extends StatelessWidget {
                             Container(
                               width: deviceW * 0.45,
                               height: 20,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFFFE6A6),
                               ),
                             ),
                             Container(
                               width: (deviceW * 0.5) / 1.3,
                               height: 20,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFFFA63E),
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(10),
