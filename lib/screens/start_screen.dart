@@ -36,8 +36,11 @@ class StartScreen extends ConsumerWidget {
                   "assets/svg/title.svg",
                 ),
                 const SizedBox(height: 40),
-                Image.asset(
-                  "assets/svg/banner_sample.png",
+                Container(
+                  padding: const EdgeInsets.all(15),
+                  child: SvgPicture.asset(
+                    "assets/svg/start_banner.svg",
+                  ),
                 ),
               ],
             ),
