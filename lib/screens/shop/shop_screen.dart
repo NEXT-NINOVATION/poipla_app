@@ -87,10 +87,11 @@ class _ShopScreen extends State<ShopScreen> {
             ),
             Container(
               alignment: Alignment.center,
-              color: Colors.grey,
               width: 320,
               height: 160,
-              child: const Text("バナー"),
+              child: Image.asset(
+                "assets/svg/costume_banner.png",
+              ),
             ),
             Expanded(
               child: GridView.count(
@@ -124,12 +125,8 @@ class _ShopScreen extends State<ShopScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 80,
-                                height: 80,
-                                child: SvgPicture.asset(
-                                  "assets/svg/${costume_list[index].image}",
-                                ),
+                              SvgPicture.asset(
+                                "assets/svg/${costume_list[index].image}",
                               ),
                               Container(
                                 padding:
