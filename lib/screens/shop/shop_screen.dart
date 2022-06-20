@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/database.dart';
+import 'package:poipla_app/screens/shop/components/buy_modal.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class ShopScreen extends StatefulWidget {
 class _ShopScreen extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
-    var point = 120;
+    var point = 1200;
 
     return Container(
       decoration: const BoxDecoration(
@@ -46,7 +47,7 @@ class _ShopScreen extends State<ShopScreen> {
               padding: const EdgeInsets.only(top: 15, right: 15, bottom: 15),
               alignment: Alignment.centerRight,
               child: Container(
-                width: 200,
+                width: 240,
                 height: 40,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -103,7 +104,18 @@ class _ShopScreen extends State<ShopScreen> {
                 children: List.generate(
                   costume_list.length,
                   (index) => GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (BuildContext context) => BuyModal(
+                            nowPoint: point,
+                            costumeName: costume_list[index].title,
+                            imageName: costume_list[index].image,
+                            point: costume_list[index].point),
+                      );
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
