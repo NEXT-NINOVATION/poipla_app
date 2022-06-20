@@ -10,7 +10,7 @@ class ShopButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push('/adventure');
+        GoRouter.of(context).push('/shop');
       },
       child: Container(
         width: 90,
