@@ -75,7 +75,6 @@ class _LeaveScreenState extends State<LeaveScreen> {
                       margin: const EdgeInsets.only(bottom: 120),
                       child: GestureDetector(
                         onTap: () {
-                          int count = 0;
                           Navigator.popUntil(context, (route) => route.isFirst);
                         },
                         child: const AppButton(text: "おうちにもどる", isPos: true),
