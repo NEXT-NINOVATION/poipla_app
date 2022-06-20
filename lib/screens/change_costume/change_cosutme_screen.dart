@@ -4,6 +4,8 @@ import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/models/database.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
+import 'package:poipla_app/screens/home/components/setting_button.dart';
+import 'package:poipla_app/screens/home/components/setting_modal.dart';
 
 class ChangeCostumeScreen extends StatefulWidget {
   ChangeCostumeScreen({Key? key}) : super(key: key);
@@ -46,6 +48,19 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
           ),
           backgroundColor: kAppBarColor,
           elevation: 0.0,
+          actions: [
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) => SettingModal(),
+                );
+              },
+              child: const SettingButton(),
+            ),
+          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,7 +74,7 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // 画面遷移
+                    Navigator.pop(context);
                   },
                   child: SizedBox(
                     width: deviceW * 0.40,
@@ -69,7 +84,7 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                 SizedBox(width: deviceW * 0.05),
                 GestureDetector(
                   onTap: () {
-                    // 画面遷移
+                    Navigator.pop(context);
                   },
                   child: SizedBox(
                     width: deviceW * 0.40,
@@ -116,8 +131,6 @@ class _ChangeCostumeScreenState extends State<ChangeCostumeScreen> {
                                 ),
                               ),
                               SizedBox(
-                                width: 70,
-                                height: 70,
                                 child: SvgPicture.asset(
                                   "assets/svg/${myCostumeList[index].image}",
                                 ),
