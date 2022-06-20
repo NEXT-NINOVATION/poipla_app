@@ -44,6 +44,10 @@ final routerProvider = Provider((ref) {
         builder: (context, state) => AdventureScreen(),
       ),
       GoRoute(
+        path: '/change_costume',
+        builder: (context, state) => ChangeCostumeScreen(),
+      ),
+      GoRoute(
         path: '/start',
         builder: (context, state) => const StartScreen(),
       ),

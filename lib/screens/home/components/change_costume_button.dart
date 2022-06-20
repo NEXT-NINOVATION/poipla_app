@@ -10,7 +10,7 @@ class ChangeCostumeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push('/shop');
+        GoRouter.of(context).push('/change_costume');
       },
       child: Container(
         width: 90,
