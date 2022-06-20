@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/database.dart';
+import 'package:poipla_app/screens/custom_back_button.dart';
+import 'package:poipla_app/screens/home/components/setting_button.dart';
+import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/shop/components/buy_modal.dart';
 
 class ShopScreen extends StatefulWidget {
@@ -39,6 +42,21 @@ class _ShopScreen extends State<ShopScreen> {
           ),
           backgroundColor: kAppBarColor,
           elevation: 0.0,
+          leading: const CustomBackButton(),
+          leadingWidth: 80,
+          actions: [
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) => SettingModal(),
+                );
+              },
+              child: const SettingButton(),
+            ),
+          ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
