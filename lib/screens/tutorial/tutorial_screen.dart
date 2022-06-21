@@ -41,7 +41,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
     final currentUser = ref.watch(authStoreProvider).currentUser;
     // セリフ
     List<String> wordsList = [
-      "こんにちは、ぼくは\n〇〇。\nきみのおなまえは？",
+      "こんにちは、ぼくは\nスー。\nきみのおなまえは？",
       "${currentUser?.name}、よろしくね！\nじつは、${currentUser?.name}に\nおねがいがあるんだ…。",
       "おうちのうみが、毎日たくさ\nんのごみであふれて住みにく\nくなっちゃったんだ",
       "というわけで、ぼくといっ\nしょにうみをきれいにする\nお手伝いをしてほしいんだ！",

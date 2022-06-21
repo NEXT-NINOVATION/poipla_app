@@ -51,7 +51,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            "${authStore.currentUser?.name}のおうち",
+            // "${authStore.currentUser?.name}のおうち",
+            "スーのおうち",
             style: const TextStyle(
               color: kAppBarFontColor,
             ),
