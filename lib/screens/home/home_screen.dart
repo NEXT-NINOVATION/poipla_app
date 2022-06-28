@@ -26,7 +26,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 final myCostumesFutureProvider = FutureProvider.autoDispose((ref) {
-  return ref.read(costumeRepositoryProvider).getMyCostumes();
+  return ref.read(myCostumeStoreProvider).fetchAll();
 });
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
@@ -41,17 +41,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // 帰ってきた表示フラグ
     bool isExc = false;
 
-    final asyncMyCostumes = ref.watch(myCostumesFutureProvider);
-    final List<Costume>? costumes = () {
-      if (asyncMyCostumes is AsyncData) {
-        return asyncMyCostumes.value;
-      } else {
-        return null;
-      }
-    }();
+    final costumes = ref.watch(myCostumeStoreProvider).myCostumes;
+    ref.watch(myCostumesFutureProvider);
+
     final authStore = ref.watch(accountStoreProvider);
 
-    final currentCostume = costumes?.firstWhereOrNull(
+    final currentCostume = costumes.firstWhereOrNull(
         (element) => element.id == authStore.currentUser?.costumeId);
 
     return Container(

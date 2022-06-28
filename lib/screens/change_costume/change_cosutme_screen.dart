@@ -106,6 +106,7 @@ class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
                         ref
                             .read(accountStoreProvider)
                             .changeCurrentCostume(costumeId: selectedCosId);
+                        ref.read(myCostumeStoreProvider).fetchAll();
                         Navigator.pop(context);
                       },
                       child: SizedBox(
