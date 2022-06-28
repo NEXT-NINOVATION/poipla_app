@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/home/components/service_button.dart';
-import 'package:poipla_app/screens/home/components/sound_icon.dart';
+// import 'package:poipla_app/screens/home/components/sound_icon.dart';
+import 'dart:ui' as ui;
 
 class SettingModal extends StatefulWidget {
   SettingModal({Key? key}) : super(key: key);
@@ -13,6 +14,29 @@ class SettingModal extends StatefulWidget {
 }
 
 class _SettingModalState extends State<SettingModal> {
+  // 音量設定用
+  double _currentSliderValue = 20;
+  late ui.Image customImage;
+
+  Future<ui.Image> loadImage(String assetPath) async {
+    ByteData data = await rootBundle.load(assetPath);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
+    ui.FrameInfo fi = await codec.getNextFrame();
+
+    return fi.image;
+  }
+
+  @override
+  void initState() {
+    loadImage('assets/svg/sound_thumb.png').then((image) {
+      setState(() {
+        customImage = image;
+      });
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // デバイスサイズ
@@ -92,31 +116,34 @@ class _SettingModalState extends State<SettingModal> {
                     Container(
                       margin: const EdgeInsets.only(top: 42, bottom: 42),
                       width: deviceW * 0.75,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                height: 20,
-                                width: 196,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFFFE6A6),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
-                              Container(
-                                height: 20,
-                                width: 196 / 2,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFFFA63E),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
-                            ],
+                      child: SliderTheme(
+                        data: SliderThemeData(
+                          activeTrackColor: const Color(0xFFFFA63E),
+                          inactiveTrackColor: const Color(0xFFFFE6A6),
+                          thumbColor: const Color(0xFFFFCD4E),
+                          overlayColor: Colors.transparent,
+                          // thumbSelector: (textDirection, values, tapValue,
+                          //         thumbSize, trackSize, dx) =>
+                          //     Thumb.start,
+                          thumbShape: SliderThumbImage(customImage),
+                          trackHeight: 20,
+                          overlayShape: const RoundSliderOverlayShape(
+                            overlayRadius: 1,
                           ),
-                          const SoundIcon(),
-                        ],
+                          trackShape: const CustomRoundedRectSliderTrackShape(
+                            Radius.circular(5),
+                          ),
+                        ),
+                        child: Slider(
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentSliderValue = value;
+                            });
+                          },
+                          min: 0,
+                          max: 100,
+                          value: _currentSliderValue,
+                        ),
                       ),
                     ),
                   ],
@@ -183,5 +210,144 @@ class _SettingModalState extends State<SettingModal> {
         ],
       ),
     );
+  }
+}
+
+class CustomRoundedRectSliderTrackShape extends SliderTrackShape
+    with BaseSliderTrackShape {
+  final Radius trackRadius;
+  const CustomRoundedRectSliderTrackShape(this.trackRadius);
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset offset, {
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required Animation<double> enableAnimation,
+    required TextDirection textDirection,
+    required Offset thumbCenter,
+    bool isDiscrete = false,
+    bool isEnabled = false,
+    double additionalActiveTrackHeight = 2,
+  }) {
+    assert(sliderTheme.disabledActiveTrackColor != null);
+    assert(sliderTheme.disabledInactiveTrackColor != null);
+    assert(sliderTheme.activeTrackColor != null);
+    assert(sliderTheme.inactiveTrackColor != null);
+    assert(sliderTheme.thumbShape != null);
+    if (sliderTheme.trackHeight == null || sliderTheme.trackHeight! <= 0) {
+      return;
+    }
+
+    final ColorTween activeTrackColorTween = ColorTween(
+        begin: sliderTheme.disabledActiveTrackColor,
+        end: sliderTheme.activeTrackColor);
+    final ColorTween inactiveTrackColorTween = ColorTween(
+        begin: sliderTheme.disabledInactiveTrackColor,
+        end: sliderTheme.inactiveTrackColor);
+    final Paint leftTrackPaint = Paint()
+      ..color = activeTrackColorTween.evaluate(enableAnimation)!;
+    final Paint rightTrackPaint = Paint()
+      ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
+
+    final Rect trackRect = getPreferredRect(
+      parentBox: parentBox,
+      offset: offset,
+      sliderTheme: sliderTheme,
+      isEnabled: isEnabled,
+      isDiscrete: isDiscrete,
+    );
+
+    var activeRect = RRect.fromLTRBAndCorners(
+      trackRect.left,
+      trackRect.top,
+      thumbCenter.dx,
+      trackRect.bottom,
+      topLeft: trackRadius,
+      bottomLeft: trackRadius,
+    );
+    var inActiveRect = RRect.fromLTRBAndCorners(
+      thumbCenter.dx,
+      trackRect.top,
+      trackRect.right,
+      trackRect.bottom,
+      topRight: trackRadius,
+      bottomRight: trackRadius,
+    );
+    var percent =
+        ((activeRect.width / (activeRect.width + inActiveRect.width)) * 100)
+            .toInt();
+    if (percent > 99) {
+      activeRect = RRect.fromLTRBAndCorners(
+        trackRect.left,
+        trackRect.top - (additionalActiveTrackHeight / 2),
+        thumbCenter.dx,
+        trackRect.bottom + (additionalActiveTrackHeight / 2),
+        topLeft: trackRadius,
+        bottomLeft: trackRadius,
+        bottomRight: trackRadius,
+        topRight: trackRadius,
+      );
+    }
+
+    if (percent < 1) {
+      inActiveRect = RRect.fromLTRBAndCorners(
+        thumbCenter.dx,
+        trackRect.top,
+        trackRect.right,
+        trackRect.bottom,
+        topRight: trackRadius,
+        bottomRight: trackRadius,
+        bottomLeft: trackRadius,
+        topLeft: trackRadius,
+      );
+    }
+    context.canvas.drawRRect(
+      activeRect,
+      leftTrackPaint,
+    );
+
+    context.canvas.drawRRect(
+      inActiveRect,
+      rightTrackPaint,
+    );
+  }
+}
+
+class SliderThumbImage extends SliderComponentShape {
+  final ui.Image image;
+
+  SliderThumbImage(this.image);
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return const Size(0, 0);
+  }
+
+  @override
+  void paint(PaintingContext context, Offset center,
+      {required Animation<double> activationAnimation,
+      required Animation<double> enableAnimation,
+      required bool isDiscrete,
+      required TextPainter labelPainter,
+      required RenderBox parentBox,
+      required SliderThemeData sliderTheme,
+      required TextDirection textDirection,
+      required double value,
+      required double textScaleFactor,
+      required Size sizeWithOverflow}) {
+    final canvas = context.canvas;
+    final imageWidth = image.width;
+    final imageHeight = image.height;
+
+    Offset imageOffset = Offset(
+      center.dx - (imageWidth / 2),
+      center.dy - (imageHeight / 2),
+    );
+
+    Paint paint = Paint()..filterQuality = FilterQuality.high;
+
+    canvas.drawImage(image, imageOffset, paint);
   }
 }
