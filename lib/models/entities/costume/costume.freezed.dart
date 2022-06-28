@@ -20,7 +20,9 @@ Costume _$CostumeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Costume {
-  String get title => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'costume_name')
+  String get costumeName => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   int? get rarity => throw _privateConstructorUsedError;
   @JsonKey(name: 'pref_id')
@@ -38,7 +40,8 @@ abstract class $CostumeCopyWith<$Res> {
   factory $CostumeCopyWith(Costume value, $Res Function(Costume) then) =
       _$CostumeCopyWithImpl<$Res>;
   $Res call(
-      {String title,
+      {int id,
+      @JsonKey(name: 'costume_name') String costumeName,
       String image,
       int? rarity,
       @JsonKey(name: 'pref_id') int? prefId,
@@ -55,16 +58,21 @@ class _$CostumeCopyWithImpl<$Res> implements $CostumeCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? title = freezed,
+    Object? id = freezed,
+    Object? costumeName = freezed,
     Object? image = freezed,
     Object? rarity = freezed,
     Object? prefId = freezed,
     Object? eventId = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      costumeName: costumeName == freezed
+          ? _value.costumeName
+          : costumeName // ignore: cast_nullable_to_non_nullable
               as String,
       image: image == freezed
           ? _value.image
@@ -93,7 +101,8 @@ abstract class _$$_CostumeCopyWith<$Res> implements $CostumeCopyWith<$Res> {
       __$$_CostumeCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String title,
+      {int id,
+      @JsonKey(name: 'costume_name') String costumeName,
       String image,
       int? rarity,
       @JsonKey(name: 'pref_id') int? prefId,
@@ -111,16 +120,21 @@ class __$$_CostumeCopyWithImpl<$Res> extends _$CostumeCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? title = freezed,
+    Object? id = freezed,
+    Object? costumeName = freezed,
     Object? image = freezed,
     Object? rarity = freezed,
     Object? prefId = freezed,
     Object? eventId = freezed,
   }) {
     return _then(_$_Costume(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      costumeName: costumeName == freezed
+          ? _value.costumeName
+          : costumeName // ignore: cast_nullable_to_non_nullable
               as String,
       image: image == freezed
           ? _value.image
@@ -146,7 +160,8 @@ class __$$_CostumeCopyWithImpl<$Res> extends _$CostumeCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Costume implements _Costume {
   _$_Costume(
-      {required this.title,
+      {required this.id,
+      @JsonKey(name: 'costume_name') required this.costumeName,
       required this.image,
       required this.rarity,
       @JsonKey(name: 'pref_id') this.prefId,
@@ -156,7 +171,10 @@ class _$_Costume implements _Costume {
       _$$_CostumeFromJson(json);
 
   @override
-  final String title;
+  final int id;
+  @override
+  @JsonKey(name: 'costume_name')
+  final String costumeName;
   @override
   final String image;
   @override
@@ -170,7 +188,7 @@ class _$_Costume implements _Costume {
 
   @override
   String toString() {
-    return 'Costume(title: $title, image: $image, rarity: $rarity, prefId: $prefId, eventId: $eventId)';
+    return 'Costume(id: $id, costumeName: $costumeName, image: $image, rarity: $rarity, prefId: $prefId, eventId: $eventId)';
   }
 
   @override
@@ -178,7 +196,9 @@ class _$_Costume implements _Costume {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Costume &&
-            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality()
+                .equals(other.costumeName, costumeName) &&
             const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality().equals(other.rarity, rarity) &&
             const DeepCollectionEquality().equals(other.prefId, prefId) &&
@@ -189,7 +209,8 @@ class _$_Costume implements _Costume {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(costumeName),
       const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(rarity),
       const DeepCollectionEquality().hash(prefId),
@@ -208,7 +229,8 @@ class _$_Costume implements _Costume {
 
 abstract class _Costume implements Costume {
   factory _Costume(
-      {required final String title,
+      {required final int id,
+      @JsonKey(name: 'costume_name') required final String costumeName,
       required final String image,
       required final int? rarity,
       @JsonKey(name: 'pref_id') final int? prefId,
@@ -217,7 +239,10 @@ abstract class _Costume implements Costume {
   factory _Costume.fromJson(Map<String, dynamic> json) = _$_Costume.fromJson;
 
   @override
-  String get title => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'costume_name')
+  String get costumeName => throw _privateConstructorUsedError;
   @override
   String get image => throw _privateConstructorUsedError;
   @override

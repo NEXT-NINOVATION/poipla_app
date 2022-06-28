@@ -90,33 +90,7 @@ class MyCostume {
   });
 }
 
-List<MyCostume> myCostumeList = [
-  MyCostume(
-    costume_name: "くらげ",
-    image: "jellyfish.svg",
-    fish_image: "fish_jellyfish.svg",
-  ),
-  MyCostume(
-    costume_name: "サメ",
-    image: "shark.svg",
-    fish_image: "fish_shark.svg",
-  ),
-  MyCostume(
-    costume_name: "たこ",
-    image: "octopus.svg",
-    fish_image: "fish_octopus.svg",
-  ),
-  MyCostume(
-    costume_name: "クジラ",
-    image: "whale.svg",
-    fish_image: "fish_whale.svg",
-  ),
-  MyCostume(
-    costume_name: "かめ",
-    image: "turtle.svg",
-    fish_image: "fish_turtle.svg",
-  ),
-];
+
 
 List<String> myCostumeFishList = [
   "fish_jellyfish.svg",

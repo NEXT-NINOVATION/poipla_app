@@ -8,7 +8,8 @@ class Costume with _$Costume{
 
 
   factory Costume({
-    required String title,
+    required int id,
+    @JsonKey(name: 'costume_name') required String costumeName,
     required String image,
     required int? rarity,
     @JsonKey(name: 'pref_id') int? prefId,
