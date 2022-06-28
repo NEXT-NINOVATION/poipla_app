@@ -10,7 +10,7 @@ import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 
 class ChangeCostumeScreen extends ConsumerStatefulWidget {
-  ChangeCostumeScreen({Key? key}) : super(key: key);
+  const ChangeCostumeScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ChangeCostumeScreen> createState() =>
@@ -23,7 +23,7 @@ final myCostumeFutureProvider = FutureProvider.autoDispose((ref) {
 
 class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
   // int fishCosIndex = 0;
-  int? selectedCosId = 0;
+  int? selectedCosId;
   bool selected = true;
 
   @override
