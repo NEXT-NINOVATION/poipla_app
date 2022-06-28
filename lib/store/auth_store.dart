@@ -5,13 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:poipla_app/models/entities/user/user.dart';
 import 'package:poipla_app/models/repositories/user_repository.dart';
 
-enum AppStateType {
-  loading,
-  unauthorized,
-  authorized,
-  start,
-  tutorial
-}
+enum AppStateType { loading, unauthorized, authorized, start, tutorial }
 
 class AuthStore extends ChangeNotifier {
   AuthStore({required this.userRepository});
