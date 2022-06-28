@@ -79,10 +79,11 @@ class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
           ),
           body: asyncMyCostumes.when(data: (data) {
             final selectedCos = () {
-              final filtered = data.where((element) => element.id == selectedCosId);
+              final filtered =
+                  data.where((element) => element.id == selectedCosId);
               if (filtered.isEmpty) {
                 return null;
-              }else{
+              } else {
                 return filtered.first;
               }
             }();
@@ -93,14 +94,18 @@ class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
                 const SizedBox(height: 20),
                 if (selectedCos != null)
                   SvgPicture.asset(
-                    "assets/svg/${selectedCos.image}.svg",
-                  ),
+                    "assets/svg/fish_${selectedCos.image}.svg",
+                  )
+                else
+                  SvgPicture.asset("assets/svg/fish_default.svg"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
                       onTap: () {
-                        ref.read(accountStoreProvider).changeCurrentCostume(costumeId: selectedCosId);
+                        ref
+                            .read(accountStoreProvider)
+                            .changeCurrentCostume(costumeId: selectedCosId);
                         Navigator.pop(context);
                       },
                       child: SizedBox(

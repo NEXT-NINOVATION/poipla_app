@@ -4,9 +4,7 @@ part 'costume.freezed.dart';
 part 'costume.g.dart';
 
 @freezed
-class Costume with _$Costume{
-
-
+class Costume with _$Costume {
   factory Costume({
     required int id,
     @JsonKey(name: 'costume_name') required String costumeName,
@@ -16,5 +14,6 @@ class Costume with _$Costume{
     @JsonKey(name: 'event_id') int? eventId,
   }) = _Costume;
 
-  factory Costume.fromJson(Map<String, dynamic> json) => _$CostumeFromJson(json);
+  factory Costume.fromJson(Map<String, dynamic> json) =>
+      _$CostumeFromJson(json);
 }

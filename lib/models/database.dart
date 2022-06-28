@@ -90,8 +90,6 @@ class MyCostume {
   });
 }
 
-
-
 List<String> myCostumeFishList = [
   "fish_jellyfish.svg",
   "fish_shark.svg",
