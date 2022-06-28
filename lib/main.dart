@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 }
 
 final routerProvider = Provider((ref) {
-  final authState = ref.read(authStoreProvider);
+  final authState = ref.read(accountStoreProvider);
   return GoRouter(
     routes: [
       GoRoute(
@@ -77,7 +77,7 @@ class RouterApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(_fetchAuthInfoFutureProvider);
 
-    ref.watch(authStoreProvider);
+    ref.watch(accountStoreProvider);
     final router = ref.read(routerProvider);
     return MaterialApp.router(
       routeInformationParser: router.routeInformationParser,
@@ -90,7 +90,7 @@ class RouterApp extends ConsumerWidget {
 }
 
 final _fetchAuthInfoFutureProvider = FutureProvider.autoDispose((ref) {
-  return ref.read(authStoreProvider).fetch();
+  return ref.read(accountStoreProvider).fetch();
 });
 
 class ExampleRegisterScreen extends ConsumerWidget {
@@ -105,7 +105,7 @@ class ExampleRegisterScreen extends ConsumerWidget {
       body: Center(
         child: TextButton(
             onPressed: () {
-              ref.read(authStoreProvider).register().then((value) {
+              ref.read(accountStoreProvider).register().then((value) {
                 GoRouter.of(context).go('/');
               });
             },

@@ -34,7 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // 帰ってきた表示フラグ
     bool isExc = false;
 
-    final authStore = ref.watch(authStoreProvider);
+    final authStore = ref.watch(accountStoreProvider);
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
