@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
+import 'package:poipla_app/models/entities/costume/costume.dart';
+import 'package:poipla_app/providers/costume_provider.dart';
 import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/adventure_result_modal.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
@@ -14,6 +16,7 @@ import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
 import 'package:poipla_app/providers/user_provider.dart';
+import 'package:collection/collection.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,6 +24,10 @@ class HomeScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
+
+final myCostumesFutureProvider = FutureProvider.autoDispose((ref) {
+  return ref.read(myCostumeStoreProvider).fetchAll();
+});
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
@@ -34,7 +41,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // 帰ってきた表示フラグ
     bool isExc = false;
 
-    final authStore = ref.watch(authStoreProvider);
+    final costumes = ref.watch(myCostumeStoreProvider).myCostumes;
+    ref.watch(myCostumesFutureProvider);
+
+    final authStore = ref.watch(accountStoreProvider);
+
+    final currentCostume = costumes.firstWhereOrNull(
+        (element) => element.id == authStore.currentUser?.costumeId);
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -50,7 +64,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             // "${authStore.currentUser?.name}のおうち",
             "スーのおうち",
             style: const TextStyle(
@@ -223,28 +237,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         clipBehavior: Clip.none,
                         alignment: Alignment.center,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              if (isExc == true) {
-                                showDialog(
-                                  // Dialogの周囲の黒い部分をタップしても閉じないようにする
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      const AdventureResultModal(
-                                    prefName: "愛知県",
-                                    kana: "あいちけん",
-                                    earnPoint: 50,
-                                    costumeName: "シャチホコ",
-                                  ),
-                                );
-                              }
-                            },
-                            child: SvgPicture.asset(
-                              "assets/svg/fish_default.svg",
-                              width: deviceW * 0.6,
-                            ),
-                          ),
+                          GestureDetector(onTap: () {
+                            if (isExc == true) {
+                              showDialog(
+                                // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    const AdventureResultModal(
+                                  prefName: "愛知県",
+                                  kana: "あいちけん",
+                                  earnPoint: 50,
+                                  costumeName: "シャチホコ",
+                                ),
+                              );
+                            }
+                          }, child: () {
+                            if (currentCostume == null) {
+                              return SvgPicture.asset(
+                                "assets/svg/fish_default.svg",
+                                width: deviceW * 0.6,
+                              );
+                            } else {
+                              return SvgPicture.asset(
+                                "assets/svg/fish_${currentCostume.image}.svg",
+                                width: deviceW * 0.6,
+                              );
+                            }
+                          }()),
                           isExc == true
                               ? Positioned(
                                   right: -10,

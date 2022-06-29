@@ -11,7 +11,7 @@ final userRepositoryProvider = Provider<UserRepository>((ref) {
       tokenService: ref.read(tokenProvider));
 });
 
-final authStoreProvider = ChangeNotifierProvider((ref) {
+final accountStoreProvider = ChangeNotifierProvider((ref) {
   final userRepository = ref.read(userRepositoryProvider);
-  return AuthStore(userRepository: userRepository);
+  return AccountStore(userRepository: userRepository);
 });
