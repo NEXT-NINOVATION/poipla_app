@@ -171,13 +171,26 @@ class _QRModalState extends ConsumerState<QRModal> {
   }
 }
 
+/// セッション中に入ったゴミの個数を表示している。
 class TrashCounterWidget extends ConsumerWidget {
   const TrashCounterWidget({Key? key, required this.session}) : super(key: key);
   final Session session;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(sessionCountEventStreamProvider(session.dustBoxId));
-    return Container();
+    final latestEvent =
+        ref.watch(sessionCountEventStreamProvider(session.dustBoxId));
+
+    /// NOTE: 現在の個数
+    final count = latestEvent.when(
+        data: (d) {
+          if (d.session.id != session.id) {
+            return 0;
+          }
+          return d.count;
+        },
+        error: (e, st) => 0,
+        loading: () => 0);
+    return Text('count:$count');
   }
 }
