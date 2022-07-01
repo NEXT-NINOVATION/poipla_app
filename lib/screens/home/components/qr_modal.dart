@@ -1,10 +1,11 @@
-import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
+import 'package:poipla_app/providers/session_event_provider.dart';
 import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -93,7 +94,7 @@ class _QRModalState extends ConsumerState<QRModal> {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
-    var scanArea = min(deviceW, deviceH) / 2;
+    // var scanArea = min(deviceW, deviceH) / 2;
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -116,7 +117,7 @@ class _QRModalState extends ConsumerState<QRModal> {
               return const Text('セッション作成中');
             }
             if (type == StateType.sessionCreated) {
-              return const Text('スキャン完了');
+              return TrashCounterWidget(session: session!);
             }
             return const Text('???');
           }()),
@@ -143,7 +144,8 @@ class _QRModalState extends ConsumerState<QRModal> {
           type = StateType.sessionCreated;
           session = value;
         });
-      }).onError((error, stackTrace) {
+      }).catchError((error, stackTrace) {
+        dev.log('failure session create', error: error, stackTrace: stackTrace);
         setState(() {
           type = StateType.scanning;
         });
@@ -166,5 +168,16 @@ class _QRModalState extends ConsumerState<QRModal> {
   void dispose() {
     _qrViewController?.dispose();
     super.dispose();
+  }
+}
+
+class TrashCounterWidget extends ConsumerWidget {
+  const TrashCounterWidget({Key? key, required this.session}) : super(key: key);
+  final Session session;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(sessionCountEventStreamProvider(session.dustBoxId));
+    return Container();
   }
 }
