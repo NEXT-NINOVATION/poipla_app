@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'clutter_result.dart';
+part of 'clatter_result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ClutterResult _$ClutterResultFromJson(Map<String, dynamic> json) {
-  return _ClutterResult.fromJson(json);
+ClatterResult _$ClatterResultFromJson(Map<String, dynamic> json) {
+  return _ClatterResult.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ClutterResult {
+mixin _$ClatterResult {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   int get userId => throw _privateConstructorUsedError;
@@ -38,15 +38,15 @@ mixin _$ClutterResult {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ClutterResultCopyWith<ClutterResult> get copyWith =>
+  $ClatterResultCopyWith<ClatterResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ClutterResultCopyWith<$Res> {
-  factory $ClutterResultCopyWith(
-          ClutterResult value, $Res Function(ClutterResult) then) =
-      _$ClutterResultCopyWithImpl<$Res>;
+abstract class $ClatterResultCopyWith<$Res> {
+  factory $ClatterResultCopyWith(
+          ClatterResult value, $Res Function(ClatterResult) then) =
+      _$ClatterResultCopyWithImpl<$Res>;
   $Res call(
       {int id,
       @JsonKey(name: 'user_id') int userId,
@@ -61,13 +61,13 @@ abstract class $ClutterResultCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ClutterResultCopyWithImpl<$Res>
-    implements $ClutterResultCopyWith<$Res> {
-  _$ClutterResultCopyWithImpl(this._value, this._then);
+class _$ClatterResultCopyWithImpl<$Res>
+    implements $ClatterResultCopyWith<$Res> {
+  _$ClatterResultCopyWithImpl(this._value, this._then);
 
-  final ClutterResult _value;
+  final ClatterResult _value;
   // ignore: unused_field
-  final $Res Function(ClutterResult) _then;
+  final $Res Function(ClatterResult) _then;
 
   @override
   $Res call({
@@ -129,11 +129,11 @@ class _$ClutterResultCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_ClutterResultCopyWith<$Res>
-    implements $ClutterResultCopyWith<$Res> {
-  factory _$$_ClutterResultCopyWith(
-          _$_ClutterResult value, $Res Function(_$_ClutterResult) then) =
-      __$$_ClutterResultCopyWithImpl<$Res>;
+abstract class _$$_ClatterResultCopyWith<$Res>
+    implements $ClatterResultCopyWith<$Res> {
+  factory _$$_ClatterResultCopyWith(
+          _$_ClatterResult value, $Res Function(_$_ClatterResult) then) =
+      __$$_ClatterResultCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -150,15 +150,15 @@ abstract class _$$_ClutterResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ClutterResultCopyWithImpl<$Res>
-    extends _$ClutterResultCopyWithImpl<$Res>
-    implements _$$_ClutterResultCopyWith<$Res> {
-  __$$_ClutterResultCopyWithImpl(
-      _$_ClutterResult _value, $Res Function(_$_ClutterResult) _then)
-      : super(_value, (v) => _then(v as _$_ClutterResult));
+class __$$_ClatterResultCopyWithImpl<$Res>
+    extends _$ClatterResultCopyWithImpl<$Res>
+    implements _$$_ClatterResultCopyWith<$Res> {
+  __$$_ClatterResultCopyWithImpl(
+      _$_ClatterResult _value, $Res Function(_$_ClatterResult) _then)
+      : super(_value, (v) => _then(v as _$_ClatterResult));
 
   @override
-  _$_ClutterResult get _value => super._value as _$_ClutterResult;
+  _$_ClatterResult get _value => super._value as _$_ClatterResult;
 
   @override
   $Res call({
@@ -171,7 +171,7 @@ class __$$_ClutterResultCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? costume = freezed,
   }) {
-    return _then(_$_ClutterResult(
+    return _then(_$_ClatterResult(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -210,8 +210,8 @@ class __$$_ClutterResultCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ClutterResult implements _ClutterResult {
-  _$_ClutterResult(
+class _$_ClatterResult implements _ClatterResult {
+  _$_ClatterResult(
       {required this.id,
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'costume_id') required this.costumeId,
@@ -221,8 +221,8 @@ class _$_ClutterResult implements _ClutterResult {
       @JsonKey(name: 'updated_at') required this.updatedAt,
       @JsonKey(name: 'costume') required this.costume});
 
-  factory _$_ClutterResult.fromJson(Map<String, dynamic> json) =>
-      _$$_ClutterResultFromJson(json);
+  factory _$_ClatterResult.fromJson(Map<String, dynamic> json) =>
+      _$$_ClatterResultFromJson(json);
 
   @override
   final int id;
@@ -250,14 +250,14 @@ class _$_ClutterResult implements _ClutterResult {
 
   @override
   String toString() {
-    return 'ClutterResult(id: $id, userId: $userId, costumeId: $costumeId, sessionId: $sessionId, earnExp: $earnExp, createdAt: $createdAt, updatedAt: $updatedAt, costume: $costume)';
+    return 'ClatterResult(id: $id, userId: $userId, costumeId: $costumeId, sessionId: $sessionId, earnExp: $earnExp, createdAt: $createdAt, updatedAt: $updatedAt, costume: $costume)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ClutterResult &&
+            other is _$_ClatterResult &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other.costumeId, costumeId) &&
@@ -283,17 +283,17 @@ class _$_ClutterResult implements _ClutterResult {
 
   @JsonKey(ignore: true)
   @override
-  _$$_ClutterResultCopyWith<_$_ClutterResult> get copyWith =>
-      __$$_ClutterResultCopyWithImpl<_$_ClutterResult>(this, _$identity);
+  _$$_ClatterResultCopyWith<_$_ClatterResult> get copyWith =>
+      __$$_ClatterResultCopyWithImpl<_$_ClatterResult>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ClutterResultToJson(this);
+    return _$$_ClatterResultToJson(this);
   }
 }
 
-abstract class _ClutterResult implements ClutterResult {
-  factory _ClutterResult(
+abstract class _ClatterResult implements ClatterResult {
+  factory _ClatterResult(
           {required final int id,
           @JsonKey(name: 'user_id') required final int userId,
           @JsonKey(name: 'costume_id') required final int? costumeId,
@@ -302,10 +302,10 @@ abstract class _ClutterResult implements ClutterResult {
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') required final DateTime updatedAt,
           @JsonKey(name: 'costume') required final Costume? costume}) =
-      _$_ClutterResult;
+      _$_ClatterResult;
 
-  factory _ClutterResult.fromJson(Map<String, dynamic> json) =
-      _$_ClutterResult.fromJson;
+  factory _ClatterResult.fromJson(Map<String, dynamic> json) =
+      _$_ClatterResult.fromJson;
 
   @override
   int get id => throw _privateConstructorUsedError;
@@ -332,6 +332,6 @@ abstract class _ClutterResult implements ClutterResult {
   Costume? get costume => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_ClutterResultCopyWith<_$_ClutterResult> get copyWith =>
+  _$$_ClatterResultCopyWith<_$_ClatterResult> get copyWith =>
       throw _privateConstructorUsedError;
 }

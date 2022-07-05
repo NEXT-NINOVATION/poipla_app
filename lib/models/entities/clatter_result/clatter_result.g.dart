@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'clutter_result.dart';
+part of 'clatter_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ClutterResult _$$_ClutterResultFromJson(Map<String, dynamic> json) =>
-    _$_ClutterResult(
+_$_ClatterResult _$$_ClatterResultFromJson(Map<String, dynamic> json) =>
+    _$_ClatterResult(
       id: json['id'] as int,
       userId: json['user_id'] as int,
       costumeId: json['costume_id'] as int?,
@@ -20,7 +20,7 @@ _$_ClutterResult _$$_ClutterResultFromJson(Map<String, dynamic> json) =>
           : Costume.fromJson(json['costume'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ClutterResultToJson(_$_ClutterResult instance) =>
+Map<String, dynamic> _$$_ClatterResultToJson(_$_ClatterResult instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
