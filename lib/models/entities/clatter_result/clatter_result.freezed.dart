@@ -21,8 +21,6 @@ ClatterResult _$ClatterResultFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ClatterResult {
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
-  int get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'costume_id')
   int? get costumeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'session_id')
@@ -49,7 +47,6 @@ abstract class $ClatterResultCopyWith<$Res> {
       _$ClatterResultCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      @JsonKey(name: 'user_id') int userId,
       @JsonKey(name: 'costume_id') int? costumeId,
       @JsonKey(name: 'session_id') int sessionId,
       @JsonKey(name: 'earn_exp') int? earnExp,
@@ -72,7 +69,6 @@ class _$ClatterResultCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? userId = freezed,
     Object? costumeId = freezed,
     Object? sessionId = freezed,
     Object? earnExp = freezed,
@@ -84,10 +80,6 @@ class _$ClatterResultCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
               as int,
       costumeId: costumeId == freezed
           ? _value.costumeId
@@ -137,7 +129,6 @@ abstract class _$$_ClatterResultCopyWith<$Res>
   @override
   $Res call(
       {int id,
-      @JsonKey(name: 'user_id') int userId,
       @JsonKey(name: 'costume_id') int? costumeId,
       @JsonKey(name: 'session_id') int sessionId,
       @JsonKey(name: 'earn_exp') int? earnExp,
@@ -163,7 +154,6 @@ class __$$_ClatterResultCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? userId = freezed,
     Object? costumeId = freezed,
     Object? sessionId = freezed,
     Object? earnExp = freezed,
@@ -175,10 +165,6 @@ class __$$_ClatterResultCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
               as int,
       costumeId: costumeId == freezed
           ? _value.costumeId
@@ -213,7 +199,6 @@ class __$$_ClatterResultCopyWithImpl<$Res>
 class _$_ClatterResult implements _ClatterResult {
   _$_ClatterResult(
       {required this.id,
-      @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'costume_id') required this.costumeId,
       @JsonKey(name: 'session_id') required this.sessionId,
       @JsonKey(name: 'earn_exp') required this.earnExp,
@@ -226,9 +211,6 @@ class _$_ClatterResult implements _ClatterResult {
 
   @override
   final int id;
-  @override
-  @JsonKey(name: 'user_id')
-  final int userId;
   @override
   @JsonKey(name: 'costume_id')
   final int? costumeId;
@@ -250,7 +232,7 @@ class _$_ClatterResult implements _ClatterResult {
 
   @override
   String toString() {
-    return 'ClatterResult(id: $id, userId: $userId, costumeId: $costumeId, sessionId: $sessionId, earnExp: $earnExp, createdAt: $createdAt, updatedAt: $updatedAt, costume: $costume)';
+    return 'ClatterResult(id: $id, costumeId: $costumeId, sessionId: $sessionId, earnExp: $earnExp, createdAt: $createdAt, updatedAt: $updatedAt, costume: $costume)';
   }
 
   @override
@@ -259,7 +241,6 @@ class _$_ClatterResult implements _ClatterResult {
         (other.runtimeType == runtimeType &&
             other is _$_ClatterResult &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other.costumeId, costumeId) &&
             const DeepCollectionEquality().equals(other.sessionId, sessionId) &&
             const DeepCollectionEquality().equals(other.earnExp, earnExp) &&
@@ -273,7 +254,6 @@ class _$_ClatterResult implements _ClatterResult {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(costumeId),
       const DeepCollectionEquality().hash(sessionId),
       const DeepCollectionEquality().hash(earnExp),
@@ -295,7 +275,6 @@ class _$_ClatterResult implements _ClatterResult {
 abstract class _ClatterResult implements ClatterResult {
   factory _ClatterResult(
           {required final int id,
-          @JsonKey(name: 'user_id') required final int userId,
           @JsonKey(name: 'costume_id') required final int? costumeId,
           @JsonKey(name: 'session_id') required final int sessionId,
           @JsonKey(name: 'earn_exp') required final int? earnExp,
@@ -309,9 +288,6 @@ abstract class _ClatterResult implements ClatterResult {
 
   @override
   int get id => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(name: 'user_id')
-  int get userId => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'costume_id')
   int? get costumeId => throw _privateConstructorUsedError;

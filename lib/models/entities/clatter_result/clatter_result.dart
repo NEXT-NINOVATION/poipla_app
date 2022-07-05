@@ -8,7 +8,6 @@ part 'clatter_result.g.dart';
 class ClatterResult with _$ClatterResult {
   factory ClatterResult({
     required int id,
-    @JsonKey(name: 'user_id') required int userId,
     @JsonKey(name: 'costume_id') required int? costumeId,
     @JsonKey(name: 'session_id') required int sessionId,
     @JsonKey(name: 'earn_exp') required int? earnExp,

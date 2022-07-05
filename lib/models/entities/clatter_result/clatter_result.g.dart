@@ -9,7 +9,6 @@ part of 'clatter_result.dart';
 _$_ClatterResult _$$_ClatterResultFromJson(Map<String, dynamic> json) =>
     _$_ClatterResult(
       id: json['id'] as int,
-      userId: json['user_id'] as int,
       costumeId: json['costume_id'] as int?,
       sessionId: json['session_id'] as int,
       earnExp: json['earn_exp'] as int?,
@@ -23,7 +22,6 @@ _$_ClatterResult _$$_ClatterResultFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_ClatterResultToJson(_$_ClatterResult instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'user_id': instance.userId,
       'costume_id': instance.costumeId,
       'session_id': instance.sessionId,
       'earn_exp': instance.earnExp,
