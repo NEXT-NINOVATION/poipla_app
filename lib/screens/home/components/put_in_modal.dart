@@ -38,45 +38,65 @@ class _PutInModalState extends State<PutInModal> {
                 style: TextStyle(
                   color: kFontColor,
                   fontSize: 20,
+                  height: 1.8,
                 ),
               ),
-              Stack(children: [
-                Container(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/svg/speech_balloon.svg",
-                        height: 150,
-                        width: 260,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+              SizedBox(height: 10),
+              Expanded(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: 20,
+                      child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Text(
-                            "$sum",
-                            style: const TextStyle(
-                              fontSize: 56,
-                              color: kFontColorImportant,
+                          SvgPicture.asset(
+                            "assets/svg/speech_balloon.svg",
+                            height: 150,
+                            width: 260,
+                          ),
+                          Container(
+                            // color: Colors.amber,
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 17),
+                                  child: Text(
+                                    "$sum",
+                                    style: const TextStyle(
+                                      fontSize: 56,
+                                      color: kFontColorImportant,
+                                      fontFamily: 'Outfit',
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                ),
+                                const Text(
+                                  "こいれたよ",
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: kFontColor,
+                                      fontFamily: 'Noto Sans JP',
+                                      fontWeight: FontWeight.w900),
+                                )
+                              ],
                             ),
                           ),
-                          const Text(
-                            "こいれたよ",
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: kFontColor,
-                            ),
-                          )
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Positioned(
+                      bottom: 110,
+                      child: SvgPicture.asset(
+                        "assets/svg/fish_shark.svg",
+                        height: 250,
+                        width: 300,
+                      ),
+                    ),
+                  ],
                 ),
-              ]),
-              SvgPicture.asset(
-                "assets/svg/fish_shark.svg",
-                height: 250,
-                width: 300,
               ),
             ],
           ),
