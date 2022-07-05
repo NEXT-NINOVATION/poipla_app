@@ -9,11 +9,11 @@ import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class QRModal extends ConsumerStatefulWidget {
-  const QRModal({Key? key}) : super(key: key);
+class QRCameraModal extends ConsumerStatefulWidget {
+  const QRCameraModal({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<QRModal> createState() => _QRModalState();
+  ConsumerState<QRCameraModal> createState() => _QRCameraModalState();
 }
 
 /// 現在の状態を表す
@@ -28,7 +28,7 @@ enum StateType {
   sessionFinished,
 }
 
-class _QRModalState extends ConsumerState<QRModal> {
+class _QRCameraModalState extends ConsumerState<QRCameraModal> {
   final qrKey = GlobalKey(debugLabel: 'QrCodeKey');
 
   QRViewController? _qrViewController;
@@ -55,22 +55,28 @@ class _QRModalState extends ConsumerState<QRModal> {
                 ),
               ),
               const SizedBox(height: 40),
-              Expanded(
+              Container(
+                width: deviceW * 0.8,
+                height: deviceW * 0.8,
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xFF207CAF), width: 9),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: QRView(
                   key: qrKey,
                   onQRViewCreated: _onQRViewCreated,
                   overlay: QrScannerOverlayShape(
-                      borderColor: Colors.red,
-                      borderRadius: 10,
-                      borderLength: 30,
-                      borderWidth: 10,
-                      cutOutSize: scanArea),
+                    borderColor: const Color(0xFF207CAF),
+                    borderRadius: 10,
+                    borderLength: 30,
+                    borderWidth: 10,
+                    cutOutSize: scanArea,
+                  ),
                   onPermissionSet: (ctrl, p) =>
                       _onPermissionSet(context, ctrl, p),
                 ),
               ),
-
-              // Image.asset("assets/svg/qr.png"),
+              const SizedBox(height: 100),
             ],
           ),
         ),
@@ -81,7 +87,7 @@ class _QRModalState extends ConsumerState<QRModal> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: const AppButton(text: "とじる", isPos: false),
+            child: const AppButton(text: "やめる", isPos: false),
           ),
         ),
       ],
