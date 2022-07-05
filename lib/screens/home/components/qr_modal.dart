@@ -194,25 +194,3 @@ class TrashCounterWidget extends ConsumerWidget {
     return Text('count:$count');
   }
 }
-
-///
-class TrashCompleteWidget extends ConsumerStatefulWidget {
-  const TrashCompleteWidget({
-    Key? key,
-    required this.session,
-    required this.onCompleteButtonPressed,
-  }) : super(key: key);
-  final Session session;
-  final VoidCallback onCompleteButtonPressed;
-
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() {
-    return TrashCompleteWidgetState();
-  }
-}
-
-class TrashCompleteWidgetState extends ConsumerState<TrashCompleteWidget> {
-  bool isSendingComplete = false;
-  @override
-  Widget build(BuildContext context) {}
-}
