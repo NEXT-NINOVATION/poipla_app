@@ -65,17 +65,22 @@ class _PoiplaApiService implements PoiplaApiService {
   }
 
   @override
-  Future<void> completeSession(boxId, sessionId) async {
+  Future<List<ClatterResult>> completeSession(boxId, sessionId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(
-        Options(method: 'PUT', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/dust-boxes/${boxId}/sessions/${sessionId}',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    return null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ClatterResult>>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/dust-boxes/${boxId}/sessions/${sessionId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => ClatterResult.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
   }
 
   @override
@@ -108,6 +113,25 @@ class _PoiplaApiService implements PoiplaApiService {
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) => Costume.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<ClatterResult>> getClatterResults(boxId, sessionId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ClatterResult>>(Options(
+                method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options,
+                '/dust-boxes/${boxId}/sessions/${sessionId}/clatter-results',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => ClatterResult.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

@@ -1,3 +1,4 @@
+import 'package:poipla_app/models/entities/clatter_result/clatter_result.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
 
 class SessionRepository {
@@ -5,7 +6,7 @@ class SessionRepository {
     throw UnimplementedError();
   }
 
-  Future<void> complete(Session session) {
+  Future<List<ClatterResult>> complete(Session session) {
     throw UnimplementedError();
   }
 }

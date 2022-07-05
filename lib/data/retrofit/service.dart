@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:poipla_app/models/entities/clatter_result/clatter_result.dart';
 import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
 import 'package:poipla_app/models/entities/token/token.dart';
-import 'package:poipla_app/models/services/token_service.dart';
 import 'package:poipla_app/models/entities/user/user.dart';
+import 'package:poipla_app/models/services/token_service.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
+
 part 'service.g.dart';
 
 @RestApi(baseUrl: 'https://poipla.yumekiti.net/api')
@@ -22,7 +24,7 @@ abstract class PoiplaApiService {
   Future<Session> createSession(@Path('boxId') String boxId);
 
   @PUT('/dust-boxes/{boxId}/sessions/{sessionId}')
-  Future<void> completeSession(
+  Future<List<ClatterResult>> completeSession(
       @Path('boxId') String boxId, @Path('sessionId') String sessionId);
 
   @PUT('/me')
@@ -30,6 +32,12 @@ abstract class PoiplaApiService {
 
   @GET('/me/costumes')
   Future<List<Costume>> getMyCostumes();
+
+  @GET('/dust-boxes/{boxId}/sessions/{sessionId}/clatter-results')
+  Future<List<ClatterResult>> getClatterResults(
+    @Path('boxId') String boxId,
+    @Path('sessionId') String sessionId,
+  );
 }
 
 PoiplaApiService create(TokenService service,
