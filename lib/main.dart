@@ -76,7 +76,7 @@ class RouterApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(_fetchAuthInfoFutureProvider);
-    ref.watch(pusherClientProvider);
+    ref.watch(pusherChannelProvider);
 
     ref.watch(accountStoreProvider);
     final router = ref.read(routerProvider);
