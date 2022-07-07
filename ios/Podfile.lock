@@ -2,10 +2,10 @@ PODS:
   - Flutter (1.0.0)
   - MTBBarcodeScanner (5.0.11)
   - NWWebSocket (0.5.2)
-  - pusher_client (2.1.0):
+  - pusher_channels_flutter (0.0.1):
     - Flutter
-    - PusherSwift (~> 9.0)
-  - PusherSwift (9.2.2):
+    - PusherSwift (~> 10.0.0)
+  - PusherSwift (10.0.0):
     - NWWebSocket (~> 0.5.2)
     - TweetNacl (~> 1.0.0)
   - qr_code_scanner (0.2.0):
@@ -17,7 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - pusher_client (from `.symlinks/plugins/pusher_client/ios`)
+  - pusher_channels_flutter (from `.symlinks/plugins/pusher_channels_flutter/ios`)
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
 
@@ -31,8 +31,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  pusher_client:
-    :path: ".symlinks/plugins/pusher_client/ios"
+  pusher_channels_flutter:
+    :path: ".symlinks/plugins/pusher_channels_flutter/ios"
   qr_code_scanner:
     :path: ".symlinks/plugins/qr_code_scanner/ios"
   shared_preferences_ios:
@@ -42,8 +42,8 @@ SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   NWWebSocket: 21f0c73639815da3272862c912275b26102aa80c
-  pusher_client: ff61542f68affe690a4deed3ab6a209089f0962d
-  PusherSwift: 8b252244aca6a662572be48a97b756d14cd7542c
+  pusher_channels_flutter: 36d51ae4a94195bb9109c2009de2f8445e222d67
+  PusherSwift: 264eaceb921a5f8e166f01a2242371179540c7ff
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6

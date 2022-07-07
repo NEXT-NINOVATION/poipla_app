@@ -23,23 +23,10 @@ final pusherChannelProvider =
   pusher.connect().catchError((e, st) {
     log('start pusher error', error: e, stackTrace: st);
   });
+  ref.onDispose(() => pusher.disconnect());
   return pusher;
 });
-// final pusherClientProvider = Provider.autoDispose<PusherClient>((ref) {
-//   final client = PusherClient(
-//     pusherApiKey,
-//     PusherOptions(
-//       cluster: 'ap3',
-//     ),
-//   );
-//   client.connect().then((value) {
-//     log('pusher is connected');
-//   });
-//   ref.onDispose(() {
-//     client.disconnect();
-//   });
-//   return client;
-// });
+
 final sessionCountEventStreamProvider = StreamProvider.autoDispose
     .family<ResultCount, int>((ref, int dustBoxId) async* {
   final pusherClient = ref.read(pusherChannelProvider);
@@ -56,15 +43,6 @@ final sessionCountEventStreamProvider = StreamProvider.autoDispose
           }
         }
       });
-  // pusherClient.subscribe('dust-box-$dustBoxId').bind('result-count', (event) {
-  //   log('on session count event, socketId:${pusherClient.getSocketId()}');
-  //   log('result-count-event:${event?.data}');
-  //   if (event?.data != null) {
-  //     final json = jsonDecode(event!.data!);
-  //     streamController.sink.add(ResultCount.fromJson(json));
-  //   }
-  //   // jsonDecode()
-  // });
 
   ref.read(accountStoreProvider);
   streamController.onCancel = () {
