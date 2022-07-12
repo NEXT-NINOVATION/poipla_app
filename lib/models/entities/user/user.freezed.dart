@@ -29,6 +29,7 @@ mixin _$User {
   int get totalPet => throw _privateConstructorUsedError;
   @JsonKey(name: 'costume_id')
   int? get costumeId => throw _privateConstructorUsedError;
+  Costume? get costume => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +47,10 @@ abstract class $UserCopyWith<$Res> {
       int point,
       String? name,
       @JsonKey(name: 'total_pet') int totalPet,
-      @JsonKey(name: 'costume_id') int? costumeId});
+      @JsonKey(name: 'costume_id') int? costumeId,
+      Costume? costume});
+
+  $CostumeCopyWith<$Res>? get costume;
 }
 
 /// @nodoc
@@ -66,6 +70,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? name = freezed,
     Object? totalPet = freezed,
     Object? costumeId = freezed,
+    Object? costume = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -96,7 +101,22 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      costume: costume == freezed
+          ? _value.costume
+          : costume // ignore: cast_nullable_to_non_nullable
+              as Costume?,
     ));
+  }
+
+  @override
+  $CostumeCopyWith<$Res>? get costume {
+    if (_value.costume == null) {
+      return null;
+    }
+
+    return $CostumeCopyWith<$Res>(_value.costume!, (value) {
+      return _then(_value.copyWith(costume: value));
+    });
   }
 }
 
@@ -112,7 +132,11 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       int point,
       String? name,
       @JsonKey(name: 'total_pet') int totalPet,
-      @JsonKey(name: 'costume_id') int? costumeId});
+      @JsonKey(name: 'costume_id') int? costumeId,
+      Costume? costume});
+
+  @override
+  $CostumeCopyWith<$Res>? get costume;
 }
 
 /// @nodoc
@@ -133,6 +157,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? name = freezed,
     Object? totalPet = freezed,
     Object? costumeId = freezed,
+    Object? costume = freezed,
   }) {
     return _then(_$_User(
       id: id == freezed
@@ -163,6 +188,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      costume: costume == freezed
+          ? _value.costume
+          : costume // ignore: cast_nullable_to_non_nullable
+              as Costume?,
     ));
   }
 }
@@ -177,7 +206,8 @@ class _$_User extends _User {
       required this.point,
       required this.name,
       @JsonKey(name: 'total_pet') required this.totalPet,
-      @JsonKey(name: 'costume_id') required this.costumeId})
+      @JsonKey(name: 'costume_id') required this.costumeId,
+      this.costume})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -198,10 +228,12 @@ class _$_User extends _User {
   @override
   @JsonKey(name: 'costume_id')
   final int? costumeId;
+  @override
+  final Costume? costume;
 
   @override
   String toString() {
-    return 'User(id: $id, level: $level, exp: $exp, point: $point, name: $name, totalPet: $totalPet, costumeId: $costumeId)';
+    return 'User(id: $id, level: $level, exp: $exp, point: $point, name: $name, totalPet: $totalPet, costumeId: $costumeId, costume: $costume)';
   }
 
   @override
@@ -215,7 +247,8 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.point, point) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.totalPet, totalPet) &&
-            const DeepCollectionEquality().equals(other.costumeId, costumeId));
+            const DeepCollectionEquality().equals(other.costumeId, costumeId) &&
+            const DeepCollectionEquality().equals(other.costume, costume));
   }
 
   @JsonKey(ignore: true)
@@ -228,7 +261,8 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(point),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(totalPet),
-      const DeepCollectionEquality().hash(costumeId));
+      const DeepCollectionEquality().hash(costumeId),
+      const DeepCollectionEquality().hash(costume));
 
   @JsonKey(ignore: true)
   @override
@@ -249,7 +283,8 @@ abstract class _User extends User {
       required final int point,
       required final String? name,
       @JsonKey(name: 'total_pet') required final int totalPet,
-      @JsonKey(name: 'costume_id') required final int? costumeId}) = _$_User;
+      @JsonKey(name: 'costume_id') required final int? costumeId,
+      final Costume? costume}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -270,6 +305,8 @@ abstract class _User extends User {
   @override
   @JsonKey(name: 'costume_id')
   int? get costumeId => throw _privateConstructorUsedError;
+  @override
+  Costume? get costume => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

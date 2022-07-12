@@ -7,8 +7,8 @@ import 'package:poipla_app/models/repositories/user_repository.dart';
 
 enum AppStateType { loading, unauthorized, authorized, start, tutorial }
 
-class AuthStore extends ChangeNotifier {
-  AuthStore({required this.userRepository});
+class AccountStore extends ChangeNotifier {
+  AccountStore({required this.userRepository});
 
   final UserRepository userRepository;
   AppStateType type = AppStateType.loading;
@@ -58,6 +58,15 @@ class AuthStore extends ChangeNotifier {
 
   Future<void> updateName({required String name}) async {
     currentUser = await userRepository.update(name: name);
+    notifyListeners();
+  }
+
+  Future<void> changeCurrentCostume({required int? costumeId}) async {
+    currentUser = await userRepository.update(
+      costumeId: costumeId,
+      name: currentUser!.name!,
+    );
+
     notifyListeners();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
 import 'package:poipla_app/models/entities/token/token.dart';
 import 'package:poipla_app/models/services/token_service.dart';
@@ -26,6 +27,9 @@ abstract class PoiplaApiService {
 
   @PUT('/me')
   Future<User> updateUser(@Body() Map<String, dynamic> body);
+
+  @GET('/me/costumes')
+  Future<List<Costume>> getMyCostumes();
 }
 
 PoiplaApiService create(TokenService service,

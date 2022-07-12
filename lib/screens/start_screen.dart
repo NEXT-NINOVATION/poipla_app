@@ -48,7 +48,7 @@ class StartScreen extends ConsumerWidget {
               margin: const EdgeInsets.only(bottom: 120),
               child: GestureDetector(
                 onTap: () {
-                  ref.read(authStoreProvider).register();
+                  ref.read(accountStoreProvider).register();
                 },
                 child: const AppButton(
                   text: "はじめる",

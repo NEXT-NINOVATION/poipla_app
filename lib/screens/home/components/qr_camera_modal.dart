@@ -1,10 +1,11 @@
-import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
+import 'package:poipla_app/providers/session_event_provider.dart';
 import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -99,7 +100,7 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
-    var scanArea = min(deviceW, deviceH) / 2;
+    // var scanArea = min(deviceW, deviceH) / 2;
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -122,7 +123,7 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
               return const Text('セッション作成中');
             }
             if (type == StateType.sessionCreated) {
-              return const Text('スキャン完了');
+              return TrashCounterWidget(session: session!);
             }
             return const Text('???');
           }()),
@@ -149,7 +150,8 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
           type = StateType.sessionCreated;
           session = value;
         });
-      }).onError((error, stackTrace) {
+      }).catchError((error, stackTrace) {
+        dev.log('failure session create', error: error, stackTrace: stackTrace);
         setState(() {
           type = StateType.scanning;
         });
@@ -172,5 +174,29 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
   void dispose() {
     _qrViewController?.dispose();
     super.dispose();
+  }
+}
+
+/// セッション中に入ったゴミの個数を表示している。
+class TrashCounterWidget extends ConsumerWidget {
+  const TrashCounterWidget({Key? key, required this.session}) : super(key: key);
+  final Session session;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final latestEvent =
+        ref.watch(sessionCountEventStreamProvider(session.dustBoxId));
+
+    /// NOTE: 現在の個数
+    final count = latestEvent.when(
+        data: (d) {
+          if (d.session.id != session.id) {
+            return 0;
+          }
+          return d.count;
+        },
+        error: (e, st) => 0,
+        loading: () => 0);
+    return Text('count:$count');
   }
 }

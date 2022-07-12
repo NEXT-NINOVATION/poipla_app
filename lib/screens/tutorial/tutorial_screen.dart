@@ -38,7 +38,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = ref.watch(authStoreProvider).currentUser;
+    final currentUser = ref.watch(accountStoreProvider).currentUser;
     // セリフ
     List<String> wordsList = [
       "こんにちは、ぼくは\nスー。\nきみのおなまえは？",
@@ -172,7 +172,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                       onTap: () {
                         if (funcKey == 1) {
                           ref
-                              .read(authStoreProvider)
+                              .read(accountStoreProvider)
                               .updateName(name: inputNameController.text)
                               .then((value) {
                             setState(() {
@@ -216,7 +216,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                             index = 4;
                             funcKey++;
                           } else {
-                            ref.read(authStoreProvider).completeTutorial();
+                            ref.read(accountStoreProvider).completeTutorial();
                             GoRouter.of(context).go('/');
                           }
                         });
