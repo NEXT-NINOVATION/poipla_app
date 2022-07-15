@@ -11,7 +11,10 @@ import 'package:poipla_app/screens/home/components/adventure_result_modal.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
 import 'package:poipla_app/screens/home/components/come_back_timer.dart';
 import 'package:poipla_app/screens/home/components/present_modal.dart';
-import 'package:poipla_app/screens/home/components/qr_modal.dart';
+import 'package:poipla_app/screens/home/components/put_in_modal.dart';
+import 'package:poipla_app/screens/home/components/qr_camera_modal.dart';
+import 'package:poipla_app/screens/home/components/qr_completed_modal.dart';
+import 'package:poipla_app/screens/home/components/qr_loading_modal.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
@@ -192,7 +195,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             // Dialogの周囲の黒い部分をタップしても閉じないようにする
                             barrierDismissible: false,
                             context: context,
-                            builder: (BuildContext context) => QRModal(),
+                            builder: (BuildContext context) =>
+                                const QRCameraModal(),
                           );
                         },
                         child: Container(
