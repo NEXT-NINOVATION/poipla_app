@@ -8,6 +8,7 @@ import 'package:poipla_app/models/entities/session/session.dart';
 import 'package:poipla_app/providers/session_event_provider.dart';
 import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
+import 'package:poipla_app/screens/home/components/qr_loading_modal.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRCameraModal extends ConsumerStatefulWidget {
@@ -120,12 +121,18 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
               return _buildQrScanner(context);
             }
             if (type == StateType.sessionCreating) {
-              return const Text('セッション作成中');
+              return QRModalLoadingWidget();
             }
             if (type == StateType.sessionCreated) {
-              return TrashCounterWidget(session: session!);
+              return QRModalCounterWidget(
+                  session: session!,
+                  onGoToNextStep: () {
+                    setState(() {
+                      type = StateType.sessionFinished;
+                    });
+                  });
             }
-            return const Text('???');
+            return BeforeGachaWidget();
           }()),
     );
   }
