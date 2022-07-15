@@ -7,6 +7,7 @@ import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/bubble.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/screens/app_button.dart';
+import 'package:poipla_app/screens/tutorial/components/prologue_phase.dart';
 
 class TutorialScreen extends ConsumerStatefulWidget {
   const TutorialScreen({Key? key}) : super(key: key);
@@ -35,6 +36,12 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
   final inputNameController = TextEditingController();
 
   bool isUserNameUpdated = false;
+
+  callback(newFlag) {
+    setState(() {
+      showHistoryFlag = newFlag;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -233,55 +240,8 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
             ),
             Visibility(
               visible: showHistoryFlag,
-              child: Container(
-                width: deviceW,
-                height: deviceH,
-                color: kBgColorYellow,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "歴史!",
-                          style: TextStyle(
-                            color: kFontColor,
-                            fontSize: 28,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        SizedBox(
-                          width: deviceW * 0.7,
-                          child: const Text(
-                            "みんなが使っているストローやスーパーの袋、ペットボトルは正しく処理されないと街にごみとして残り続けます。ごみは川に流れてやがて、海にたどりつきます。消える事がなく、捨て続けると〇〇が大人になる頃にはプラスチックごみで海が溢れかえって僕たちのお家がなくなるよ！助けてー",
-                            style: TextStyle(
-                              color: kFontColor,
-                              fontSize: 20,
-                              height: 1.5,
-                            ),
-                            softWrap: true,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: const EdgeInsets.only(bottom: 120),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            showHistoryFlag = false;
-                          });
-                        },
-                        child: const AppButton(
-                          text: "わかった！",
-                          isPos: true,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              child: ProloguePhase(
+                callback: callback,
               ),
             ),
           ],
