@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
-import 'package:poipla_app/providers/session_event_provider.dart';
 import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/home/components/qr_loading_modal.dart';
@@ -140,7 +139,6 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
   void _onQRViewCreated(QRViewController controller) {
     _qrViewController = controller;
     _qrViewController?.scannedDataStream.listen((event) {
-      // TODO(pantasystem): セッション開始処理を行う
       if (type != StateType.scanning) {
         return;
       }
@@ -181,29 +179,5 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
   void dispose() {
     _qrViewController?.dispose();
     super.dispose();
-  }
-}
-
-/// セッション中に入ったゴミの個数を表示している。
-class TrashCounterWidget extends ConsumerWidget {
-  const TrashCounterWidget({Key? key, required this.session}) : super(key: key);
-  final Session session;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final latestEvent =
-        ref.watch(sessionCountEventStreamProvider(session.dustBoxId));
-
-    /// NOTE: 現在の個数
-    final count = latestEvent.when(
-        data: (d) {
-          if (d.session.id != session.id) {
-            return 0;
-          }
-          return d.count;
-        },
-        error: (e, st) => 0,
-        loading: () => 0);
-    return Text('count:$count');
   }
 }
