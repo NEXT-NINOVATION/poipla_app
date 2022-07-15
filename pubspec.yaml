@@ -22,7 +22,8 @@ dependencies:
   bordered_text: ^2.0.0
   ruby_text: ^3.0.1
   qr_code_scanner: ^0.7.0
-  pusher_channels_flutter: '^1.0.1'
+  flutter_spinkit: ^5.1.0
+  pusher_channels_flutter: "^1.0.1"
 
 dev_dependencies:
   flutter_test:
