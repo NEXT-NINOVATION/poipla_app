@@ -58,8 +58,8 @@ final routerProvider = Provider((ref) {
       GoRoute(
         path: '/result_box/:dustBoxId/clatter_result/:sessionId',
         builder: (context, state) => GachaResultScreen(
-          clatterResultId: int.parse(state.params['dustBoxId']!),
-          boxId: int.parse(state.params['sessionId']!),
+          sessionId: int.parse(state.params['sessionId']!),
+          boxId: int.parse(state.params['dustBoxId']!),
         ),
       )
     ],
