@@ -10,6 +10,7 @@ class Costume with _$Costume {
     @JsonKey(name: 'costume_name') required String costumeName,
     required String image,
     required int? rarity,
+    @JsonKey(name: 'animal_type') required String animalType,
     @JsonKey(name: 'pref_id') int? prefId,
     @JsonKey(name: 'event_id') int? eventId,
   }) = _Costume;
