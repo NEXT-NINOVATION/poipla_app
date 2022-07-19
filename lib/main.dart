@@ -65,6 +65,11 @@ final routerProvider = Provider((ref) {
       if (state.subloc != '/splash' && authState.type == AppStateType.loading) {
         return '/splash';
       }
+
+      if (['/start', '/tutorials', '/splash'].contains(state.subloc) &&
+          authState.type == AppStateType.authorized) {
+        return '/';
+      }
       return null;
     },
     refreshListenable: authState,
