@@ -25,6 +25,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   pusher_channels_flutter: "^1.0.1"
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,3 +45,5 @@ flutter:
 
   assets:
     - assets/svg/
+
+
