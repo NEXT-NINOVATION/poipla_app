@@ -24,6 +24,7 @@ dependencies:
   qr_code_scanner: ^0.7.0
   pusher_client: ^2.0.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -43,3 +44,5 @@ flutter:
 
   assets:
     - assets/svg/
+
+
