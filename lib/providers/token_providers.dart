@@ -18,8 +18,8 @@ class TestToken implements TokenService {
 final tokenProvider = Provider<TokenService>((ref) {
   const isRelease = bool.fromEnvironment('dart.vm.product');
 
-  // if (isRelease) {
-  //   return SharedPreferenceTokenService();
-  // }
+  if (isRelease) {
+    return SharedPreferenceTokenService();
+  }
   return TestToken();
 });
