@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/entities/session/session.dart';
 import 'package:poipla_app/providers/session_event_provider.dart';
+import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 
 class QRModalLoadingWidget extends StatelessWidget {
@@ -71,9 +73,11 @@ class QRModalConnectedWidget extends StatelessWidget {
 class QRModalCounterWidget extends ConsumerStatefulWidget {
   final Session session;
   final VoidCallback onGoToNextStep;
+
   const QRModalCounterWidget(
       {Key? key, required this.session, required this.onGoToNextStep})
       : super(key: key);
+
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
     return QRModalCounterWidgetState();
@@ -206,18 +210,19 @@ class QRModalCounterWidgetState extends ConsumerState<QRModalCounterWidget> {
   }
 }
 
-class BeforeGachaWidget extends StatelessWidget {
-  const BeforeGachaWidget({Key? key}) : super(key: key);
+class BeforeGachaWidget extends ConsumerWidget {
+  const BeforeGachaWidget({Key? key, required this.session}) : super(key: key);
+  final Session session;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double deviceW = MediaQuery.of(context).size.width;
 
     return Stack(
       children: [
         Column(
           children: [
-            SizedBox(height: 53),
+            const SizedBox(height: 53),
             const Text(
               "ごほうびをもらおう！",
               style: TextStyle(
@@ -225,7 +230,7 @@ class BeforeGachaWidget extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Expanded(
               child: Stack(
                 alignment: Alignment.center,
@@ -269,7 +274,14 @@ class BeforeGachaWidget extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 40),
           child: GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              ref
+                  .read(sessionRepositoryProvider)
+                  .complete(session)
+                  .then((value) {
+                Navigator.of(context).pop();
+                GoRouter.of(context).push(
+                    '/result_box/${session.dustBoxId}/clatter_result/${session.id}');
+              });
             },
             child: SizedBox(
               width: deviceW * 0.5,

@@ -120,7 +120,7 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
               return _buildQrScanner(context);
             }
             if (type == StateType.sessionCreating) {
-              return QRModalLoadingWidget();
+              return const QRModalLoadingWidget();
             }
             if (type == StateType.sessionCreated) {
               return QRModalCounterWidget(
@@ -131,7 +131,7 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
                     });
                   });
             }
-            return BeforeGachaWidget();
+            return BeforeGachaWidget(session: session!);
           }()),
     );
   }

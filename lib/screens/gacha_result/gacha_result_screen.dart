@@ -7,7 +7,13 @@ import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/gacha_result/components/result_detail_modal.dart';
 
 class GachaResultScreen extends StatefulWidget {
-  const GachaResultScreen({Key? key}) : super(key: key);
+  const GachaResultScreen({
+    Key? key,
+    required this.boxId,
+    required this.clatterResultId,
+  }) : super(key: key);
+  final int boxId;
+  final int clatterResultId;
 
   @override
   State<GachaResultScreen> createState() => _GachaResultScreenState();
@@ -16,6 +22,7 @@ class GachaResultScreen extends StatefulWidget {
 class _GachaResultScreenState extends State<GachaResultScreen> {
   bool isVisible = true;
   int index = 0;
+
   @override
   Widget build(BuildContext context) {
     // デバイスサイズ
