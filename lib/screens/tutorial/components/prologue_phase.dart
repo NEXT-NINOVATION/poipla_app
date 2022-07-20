@@ -20,11 +20,6 @@ class _ProloguePhaseState extends State<ProloguePhase> {
 
   @override
   void initState() {
-    // _scrollController.animateTo(
-    //   _scrollController.position.maxScrollExtent, //最後の要素の指定
-    //   duration: const Duration(seconds: 30),
-    //   curve: Curves.ease,
-    // );
     super.initState();
   }
 
@@ -68,7 +63,7 @@ class _ProloguePhaseState extends State<ProloguePhase> {
                       curve: Curves.ease,
                     );
                   },
-                  child: Text("animation"),
+                  child: const Text("animation"),
                 ),
                 Column(
                   children: [
