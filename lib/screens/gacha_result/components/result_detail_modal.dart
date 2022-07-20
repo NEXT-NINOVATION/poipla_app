@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:poipla_app/constants.dart';
-import 'package:poipla_app/models/database.dart';
+import 'package:poipla_app/models/entities/clatter_result/clatter_result.dart';
+import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/screens/app_button.dart';
 
 class ResultDetailModal extends StatefulWidget {
-  ResultDetailModal({Key? key}) : super(key: key);
+  const ResultDetailModal({Key? key, required this.results}) : super(key: key);
+  final List<ClatterResult> results;
 
   @override
   State<ResultDetailModal> createState() => _ResultDetailModal();
@@ -16,7 +18,17 @@ class _ResultDetailModal extends State<ResultDetailModal> {
   Widget build(BuildContext context) {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
-    int point = 50;
+
+    final point = () {
+      int sum = 0;
+      for (var element in widget.results) {
+        sum += element.earnExp ?? 0;
+      }
+      return sum;
+    }();
+
+    final costumes =
+        widget.results.map((e) => e.costume).whereType<Costume>().toList();
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -181,9 +193,9 @@ class _ResultDetailModal extends State<ResultDetailModal> {
                   crossAxisCount: 3,
                   // physics: const NeverScrollableScrollPhysics(),
                   children: List.generate(
-                    sample_list.length,
+                    costumes.length,
                     (index) => SvgPicture.asset(
-                      "assets/svg/${sample_list[index].image}",
+                      "assets/svg/${costumes[index].image}.svg",
                       width: 100,
                       // clipBehavior: Clip.hardEdge,
                     ),
@@ -196,7 +208,7 @@ class _ResultDetailModal extends State<ResultDetailModal> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "きせかえ×" + "${sample_list.length}",
+                    "きせかえ×" + "${costumes.length}",
                     style: const TextStyle(
                         color: Color(0xFFFFA63E),
                         fontSize: 24,
@@ -235,6 +247,7 @@ class _ResultDetailModal extends State<ResultDetailModal> {
             margin: const EdgeInsets.only(bottom: 40),
             child: GestureDetector(
               onTap: () {
+                Navigator.pop(context);
                 Navigator.pop(context);
               },
               child: SizedBox(

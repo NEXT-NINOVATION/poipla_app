@@ -5,6 +5,7 @@ import 'package:poipla_app/providers/session_event_provider.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/adventure/adventure_screen.dart';
 import 'package:poipla_app/screens/change_costume/change_cosutme_screen.dart';
+import 'package:poipla_app/screens/gacha_result/gacha_result_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
 import 'package:poipla_app/screens/shop/shop_screen.dart';
 import 'package:poipla_app/screens/splash_screen.dart';
@@ -52,7 +53,15 @@ final routerProvider = Provider((ref) {
         builder: (context, state) => const StartScreen(),
       ),
       GoRoute(
-          path: '/tutorials', builder: (context, state) => TutorialScreen()),
+          path: '/tutorials',
+          builder: (context, state) => const TutorialScreen()),
+      GoRoute(
+        path: '/result_box/:dustBoxId/clatter_result/:sessionId',
+        builder: (context, state) => GachaResultScreen(
+          sessionId: int.parse(state.params['sessionId']!),
+          boxId: int.parse(state.params['dustBoxId']!),
+        ),
+      )
     ],
     redirect: (state) {
       if (state.subloc != '/start' && authState.type == AppStateType.start) {
@@ -78,6 +87,7 @@ final routerProvider = Provider((ref) {
 
 class RouterApp extends ConsumerWidget {
   const RouterApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(_fetchAuthInfoFutureProvider);
