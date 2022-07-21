@@ -6,6 +6,7 @@ import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/adventure/adventure_screen.dart';
 import 'package:poipla_app/screens/change_costume/change_cosutme_screen.dart';
 import 'package:poipla_app/screens/gacha_result/gacha_result_screen.dart';
+import 'package:poipla_app/screens/home/components/gacha_animation_screen.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
 import 'package:poipla_app/screens/shop/shop_screen.dart';
 import 'package:poipla_app/screens/splash_screen.dart';
@@ -61,7 +62,12 @@ final routerProvider = Provider((ref) {
           sessionId: int.parse(state.params['sessionId']!),
           boxId: int.parse(state.params['dustBoxId']!),
         ),
-      )
+      ),
+      GoRoute(
+          path: '/result_box/:dustBoxId/clatter_result/:sessionId/animation',
+          builder: (context, state) => GachaAnimationScreen(
+              sessionId: int.parse(state.params['sessionId']!),
+              boxId: int.parse(state.params['dustBoxId']!)))
     ],
     redirect: (state) {
       if (state.subloc != '/start' && authState.type == AppStateType.start) {
