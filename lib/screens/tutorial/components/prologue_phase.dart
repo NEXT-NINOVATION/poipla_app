@@ -20,7 +20,23 @@ class _ProloguePhaseState extends State<ProloguePhase> {
 
   @override
   void initState() {
+    _scrollController.addListener(_onScrollEvent);
     super.initState();
+  }
+
+  void _onScrollEvent() {
+    var currentPosition = _scrollController.position.pixels;
+    final maxScrollExtent = _scrollController.position.maxScrollExtent;
+    if (maxScrollExtent == currentPosition) {
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => ))
+      widget.callback(false);
+    }
+    // print("Extent after: $currentPosition");
+  }
+
+  void dispose() {
+    _scrollController.removeListener(_onScrollEvent);
+    super.dispose();
   }
 
   @override
@@ -33,6 +49,7 @@ class _ProloguePhaseState extends State<ProloguePhase> {
       backgroundColor: kBgColorYellow,
       body: Center(
         child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: _scrollController,
           child: Container(
             margin: const EdgeInsets.only(top: 70, bottom: 70),
@@ -59,7 +76,7 @@ class _ProloguePhaseState extends State<ProloguePhase> {
                   onPressed: () {
                     _scrollController.animateTo(
                       _scrollController.position.maxScrollExtent, //最後の要素の指定
-                      duration: const Duration(seconds: 30),
+                      duration: const Duration(seconds: 20),
                       curve: Curves.ease,
                     );
                   },
