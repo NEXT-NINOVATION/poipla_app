@@ -280,7 +280,7 @@ class BeforeGachaWidget extends ConsumerWidget {
                   .then((value) {
                 Navigator.of(context).pop();
                 GoRouter.of(context).push(
-                    '/result_box/${session.dustBoxId}/clatter_result/${session.id}');
+                    '/result_box/${session.dustBoxId}/clatter_result/${session.id}/animation');
               });
             },
             child: SizedBox(

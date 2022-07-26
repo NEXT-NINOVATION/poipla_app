@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:video_player/video_player.dart';
 
 class GachaAnimationScreen extends StatefulWidget {
-  GachaAnimationScreen({Key? key}) : super(key: key);
+  const GachaAnimationScreen({
+    Key? key,
+    required this.sessionId,
+    required this.boxId,
+  }) : super(key: key);
+  final int sessionId;
+  final int boxId;
 
   @override
   State<GachaAnimationScreen> createState() => _GachaAnimationScreenState();
@@ -13,7 +20,8 @@ class GachaAnimationScreen extends StatefulWidget {
 class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
   late VideoPlayerController _controller;
   late VoidCallback _listener;
-  // bool _isPlayComplete = false;
+
+  bool _isPlayComplete = false;
 
   @override
   void initState() {
@@ -24,14 +32,10 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
       setState(() {});
 
       _listener = () {
-        if (!_controller.value.isPlaying) {
-          // 再生完了
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => GachaResultScreen(),
-          //   ),
-          // );
+        if (!_controller.value.isPlaying && !_isPlayComplete) {
+          _isPlayComplete = true;
+          GoRouter.of(context).push(
+              '/result_box/${widget.boxId}/clatter_result/${widget.sessionId}');
         }
       };
       _controller.addListener(_listener);
