@@ -24,19 +24,44 @@ class _ProloguePhaseState extends State<ProloguePhase> {
     super.initState();
   }
 
+  // void _onStartScroll() {
+  //   var currentPosition = _scrollController.position.pixels;
+  //   final minScrollExtent = _scrollController.position.minScrollExtent;
+
+  //   if (currentPosition == minScrollExtent) {
+  //     _scrollController.animateTo(
+  //       _scrollController.position.maxScrollExtent, //最後の要素の指定
+  //       duration: const Duration(seconds: 20),
+  //       curve: Curves.ease,
+  //     );
+  //   }
+  // }
+
   void _onScrollEvent() {
     var currentPosition = _scrollController.position.pixels;
     final maxScrollExtent = _scrollController.position.maxScrollExtent;
+
     if (maxScrollExtent == currentPosition) {
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => ))
       widget.callback(false);
     }
-    // print("Extent after: $currentPosition");
   }
 
   void dispose() {
     _scrollController.removeListener(_onScrollEvent);
     super.dispose();
+  }
+
+  Future<void> _onStartScroll() async {
+    var currentPosition = _scrollController.position.pixels;
+    final minScrollExtent = _scrollController.position.minScrollExtent;
+
+    if (currentPosition == minScrollExtent) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent, //最後の要素の指定
+        duration: const Duration(seconds: 20),
+        curve: Curves.ease,
+      );
+    }
   }
 
   @override
@@ -45,11 +70,13 @@ class _ProloguePhaseState extends State<ProloguePhase> {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
 
+    // _onStartScroll();
+
     return Scaffold(
       backgroundColor: kBgColorYellow,
       body: Center(
         child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+          // physics: const NeverScrollableScrollPhysics(),
           controller: _scrollController,
           child: Container(
             margin: const EdgeInsets.only(top: 70, bottom: 70),
@@ -72,16 +99,16 @@ class _ProloguePhaseState extends State<ProloguePhase> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TextButton(
-                  onPressed: () {
-                    _scrollController.animateTo(
-                      _scrollController.position.maxScrollExtent, //最後の要素の指定
-                      duration: const Duration(seconds: 20),
-                      curve: Curves.ease,
-                    );
-                  },
-                  child: const Text("animation"),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     _scrollController.animateTo(
+                //       _scrollController.position.maxScrollExtent, //最後の要素の指定
+                //       duration: const Duration(seconds: 20),
+                //       curve: Curves.ease,
+                //     );
+                //   },
+                //   child: const Text("animation"),
+                // ),
                 Column(
                   children: [
                     ClipPath(

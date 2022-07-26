@@ -26,7 +26,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
   // 吹き出し表示/非表示フラグ
   bool showSpeechBalloonFlag = true;
 
-  bool showHistoryFlag = false;
+  bool showPrologueFlag = false;
 
   String fishSvgName = "fish_default.svg";
   String buttonText = "こたえる";
@@ -39,7 +39,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
 
   callback(newFlag) {
     setState(() {
-      showHistoryFlag = newFlag;
+      showPrologueFlag = newFlag;
     });
   }
 
@@ -217,7 +217,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                             buttonText = "いいよ！";
                             funcKey++;
                             index++;
-                            showHistoryFlag = true;
+                            showPrologueFlag = true;
                           } else if (funcKey == 4) {
                             buttonText = "よろしくね";
                             index = 4;
@@ -239,7 +239,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
               ),
             ),
             Visibility(
-              visible: showHistoryFlag,
+              visible: showPrologueFlag,
               child: ProloguePhase(
                 callback: callback,
               ),
