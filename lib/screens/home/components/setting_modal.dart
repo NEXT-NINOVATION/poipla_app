@@ -1,19 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:poipla_app/constants.dart';
-import 'package:poipla_app/screens/app_button.dart';
-import 'package:poipla_app/screens/home/components/service_button.dart';
 // import 'package:poipla_app/screens/home/components/sound_icon.dart';
 import 'dart:ui' as ui;
 
-class SettingModal extends StatefulWidget {
-  SettingModal({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:poipla_app/constants.dart';
+import 'package:poipla_app/providers/user_provider.dart';
+import 'package:poipla_app/screens/app_button.dart';
+import 'package:poipla_app/screens/change_costume/change_cosutme_screen.dart';
+import 'package:poipla_app/screens/home/components/service_button.dart';
+
+class SettingModal extends ConsumerStatefulWidget {
+  const SettingModal({Key? key}) : super(key: key);
 
   @override
-  State<SettingModal> createState() => _SettingModalState();
+  ConsumerState<SettingModal> createState() => _SettingModalState();
 }
 
-class _SettingModalState extends State<SettingModal> {
+class _SettingModalState extends ConsumerState<SettingModal> {
   // 音量設定用
   double _currentSliderValue = 20;
   late ui.Image customImage;
@@ -194,6 +198,15 @@ class _SettingModalState extends State<SettingModal> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TextButton(
+                    onPressed: () async {
+                      await ref.read(accountStoreProvider).withdrawal();
+                      ref.refresh(myCostumeFutureProvider);
+                    },
+                    child: const Text("リセット"))
               ],
             ),
           ),
