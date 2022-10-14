@@ -1,4 +1,5 @@
 import 'dart:developer' as dev;
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -36,6 +37,16 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
 
   StateType type = StateType.scanning;
   Session? session;
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      _qrViewController?.pauseCamera();
+    } else {
+      _qrViewController?.resumeCamera();
+    }
+  }
 
   Widget _buildQrScanner(BuildContext context) {
     double deviceW = MediaQuery.of(context).size.width;
@@ -138,6 +149,8 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
 
   void _onQRViewCreated(QRViewController controller) {
     _qrViewController = controller;
+    controller.pauseCamera();
+    controller.resumeCamera();
     _qrViewController?.scannedDataStream.listen((event) {
       if (type != StateType.scanning) {
         return;
