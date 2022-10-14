@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/entities/clatter_result/clatter_result.dart';
 import 'package:poipla_app/models/entities/costume/costume.dart';
@@ -247,8 +248,7 @@ class _ResultDetailModal extends State<ResultDetailModal> {
             margin: const EdgeInsets.only(bottom: 40),
             child: GestureDetector(
               onTap: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
+                GoRouter.of(context).go('/');
               },
               child: SizedBox(
                 width: deviceW * 0.45,
