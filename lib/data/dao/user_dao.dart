@@ -27,4 +27,9 @@ class UserDao implements UserRepository {
     });
     return res;
   }
+
+  @override
+  Future<void> withdrawal() async {
+    await tokenService.save(token: null);
+  }
 }

@@ -12,4 +12,8 @@ class UserRepository {
   Future<User> update({required String name, int? costumeId}) {
     throw UnimplementedError();
   }
+
+  Future<void> withdrawal() {
+    throw UnimplementedError();
+  }
 }
