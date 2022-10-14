@@ -189,6 +189,26 @@ class _SettingModalState extends State<SettingModal> {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  // code
+                                },
+                                child: const Text(
+                                  "初期化",
+                                  style: TextStyle(color: kFontColor),
+                                ),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Color(0xFF94EDFF),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     ),
