@@ -69,4 +69,11 @@ class AccountStore extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> withdrawal() async {
+    currentUser = null;
+    type = AppStateType.start;
+    await userRepository.withdrawal();
+    notifyListeners();
+  }
 }

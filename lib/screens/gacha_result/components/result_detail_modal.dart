@@ -248,7 +248,7 @@ class _ResultDetailModal extends State<ResultDetailModal> {
             margin: const EdgeInsets.only(bottom: 40),
             child: GestureDetector(
               onTap: () {
-                GoRouter.of(context).go("/");
+                GoRouter.of(context).go('/');
               },
               child: SizedBox(
                 width: deviceW * 0.45,
