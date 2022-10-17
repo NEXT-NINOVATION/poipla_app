@@ -20,8 +20,7 @@ class GachaAnimationScreen extends StatefulWidget {
 class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
   late VideoPlayerController _controller;
   late VoidCallback _listener;
-
-  bool _isPlayComplete = false;
+  bool isNavigated = false;
 
   @override
   void initState() {
@@ -31,9 +30,14 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
       // 最初のフレームを描画するため初期化後に更新
       setState(() {});
 
-      _listener = () {
-        if (!_controller.value.isPlaying && !_isPlayComplete) {
-          _isPlayComplete = true;
+      _listener = () async {
+        final position = await _controller.position;
+
+        if (position != null &&
+            position > Duration.zero &&
+            !_controller.value.isPlaying &&
+            !isNavigated) {
+          isNavigated = true;
           GoRouter.of(context).push(
               '/result_box/${widget.boxId}/clatter_result/${widget.sessionId}');
         }
