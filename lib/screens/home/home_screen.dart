@@ -20,6 +20,7 @@ import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:collection/collection.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -92,41 +93,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         body: Stack(
           children: [
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 180, bottom: 20),
-                // Fix
-                height: 200,
-                child: Stack(
-                  children: [
-                    isLeave == true
-                        ? Container()
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: 20,
-                                height: 20,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                  ],
-                ),
-              ),
-            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -135,6 +101,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   margin: const EdgeInsets.only(top: 25, left: 15),
                   child: Column(
                     children: [
+                      // ToDo:コンポーネント化する
                       GestureDetector(
                         onTap: () {
                           showDialog(
@@ -189,6 +156,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 8.0),
+                      // ToDo:コンポーネント化する
+                      // QRボタン
                       GestureDetector(
                         onTap: () {
                           showDialog(
@@ -258,14 +227,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             }
                           }, child: () {
                             if (currentCostume == null) {
-                              return SvgPicture.asset(
-                                "assets/svg/fish_default.svg",
-                                width: deviceW * 0.6,
+                              // return SvgPicture.asset(
+                              //   "assets/animation/data.json",
+                              //   width: deviceW * 0.6,
+                              // );
+                              return Lottie.asset(
+                                "assets/animation/costume_takosuke.json",
+                                width: deviceW * 0.8,
                               );
                             } else {
-                              return SvgPicture.asset(
-                                "assets/svg/fish_${currentCostume.image}.svg",
-                                width: deviceW * 0.6,
+                              // return SvgPicture.asset(
+                              //   "assets/svg/costume_${currentCostume.image}.svg",
+                              //   width: deviceW * 0.6,
+                              // );
+                              return Lottie.asset(
+                                "assets/animation/${currentCostume.image}.json",
+                                width: deviceW * 0.8,
                               );
                             }
                           }()),
