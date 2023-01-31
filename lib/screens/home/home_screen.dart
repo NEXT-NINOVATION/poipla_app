@@ -227,21 +227,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             }
                           }, child: () {
                             if (currentCostume == null) {
-                              // return SvgPicture.asset(
-                              //   "assets/animation/data.json",
-                              //   width: deviceW * 0.6,
-                              // );
                               return Lottie.asset(
-                                "assets/animation/costume_takosuke.json",
+                                "assets/animation/fish_default.json",
                                 width: deviceW * 0.8,
                               );
                             } else {
-                              // return SvgPicture.asset(
-                              //   "assets/svg/costume_${currentCostume.image}.svg",
-                              //   width: deviceW * 0.6,
-                              // );
                               return Lottie.asset(
-                                "assets/animation/${currentCostume.image}.json",
+                                "assets/animation/fish_${currentCostume.image}.json",
                                 width: deviceW * 0.8,
                               );
                             }
