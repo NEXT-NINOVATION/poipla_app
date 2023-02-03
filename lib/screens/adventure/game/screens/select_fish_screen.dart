@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:flame/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:poipla_app/constants.dart';
@@ -12,7 +9,6 @@ import '../models/player_data.dart';
 import '../models/character_details.dart';
 
 import 'game_play_screen.dart';
-import 'main_menu_screen.dart';
 
 // Represents the fish selection menu from where player can
 // change current fish or buy a new one.
@@ -25,9 +21,9 @@ class SelectFishScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "ぼうけんにいく",
-          style: const TextStyle(
+          style: TextStyle(
             color: kAppBarFontColor,
           ),
         ),
@@ -102,7 +98,7 @@ class SelectFishScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   fish.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: kFontColor,
                                     fontSize: 22,
                                   ),
@@ -123,6 +119,7 @@ class SelectFishScreen extends StatelessWidget {
                       // _typeIndex = value;
                       // print(_typeIndex);
                       _fishType = Fish.fishes.entries.elementAt(value).key;
+                      print(_fishType);
                     },
                   ),
                 ),
