@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
+import 'package:poipla_app/screens/adventure/game/widgets/overlays/start_count_down.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
 
@@ -15,37 +16,40 @@ class GameClearMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // ゴールメニュー
-          Image.asset(
-            'assets/images/clear_text.png',
-            width: MediaQuery.of(context).size.width / 1.1,
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 50),
-            child: Image.asset(
-              'assets/images/trush.png',
-              width: MediaQuery.of(context).size.width / 1.4,
+    return Scaffold(
+      backgroundColor: Colors.black54,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // ゴールメニュー
+            Image.asset(
+              'assets/images/clear_text.png',
+              width: MediaQuery.of(context).size.width / 1.1,
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              gameRef.overlays.remove(GameClearMenu.id);
-              gameRef.removeFromParent();
-              gameRef.reset();
-              gameRef.resumeEngine();
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 50),
+              child: Image.asset(
+                'assets/images/trush.png',
+                width: MediaQuery.of(context).size.width / 1.4,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                gameRef.overlays.remove(GameClearMenu.id);
+                gameRef.removeFromParent();
+                gameRef.reset();
+                gameRef.resumeEngine();
 
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  (_) => false);
-            },
-            child: const AppButton(text: "おうちへかえる", isPos: false),
-          ),
-        ],
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    (_) => false);
+              },
+              child: const AppButton(text: "おうちへかえる", isPos: false),
+            ),
+          ],
+        ),
       ),
     );
   }
