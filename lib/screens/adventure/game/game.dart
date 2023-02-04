@@ -8,9 +8,9 @@ import 'package:poipla_app/screens/adventure/game/models/character_details.dart'
 import 'package:poipla_app/screens/adventure/game/models/player_data.dart';
 import 'package:poipla_app/screens/adventure/game/player_score.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/game_clear_menu.dart';
-import 'package:poipla_app/screens/adventure/game/widgets/overlays/game_over_menu.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/pause_button.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/pause_menu.dart';
+import 'package:poipla_app/screens/adventure/game/widgets/overlays/start_count_down.dart';
 import 'package:provider/provider.dart';
 
 import 'obstacle.dart';
@@ -65,6 +65,9 @@ class AdventureGame extends FlameGame
 
   // ゲームがすでに初期化されていることを示します。
   bool _isAlreadyLoaded = false;
+
+  // スタート前のカウントダウン画面表示用
+  bool _isStarted = false;
 
   // このメソッドは、ゲームループが始まる前に Flame によって呼び出されます。
   // アセットのロードとコンポーネントの追加は、ここで行う必要がある。
@@ -235,6 +238,12 @@ class AdventureGame extends FlameGame
       // スコアとヘルスコンポーネントを最新の値で更新する。
       _scoreText.text = '${_player.score}こ';
 
+      if (_isStarted == false) {
+        pauseEngine();
+        overlays.add(StartCountDown.id);
+        _isStarted = true;
+      }
+
       /// [Player.health] がゼロになり、カメラの揺れが止まると
       /// [GameOverMenu] を表示します。
       if (_player.hIndex < 0 && (!camera.shaking)) {
@@ -242,11 +251,6 @@ class AdventureGame extends FlameGame
         overlays.remove(PauseButton.id);
         overlays.add(GameClearMenu.id);
       }
-      // else if (_player.score == 10) {
-      //   pauseEngine();
-      //   overlays.remove(PauseButton.id);
-      //   overlays.add(GameClearMenu.id);
-      // }
     }
   }
 
@@ -277,14 +281,14 @@ class AdventureGame extends FlameGame
 
   // ゲームを初期状態にリセットします。ゲームの再起動中および終了中に呼び出す必要がある。
   void reset() {
-    // 最初にプレイヤー、敵マネージャー、パワーアップマネージャーをリセットする。
+    // 最初にマネージャーをリセットする。
     _player.reset();
     _obstacleManager.reset();
     _plasticManager.reset();
+    _isStarted = false;
 
-    // ゲームからすべての敵、弾丸、パワーアップを削除する。
-    // Enemy.destroy() を呼び出していないことに注意してください。
-    // 不必要に爆発効果が実行され、プレイヤーのスコアが増加するためです。
+    // ゲームからすべての障害物とプラスチックを削除する。
+    // プレイヤーのスコアが増加するためdestroy() を呼び出していない。
     children.whereType<Obstacle>().forEach((obstacle) {
       obstacle.removeFromParent();
     });

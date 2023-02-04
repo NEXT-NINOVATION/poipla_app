@@ -27,7 +27,7 @@ class PlasticManager extends Component
   Random random = Random();
 
   PlasticManager({required this.spriteSheet}) : super() {
-    // タイマーが明示的に停止するまで、1 秒ごとに _spawnEnemy() を呼び出すようにタイマーを設定。
+    // タイマーが明示的に停止するまで、1.7 秒ごとに _spawnEnemy() を呼び出すようにタイマーを設定。
     _timer = Timer(1.7, onTick: _spawnPlastic, repeat: true);
 
     // フリーズ時間を2秒に設定します。2秒後にスポーンタイマーが再び開始されます。

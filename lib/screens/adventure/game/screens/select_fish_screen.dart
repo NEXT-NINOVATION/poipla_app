@@ -116,10 +116,7 @@ class SelectFishScreen extends StatelessWidget {
                       );
                     },
                     onSlideChanged: (value) {
-                      // _typeIndex = value;
-                      // print(_typeIndex);
                       _fishType = Fish.fishes.entries.elementAt(value).key;
-                      print(_fishType);
                     },
                   ),
                 ),
@@ -130,11 +127,11 @@ class SelectFishScreen extends StatelessWidget {
                     children: [
                       Image.asset(
                         "assets/images/arrow_left.png",
-                        width: 56,
+                        width: 72,
                       ),
                       Image.asset(
                         "assets/images/arrow_right.png",
-                        width: 56,
+                        width: 72,
                       ),
                     ],
                   ),
