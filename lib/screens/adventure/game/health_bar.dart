@@ -19,6 +19,10 @@ class HealthBar extends PositionComponent {
     positionType = PositionType.viewport;
   }
 
+  bool isFirst = true;
+  int maxHealth = 0;
+  List positionList = [];
+
   @override
   Future<void> render(Canvas canvas) async {
     // 右上隅に長方形のヘルスバーを描画。
@@ -31,22 +35,29 @@ class HealthBar extends PositionComponent {
     );
     super.render(canvas);
 
+    if (isFirst == true) {
+      maxHealth = player.hIndex;
+      positionList = [330, 390, 450, 510];
+      isFirst = false;
+    }
     final healthAvailable = await Sprite.load('health_available.png');
     final healthUnavailable = await Sprite.load('health_unavailable.png');
-    final position = [330, 390, 450];
 
-    for (int i = 0; i <= 2; i++) {
+    print(player.hIndex);
+
+    for (int i = 0; i <= maxHealth; i++) {
       if (player.health[i] == true) {
         add(SpriteComponent(
           sprite: healthAvailable,
           size: Vector2.all(60.0),
-          position: Vector2(size.x + position[i], 8),
+          position: Vector2(size.x + positionList[i], 8),
         ));
       } else {
+        print(player.health);
         add(SpriteComponent(
           sprite: healthUnavailable,
           size: Vector2.all(60.0),
-          position: Vector2(size.x + position[i], 8),
+          position: Vector2(size.x + positionList[i], 8),
         ));
       }
     }

@@ -28,13 +28,6 @@ class Player extends SpriteComponent
   // ジョイスティック
   JoystickComponent joystick;
 
-  // 残りライフ
-  List _health = [true, true, true];
-  List get health => _health;
-
-  int _hIndex = 2;
-  int get hIndex => _hIndex;
-
   bool hitByObstacle = false;
 
   // 現在の魚の詳細
@@ -42,6 +35,10 @@ class Player extends SpriteComponent
 
   // 現在の魚の種類
   FishType fishType;
+
+  // 残りライフ
+  List health;
+  int hIndex;
 
   // お金を変更できるようにするための PlayerData への参照
   late PlayerData _playerData;
@@ -59,6 +56,8 @@ class Player extends SpriteComponent
   Player({
     required this.joystick,
     required this.fishType,
+    required this.health,
+    required this.hIndex,
     Sprite? sprite,
     Vector2? position,
     Vector2? size,
@@ -98,10 +97,10 @@ class Player extends SpriteComponent
       gameRef.camera.shake(intensity: 20);
 
       // ライフが残っていたら配列から要素を一つ減らす。
-      if (_health.indexOf(true) == 0) {
-        hit(_hIndex);
-        _health[hIndex] = false;
-        _hIndex -= 1;
+      if (health.indexOf(true) == 0) {
+        hit(hIndex);
+        health[hIndex] = false;
+        hIndex -= 1;
         // if (_hIndex < 0) {
         //   _hIndex = 0;
         // }
@@ -258,8 +257,8 @@ class Player extends SpriteComponent
   // ゲームの再起動中および終了中に呼び出す必要があります。
   void reset() {
     _playerData.currentScore = 0;
-    _health = [true, true, true];
-    _hIndex = 2;
+    health = [];
+    hIndex = 0;
     position = gameRef.size / 2;
   }
 
@@ -269,5 +268,11 @@ class Player extends SpriteComponent
     fishType = fishType;
     _fish = Fish.getFishByType(fishType);
     sprite = gameRef.spriteSheet.getSpriteById(_fish.spriteId);
+
+    for (int i = 0; i < _fish.health; i++) {
+      health.add(true);
+    }
+    hIndex = _fish.health - 1;
+    print(hIndex);
   }
 }

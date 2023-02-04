@@ -119,12 +119,14 @@ class AdventureGame extends FlameGame
       /// onLoad() メソッドではビルドコンテキストが有効でないため、ここでは
       /// 現在の [PlayerData] を取得できません。したがって、デフォルトの
       /// FishType.suu でプレーヤーを初期化。
-      const fishType = FishType.sameko;
+      const fishType = FishType.suu;
       final fish = Fish.getFishByType(fishType);
 
       _player = Player(
         joystick: joystick,
         fishType: fishType,
+        health: [],
+        hIndex: 0,
         sprite: spriteSheet.getSpriteById(fish.spriteId),
         size: Vector2(100, 100),
         position: size / 2,
@@ -200,6 +202,10 @@ class AdventureGame extends FlameGame
   // ゲームインスタンスが Flutter のウィジェットツリーにアタッチされると呼び出されます。
   @override
   void onAttach() {
+    _healthBar = HealthBar(
+      player: _player,
+      position: Vector2(size.x - 240, 10),
+    );
     add(_healthBar);
     add(_playerScore);
     add(_scoreText);
