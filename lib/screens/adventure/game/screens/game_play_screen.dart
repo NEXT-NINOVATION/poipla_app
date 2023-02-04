@@ -2,7 +2,6 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/game_clear_menu.dart';
-import 'package:poipla_app/screens/adventure/game/widgets/overlays/game_over_menu.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/start_count_down.dart';
 
 import '../widgets/overlays/pause_button.dart';
@@ -56,10 +55,6 @@ class GamePlayScreen extends StatelessWidget {
                       StartCountDown(
                         gameRef: gameRef,
                       ),
-              GameOverMenu.id: (BuildContext context, AdventureGame gameRef) =>
-                  GameOverMenu(
-                    gameRef: gameRef,
-                  ),
               GameClearMenu.id: (BuildContext context, AdventureGame gameRef) =>
                   GameClearMenu(
                     gameRef: gameRef,

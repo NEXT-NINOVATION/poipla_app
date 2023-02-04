@@ -69,6 +69,7 @@ class PlasticManager extends Component
 
       // 敵のスプライトが中央にあることを確認する。
       plastic.anchor = Anchor.center;
+      plastic.priority = -1;
 
       // EnemyManager の代わりに、ゲームインスタンスのコンポーネントリストに追加します。
       // これにより、衝突検出が正しく機能することが保証されます。

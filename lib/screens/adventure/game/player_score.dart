@@ -52,4 +52,8 @@ class PlayerScore extends PositionComponent {
       position: Vector2(size.x + 140, 87),
     ));
   }
+
+  void reset() {
+    removeFromParent();
+  }
 }

@@ -73,6 +73,7 @@ class AdventureGame extends FlameGame
   // アセットのロードとコンポーネントの追加は、ここで行う必要がある。
   @override
   Future<void> onLoad() async {
+    print("onLoad");
     // ウィンドウのサイズに関係なく、ゲームが固定解像度を使用するようにする。
     camera.viewport = FixedResolutionViewport(Vector2(540, 960));
 
@@ -94,7 +95,7 @@ class AdventureGame extends FlameGame
         baseVelocity: Vector2(0, -50),
         velocityMultiplierDelta: Vector2(0, 1.5),
       );
-      add(bubble);
+      add(bubble..priority = -2);
 
       spriteSheet = SpriteSheet.fromColumnsAndRows(
         image: images.fromCache('poipla_tilesheet@2.png'),
@@ -146,7 +147,7 @@ class AdventureGame extends FlameGame
 
       _playerScore.positionType = PositionType.viewport;
 
-      add(_playerScore);
+      // add(_playerScore);
 
       // プレーヤースコアのテキストコンポーネントを作成します。
       _scoreText = TextComponent(
@@ -177,7 +178,7 @@ class AdventureGame extends FlameGame
       // カメラの変換の影響を受けないようになる。
       _scoreText.positionType = PositionType.viewport;
 
-      add(_scoreText);
+      // add(_scoreText);
       // add(subText);
 
       _healthBar = HealthBar(
@@ -189,7 +190,7 @@ class AdventureGame extends FlameGame
       // の変換の影響を受けないようになります。
       _healthBar.positionType = PositionType.viewport;
 
-      add(_healthBar);
+      // add(_healthBar);
 
       // trueに設定して、同じセッションで再度初期化しないようにする。
       _isAlreadyLoaded = true;
@@ -199,6 +200,9 @@ class AdventureGame extends FlameGame
   // ゲームインスタンスが Flutter のウィジェットツリーにアタッチされると呼び出されます。
   @override
   void onAttach() {
+    add(_healthBar);
+    add(_playerScore);
+    add(_scoreText);
     if (buildContext != null) {
       // リスナーを登録せずに、現在のビルドコンテキストから PlayerData を取得します。
       final playerData = Provider.of<PlayerData>(buildContext!, listen: false);
@@ -250,6 +254,7 @@ class AdventureGame extends FlameGame
         pauseEngine();
         overlays.remove(PauseButton.id);
         overlays.add(GameClearMenu.id);
+        _isStarted = false;
       }
     }
   }
@@ -285,6 +290,9 @@ class AdventureGame extends FlameGame
     _player.reset();
     _obstacleManager.reset();
     _plasticManager.reset();
+    _healthBar.reset();
+    _playerScore.reset();
+    remove(_scoreText);
     _isStarted = false;
 
     // ゲームからすべての障害物とプラスチックを削除する。

@@ -52,10 +52,10 @@ class ObstacleManager extends Component
     // 使用する前に、有効な BuildContext があることを確認してください。
     if (gameRef.buildContext != null) {
       // 現在のスコアを取得し、このスコアでスポーンできる敵の最大レベルを把握する。
-      int currentScore =
-          Provider.of<PlayerData>(gameRef.buildContext!, listen: false)
-              .currentScore;
-      int maxLevel = mapScoreToMaxEnemyLevel(currentScore);
+      // int currentScore =
+      //     Provider.of<PlayerData>(gameRef.buildContext!, listen: false)
+      //         .currentScore;
+      // int maxLevel = mapScoreToMaxEnemyLevel(currentScore);
 
       /// リストからランダムな [EnemyData] オブジェクトを取得する。
       final obstacleData = _obstacleDataList.elementAt(random.nextInt(9 - 5));
@@ -74,6 +74,7 @@ class ObstacleManager extends Component
 
       // 敵のスプライトが中央にあることを確認する。
       obstacle.anchor = Anchor.center;
+      obstacle.priority = -1;
 
       // EnemyManager の代わりに、ゲームインスタンスのコンポーネントリストに追加します。
       // これにより、衝突検出が正しく機能することが保証されます。

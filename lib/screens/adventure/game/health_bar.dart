@@ -51,4 +51,8 @@ class HealthBar extends PositionComponent {
       }
     }
   }
+
+  void reset() {
+    removeFromParent();
+  }
 }
