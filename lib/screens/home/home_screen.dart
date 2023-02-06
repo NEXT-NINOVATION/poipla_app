@@ -120,20 +120,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ),
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "1000000",
+                                    "10000",
                                     style: TextStyle(
                                       color: kFontColorRed,
                                       fontSize: 18,
                                     ),
                                   ),
-                                  Text(
-                                    "こ",
-                                    style: TextStyle(
-                                      color: kFontColorRed,
-                                      fontSize: 12,
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 3),
+                                    child: Text(
+                                      "こ",
+                                      style: TextStyle(
+                                        color: kFontColorRed,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   )
                                 ],
