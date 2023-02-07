@@ -10,6 +10,7 @@ import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/adventure_result_modal.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
 import 'package:poipla_app/screens/home/components/come_back_timer.dart';
+import 'package:poipla_app/screens/home/components/game_score.dart';
 import 'package:poipla_app/screens/home/components/present_modal.dart';
 import 'package:poipla_app/screens/home/components/put_in_modal.dart';
 import 'package:poipla_app/screens/home/components/qr_camera_modal.dart';
@@ -93,80 +94,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         body: Stack(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 30),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: 154,
-                        height: 48,
-                        color: const Color(0xFFD2F4FF),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "あつめたプラのかず",
-                                style: TextStyle(
-                                  color: Color(0xFF207CAF),
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "10000",
-                                    style: TextStyle(
-                                      color: kFontColorRed,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 3),
-                                    child: Text(
-                                      "こ",
-                                      style: TextStyle(
-                                        color: kFontColorRed,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: -20,
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF2D9DDC),
-                            shape: BoxShape.circle,
-                          ),
-                          width: 56,
-                          height: 56,
-                          child: SvgPicture.asset(
-                            "assets/svg/score_icon.svg",
-                            width: 40,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            GameScore(),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
