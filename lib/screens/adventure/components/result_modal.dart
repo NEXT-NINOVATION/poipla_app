@@ -1,14 +1,11 @@
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/adventure/game/models/character_details.dart';
 import 'package:poipla_app/screens/adventure/game/models/player_data.dart';
 import 'package:poipla_app/screens/adventure/game/models/settings.dart';
-import 'package:poipla_app/screens/adventure/game/screens/select_fish_screen.dart';
 import 'package:poipla_app/screens/app_button.dart';
-import 'package:provider/provider.dart';
 
 class ResultModal extends StatelessWidget {
   const ResultModal({
@@ -103,14 +100,14 @@ class ResultModal extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         height: 60,
                         thickness: 1,
                         indent: 52,
                         endIndent: 52,
                         color: Colors.black38,
                       ),
-                      Text(
+                      const Text(
                         "ポイントゲット！",
                         style: TextStyle(
                           fontSize: 16,
@@ -140,14 +137,14 @@ class ResultModal extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         height: 60,
                         thickness: 1,
                         indent: 52,
                         endIndent: 52,
                         color: Colors.black38,
                       ),
-                      Text(
+                      const Text(
                         "いままでのハイスコア",
                         style: TextStyle(
                           fontSize: 16,
@@ -166,8 +163,8 @@ class ResultModal extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(bottom: 6),
-                            child: Text(
+                            margin: const EdgeInsets.only(bottom: 6),
+                            child: const Text(
                               "こ",
                               style: TextStyle(
                                 fontSize: 24,

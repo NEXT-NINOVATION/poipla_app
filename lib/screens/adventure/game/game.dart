@@ -49,9 +49,6 @@ class AdventureGame extends FlameGame
   late TextComponent _scoreText;
   late PlayerScore _playerScore;
 
-  // 右上にプレイヤーのヘルスを表示。
-  // late SpriteComponent _playerHealth;
-
   // 右上にヘルスバーを表示
   late HealthBar _healthBar;
 
@@ -126,7 +123,7 @@ class AdventureGame extends FlameGame
         joystick: joystick,
         fishType: fishType,
         health: [],
-        hIndex: 0,
+        hIndex: Fish.getFishByType(fishType).health - 1,
         sprite: spriteSheet.getSpriteById(fish.spriteId),
         size: Vector2(100, 100),
         position: size / 2,
@@ -142,28 +139,6 @@ class AdventureGame extends FlameGame
       _plasticManager = PlasticManager(spriteSheet: spriteSheet);
       add(_plasticManager);
 
-      _playerScore = PlayerScore(
-        player: _player,
-        position: Vector2(size.x - 300, 10),
-      );
-
-      _playerScore.positionType = PositionType.viewport;
-
-      // add(_playerScore);
-
-      // プレーヤースコアのテキストコンポーネントを作成します。
-      _scoreText = TextComponent(
-        text: '0',
-        position: Vector2(size.x - 90, 96),
-        textRenderer: TextPaint(
-          style: const TextStyle(
-            color: Color(0xFFF26957),
-            fontSize: 40,
-            fontFamily: 'LightNovelPOPv2',
-          ),
-        ),
-      );
-
       // final subText = TextComponent(
       //   text: '0こ',
       //   position: _scoreText.positionOfAnchor(Anchor.centerRight),
@@ -176,23 +151,7 @@ class AdventureGame extends FlameGame
       //   ),
       // );
 
-      // positionTypeをviewportに設定すると、このコンポーネントが
-      // カメラの変換の影響を受けないようになる。
-      _scoreText.positionType = PositionType.viewport;
-
-      // add(_scoreText);
       // add(subText);
-
-      _healthBar = HealthBar(
-        player: _player,
-        position: Vector2(size.x - 240, 10),
-      );
-
-      // positionTypeをviewportに設定すると、このコンポーネントがカメラ
-      // の変換の影響を受けないようになります。
-      _healthBar.positionType = PositionType.viewport;
-
-      // add(_healthBar);
 
       // trueに設定して、同じセッションで再度初期化しないようにする。
       _isAlreadyLoaded = true;
@@ -202,13 +161,37 @@ class AdventureGame extends FlameGame
   // ゲームインスタンスが Flutter のウィジェットツリーにアタッチされると呼び出されます。
   @override
   void onAttach() {
+    // ヘルスバーを初期化
     _healthBar = HealthBar(
       player: _player,
-      position: Vector2(size.x - 240, 10),
+      camera: camera,
     );
+    _healthBar.positionType = PositionType.viewport;
+
+    // スコアバーを初期化
+    _playerScore = PlayerScore(
+      player: _player,
+      camera: camera,
+    );
+    _playerScore.positionType = PositionType.viewport;
+
+    // スコアテキストを初期化
+    _scoreText = TextComponent(
+      text: '0',
+      position: Vector2(camera.gameSize.x - 100, 94),
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          color: Color(0xFFF26957),
+          fontSize: 40,
+          fontFamily: 'LightNovelPOPv2',
+        ),
+      ),
+    );
+    _scoreText.positionType = PositionType.viewport;
     add(_healthBar);
     add(_playerScore);
     add(_scoreText);
+
     if (buildContext != null) {
       // リスナーを登録せずに、現在のビルドコンテキストから PlayerData を取得します。
       final playerData = Provider.of<PlayerData>(buildContext!, listen: false);

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/adventure/components/detail_modal.dart';
 import 'package:poipla_app/screens/adventure/components/pref_point_button.dart';
+import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
 
 class AdventureScreen extends StatefulWidget {
@@ -64,6 +65,13 @@ class _AdventureScreenState extends State<AdventureScreen> {
                             costumeName: "シャチホコ",
                           ),
                         );
+                        // showDialog(
+                        //   // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                        //   barrierDismissible: false,
+                        //   context: context,
+                        //   builder: (BuildContext context) =>
+                        //       const ResultModal(),
+                        // );
                       },
                       // 座標的なのを引数で渡す
                       child: const PrefPointButton(),

@@ -1,3 +1,6 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 class Costume {
   final String title, image;
   final int point, rarity, req_lv;
@@ -11,6 +14,16 @@ class Costume {
     required this.req_lv,
     required this.buyable_flag,
   });
+}
+
+Future<http.Response> getCostume() async {
+  var url = Uri.https('poipla.yumekiti.net', '/api/shops/4');
+  final response = await http.post(url);
+
+  print(json.decode(response.body));
+  print(response.statusCode);
+
+  return response;
 }
 
 List<Costume> costume_list = [
@@ -31,18 +44,18 @@ List<Costume> costume_list = [
     buyable_flag: true,
   ),
   Costume(
-    title: "クジラ",
-    image: "whale.svg",
-    rarity: 5,
-    point: 1000,
-    req_lv: 50,
-    buyable_flag: true,
-  ),
-  Costume(
     title: "かめ",
     image: "turtle.svg",
     rarity: 5,
     point: 50,
+    req_lv: 50,
+    buyable_flag: true,
+  ),
+  Costume(
+    title: "クジラ",
+    image: "whale.svg",
+    rarity: 5,
+    point: 1000,
     req_lv: 50,
     buyable_flag: true,
   ),
@@ -53,30 +66,6 @@ List<Costume> costume_list = [
     point: 1200,
     req_lv: 50,
     buyable_flag: true,
-  ),
-  Costume(
-    title: "たこ",
-    image: "octopus.svg",
-    rarity: 1,
-    point: 100,
-    req_lv: 1,
-    buyable_flag: false,
-  ),
-  Costume(
-    title: "たこ",
-    image: "octopus.svg",
-    rarity: 1,
-    point: 100,
-    req_lv: 1,
-    buyable_flag: false,
-  ),
-  Costume(
-    title: "たこ",
-    image: "octopus.svg",
-    rarity: 1,
-    point: 100,
-    req_lv: 1,
-    buyable_flag: false,
   ),
 ];
 

@@ -37,6 +37,7 @@ class GameClearMenu extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 gameRef.overlays.remove(GameClearMenu.id);
+                gameRef.overlays.remove(StartCountDown.id);
                 gameRef.removeFromParent();
                 gameRef.reset();
                 gameRef.resumeEngine();

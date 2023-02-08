@@ -89,8 +89,6 @@ class PlayerData extends ChangeNotifier with HiveObjectMixin {
     this.fishType = fishType;
     notifyListeners();
 
-    print(this.fishType);
-
     // プレーヤーデータをディスクに保存
     save();
   }

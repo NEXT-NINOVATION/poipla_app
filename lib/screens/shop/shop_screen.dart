@@ -18,6 +18,7 @@ class _ShopScreen extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     var point = 1200;
+    final response = getCostume();
 
     return Container(
       decoration: const BoxDecoration(

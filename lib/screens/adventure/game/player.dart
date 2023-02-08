@@ -273,6 +273,5 @@ class Player extends SpriteComponent
       health.add(true);
     }
     hIndex = _fish.health - 1;
-    print(hIndex);
   }
 }

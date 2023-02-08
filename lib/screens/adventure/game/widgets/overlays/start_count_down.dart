@@ -17,7 +17,7 @@ class _StartCountDownState extends State<StartCountDown> {
   // カウントを示すインスタンス変数
   int _start = 3;
   int _current = 3;
-  bool _isStart = false;
+  bool _isStart = true;
 
   // ③ カウントダウン処理を行う関数を定義
   void startTimer() {
@@ -35,7 +35,6 @@ class _StartCountDownState extends State<StartCountDown> {
 
     // 終了時の処理
     sub.onDone(() {
-      print("Done");
       sub.cancel();
       _current = 0;
     });
@@ -44,9 +43,9 @@ class _StartCountDownState extends State<StartCountDown> {
   @override
   Widget build(BuildContext context) {
     // widget.gameRef.pauseEngine();
-    if (_isStart == false) {
+    if (_isStart == true) {
       startTimer();
-      _isStart = true;
+      _isStart = false;
     }
     if (_current == 0) {
       Future.delayed(const Duration(seconds: 1)).then((_) {
