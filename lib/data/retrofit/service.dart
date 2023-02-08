@@ -40,7 +40,7 @@ abstract class PoiplaApiService {
     @Path('sessionId') String sessionId,
   );
 
-  @GET('/api/shops')
+  @GET('/shops')
   Future<List<ShopCostume>> getShopCostumes();
 }
 

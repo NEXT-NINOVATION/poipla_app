@@ -208,7 +208,7 @@ class _PoiplaApiService implements PoiplaApiService {
     )
             .compose(
               _dio.options,
-              '/api/shops',
+              '/shops',
               queryParameters: queryParameters,
               data: _data,
             )

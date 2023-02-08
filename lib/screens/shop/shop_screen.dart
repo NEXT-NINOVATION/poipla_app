@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,7 +12,12 @@ import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/shop/components/buy_modal.dart';
 
 final shopCostumesFutureProvider = FutureProvider((ref) {
-  return ref.read(poiplaApiServiceProvider).getShopCostumes();
+  return ref
+      .read(poiplaApiServiceProvider)
+      .getShopCostumes()
+      .catchError((e, st) {
+    log('fetch shop error', error: e, stackTrace: st);
+  });
 });
 
 class ShopScreen extends ConsumerStatefulWidget {
@@ -30,6 +37,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
         ) ??
         [];
     var point = 1200;
+    log('costumes: $costumeList');
 
     return Container(
       decoration: const BoxDecoration(
@@ -132,7 +140,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                 crossAxisSpacing: 16,
                 crossAxisCount: 2,
                 children: List.generate(
-                  costume_list.length,
+                  costumeList.length,
                   (index) => GestureDetector(
                     onTap: () {
                       showDialog(
@@ -141,15 +149,15 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                         context: context,
                         builder: (BuildContext context) => BuyModal(
                             nowPoint: point,
-                            costumeName: costume_list[index].title,
-                            imageName: costume_list[index].image,
-                            point: costume_list[index].point),
+                            costumeName: costumeList[index].costumeName,
+                            imageName: '${costumeList[index].image}.svg',
+                            point: costumeList[index].point),
                       );
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: costume_list[index].buyable_flag == true
+                        color: costumeList[index].isBuyable
                             ? Colors.white
                             : Colors.grey,
                       ),
@@ -161,14 +169,14 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                                 alignment: Alignment.centerLeft,
                                 padding: const EdgeInsets.only(left: 5, top: 5),
                                 child: Text(
-                                  costume_list[index].title,
+                                  costumeList[index].costumeName,
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
                               ),
                               SvgPicture.asset(
-                                "assets/svg/${costume_list[index].image}",
+                                "assets/svg/${costumeList[index].image}.svg",
                               ),
                               Container(
                                 padding:
@@ -178,7 +186,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      "${costume_list[index].point}",
+                                      "${costumeList[index].point}",
                                       style: const TextStyle(
                                         fontSize: 20,
                                       ),
@@ -189,7 +197,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                               ),
                             ],
                           ),
-                          costume_list[index].buyable_flag == false
+                          costumeList[index].isBuyable == false
                               ? Container(
                                   alignment: Alignment.center,
                                   child:
