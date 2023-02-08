@@ -10,4 +10,9 @@ class CostumeDao implements CostumeRepository {
   Future<List<Costume>> getMyCostumes() {
     return apiService.getMyCostumes();
   }
+
+  @override
+  Future buyShopCostume(int costumeId) {
+    return apiService.buyShopCostume(costumeId.toString());
+  }
 }

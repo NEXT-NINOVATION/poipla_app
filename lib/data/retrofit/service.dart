@@ -21,6 +21,9 @@ abstract class PoiplaApiService {
   @POST('/register')
   Future<Token> register();
 
+  @POST('/shops/{costumeId}')
+  Future buyShopCostume(@Path('costumeId') String costumeId);
+
   @POST('/dust-boxes/{boxId}/sessions')
   Future<Session> createSession(@Path('boxId') String boxId);
 

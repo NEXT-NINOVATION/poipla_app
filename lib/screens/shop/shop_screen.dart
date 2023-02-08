@@ -32,12 +32,14 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
   Widget build(BuildContext context) {
     final costumeListState = ref.watch(shopCostumesFutureProvider);
 
-    final costumeList = costumeListState.whenOrNull(
-          data: (d) => d,
-        ) ??
-        [];
+    final costumeList = (costumeListState.whenOrNull(
+              data: (d) => d,
+            ) ??
+            [])
+        .where((element) => element.point != null && element.reqLv != null)
+        .toList();
     var point = 1200;
-    log('costumes: $costumeList');
+    print('costumes: $costumeList');
 
     return Container(
       decoration: const BoxDecoration(
@@ -148,10 +150,11 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                         barrierDismissible: false,
                         context: context,
                         builder: (BuildContext context) => BuyModal(
+                            costumeId: costumeList[index].costumeId,
                             nowPoint: point,
                             costumeName: costumeList[index].costumeName,
                             imageName: '${costumeList[index].image}.svg',
-                            point: costumeList[index].point),
+                            point: costumeList[index].point ?? 0),
                       );
                     },
                     child: Container(

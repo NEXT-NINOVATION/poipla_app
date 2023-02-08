@@ -20,18 +20,20 @@ ShopCostume _$ShopCostumeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ShopCostume {
+  @JsonKey(name: 'costume_id')
+  int get costumeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'costume_name')
   String get costumeName => throw _privateConstructorUsedError;
   @JsonKey(name: 'animal_type')
   String get animalType => throw _privateConstructorUsedError;
   @JsonKey(name: 'req_lv')
-  int get reqLv => throw _privateConstructorUsedError;
+  int? get reqLv => throw _privateConstructorUsedError;
   @JsonKey(name: 'image')
   String get image => throw _privateConstructorUsedError;
   @JsonKey(name: 'rarity')
   int get rarity => throw _privateConstructorUsedError;
   @JsonKey(name: 'point')
-  int get point => throw _privateConstructorUsedError;
+  int? get point => throw _privateConstructorUsedError;
   @JsonKey(name: 'has_costume')
   bool get hasCostume => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_buyable')
@@ -50,12 +52,13 @@ abstract class $ShopCostumeCopyWith<$Res> {
       _$ShopCostumeCopyWithImpl<$Res, ShopCostume>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'costume_name') String costumeName,
+      {@JsonKey(name: 'costume_id') int costumeId,
+      @JsonKey(name: 'costume_name') String costumeName,
       @JsonKey(name: 'animal_type') String animalType,
-      @JsonKey(name: 'req_lv') int reqLv,
+      @JsonKey(name: 'req_lv') int? reqLv,
       @JsonKey(name: 'image') String image,
       @JsonKey(name: 'rarity') int rarity,
-      @JsonKey(name: 'point') int point,
+      @JsonKey(name: 'point') int? point,
       @JsonKey(name: 'has_costume') bool hasCostume,
       @JsonKey(name: 'is_buyable') bool isBuyable});
 }
@@ -73,16 +76,21 @@ class _$ShopCostumeCopyWithImpl<$Res, $Val extends ShopCostume>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? costumeId = null,
     Object? costumeName = null,
     Object? animalType = null,
-    Object? reqLv = null,
+    Object? reqLv = freezed,
     Object? image = null,
     Object? rarity = null,
-    Object? point = null,
+    Object? point = freezed,
     Object? hasCostume = null,
     Object? isBuyable = null,
   }) {
     return _then(_value.copyWith(
+      costumeId: null == costumeId
+          ? _value.costumeId
+          : costumeId // ignore: cast_nullable_to_non_nullable
+              as int,
       costumeName: null == costumeName
           ? _value.costumeName
           : costumeName // ignore: cast_nullable_to_non_nullable
@@ -91,10 +99,10 @@ class _$ShopCostumeCopyWithImpl<$Res, $Val extends ShopCostume>
           ? _value.animalType
           : animalType // ignore: cast_nullable_to_non_nullable
               as String,
-      reqLv: null == reqLv
+      reqLv: freezed == reqLv
           ? _value.reqLv
           : reqLv // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -103,10 +111,10 @@ class _$ShopCostumeCopyWithImpl<$Res, $Val extends ShopCostume>
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
               as int,
-      point: null == point
+      point: freezed == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       hasCostume: null == hasCostume
           ? _value.hasCostume
           : hasCostume // ignore: cast_nullable_to_non_nullable
@@ -128,12 +136,13 @@ abstract class _$$_ShopCostumeCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'costume_name') String costumeName,
+      {@JsonKey(name: 'costume_id') int costumeId,
+      @JsonKey(name: 'costume_name') String costumeName,
       @JsonKey(name: 'animal_type') String animalType,
-      @JsonKey(name: 'req_lv') int reqLv,
+      @JsonKey(name: 'req_lv') int? reqLv,
       @JsonKey(name: 'image') String image,
       @JsonKey(name: 'rarity') int rarity,
-      @JsonKey(name: 'point') int point,
+      @JsonKey(name: 'point') int? point,
       @JsonKey(name: 'has_costume') bool hasCostume,
       @JsonKey(name: 'is_buyable') bool isBuyable});
 }
@@ -149,16 +158,21 @@ class __$$_ShopCostumeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? costumeId = null,
     Object? costumeName = null,
     Object? animalType = null,
-    Object? reqLv = null,
+    Object? reqLv = freezed,
     Object? image = null,
     Object? rarity = null,
-    Object? point = null,
+    Object? point = freezed,
     Object? hasCostume = null,
     Object? isBuyable = null,
   }) {
     return _then(_$_ShopCostume(
+      costumeId: null == costumeId
+          ? _value.costumeId
+          : costumeId // ignore: cast_nullable_to_non_nullable
+              as int,
       costumeName: null == costumeName
           ? _value.costumeName
           : costumeName // ignore: cast_nullable_to_non_nullable
@@ -167,10 +181,10 @@ class __$$_ShopCostumeCopyWithImpl<$Res>
           ? _value.animalType
           : animalType // ignore: cast_nullable_to_non_nullable
               as String,
-      reqLv: null == reqLv
+      reqLv: freezed == reqLv
           ? _value.reqLv
           : reqLv // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -179,10 +193,10 @@ class __$$_ShopCostumeCopyWithImpl<$Res>
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
               as int,
-      point: null == point
+      point: freezed == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       hasCostume: null == hasCostume
           ? _value.hasCostume
           : hasCostume // ignore: cast_nullable_to_non_nullable
@@ -199,7 +213,8 @@ class __$$_ShopCostumeCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ShopCostume implements _ShopCostume {
   _$_ShopCostume(
-      {@JsonKey(name: 'costume_name') required this.costumeName,
+      {@JsonKey(name: 'costume_id') required this.costumeId,
+      @JsonKey(name: 'costume_name') required this.costumeName,
       @JsonKey(name: 'animal_type') required this.animalType,
       @JsonKey(name: 'req_lv') required this.reqLv,
       @JsonKey(name: 'image') required this.image,
@@ -212,6 +227,9 @@ class _$_ShopCostume implements _ShopCostume {
       _$$_ShopCostumeFromJson(json);
 
   @override
+  @JsonKey(name: 'costume_id')
+  final int costumeId;
+  @override
   @JsonKey(name: 'costume_name')
   final String costumeName;
   @override
@@ -219,7 +237,7 @@ class _$_ShopCostume implements _ShopCostume {
   final String animalType;
   @override
   @JsonKey(name: 'req_lv')
-  final int reqLv;
+  final int? reqLv;
   @override
   @JsonKey(name: 'image')
   final String image;
@@ -228,7 +246,7 @@ class _$_ShopCostume implements _ShopCostume {
   final int rarity;
   @override
   @JsonKey(name: 'point')
-  final int point;
+  final int? point;
   @override
   @JsonKey(name: 'has_costume')
   final bool hasCostume;
@@ -238,7 +256,7 @@ class _$_ShopCostume implements _ShopCostume {
 
   @override
   String toString() {
-    return 'ShopCostume(costumeName: $costumeName, animalType: $animalType, reqLv: $reqLv, image: $image, rarity: $rarity, point: $point, hasCostume: $hasCostume, isBuyable: $isBuyable)';
+    return 'ShopCostume(costumeId: $costumeId, costumeName: $costumeName, animalType: $animalType, reqLv: $reqLv, image: $image, rarity: $rarity, point: $point, hasCostume: $hasCostume, isBuyable: $isBuyable)';
   }
 
   @override
@@ -246,6 +264,8 @@ class _$_ShopCostume implements _ShopCostume {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ShopCostume &&
+            (identical(other.costumeId, costumeId) ||
+                other.costumeId == costumeId) &&
             (identical(other.costumeName, costumeName) ||
                 other.costumeName == costumeName) &&
             (identical(other.animalType, animalType) ||
@@ -262,8 +282,8 @@ class _$_ShopCostume implements _ShopCostume {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, costumeName, animalType, reqLv,
-      image, rarity, point, hasCostume, isBuyable);
+  int get hashCode => Object.hash(runtimeType, costumeId, costumeName,
+      animalType, reqLv, image, rarity, point, hasCostume, isBuyable);
 
   @JsonKey(ignore: true)
   @override
@@ -281,12 +301,13 @@ class _$_ShopCostume implements _ShopCostume {
 
 abstract class _ShopCostume implements ShopCostume {
   factory _ShopCostume(
-          {@JsonKey(name: 'costume_name') required final String costumeName,
+          {@JsonKey(name: 'costume_id') required final int costumeId,
+          @JsonKey(name: 'costume_name') required final String costumeName,
           @JsonKey(name: 'animal_type') required final String animalType,
-          @JsonKey(name: 'req_lv') required final int reqLv,
+          @JsonKey(name: 'req_lv') required final int? reqLv,
           @JsonKey(name: 'image') required final String image,
           @JsonKey(name: 'rarity') required final int rarity,
-          @JsonKey(name: 'point') required final int point,
+          @JsonKey(name: 'point') required final int? point,
           @JsonKey(name: 'has_costume') required final bool hasCostume,
           @JsonKey(name: 'is_buyable') required final bool isBuyable}) =
       _$_ShopCostume;
@@ -295,6 +316,9 @@ abstract class _ShopCostume implements ShopCostume {
       _$_ShopCostume.fromJson;
 
   @override
+  @JsonKey(name: 'costume_id')
+  int get costumeId;
+  @override
   @JsonKey(name: 'costume_name')
   String get costumeName;
   @override
@@ -302,7 +326,7 @@ abstract class _ShopCostume implements ShopCostume {
   String get animalType;
   @override
   @JsonKey(name: 'req_lv')
-  int get reqLv;
+  int? get reqLv;
   @override
   @JsonKey(name: 'image')
   String get image;
@@ -311,7 +335,7 @@ abstract class _ShopCostume implements ShopCostume {
   int get rarity;
   @override
   @JsonKey(name: 'point')
-  int get point;
+  int? get point;
   @override
   @JsonKey(name: 'has_costume')
   bool get hasCostume;
