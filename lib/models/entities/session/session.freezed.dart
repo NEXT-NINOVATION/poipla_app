@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'session.dart';
 
@@ -36,7 +36,8 @@ mixin _$Session {
 /// @nodoc
 abstract class $SessionCopyWith<$Res> {
   factory $SessionCopyWith(Session value, $Res Function(Session) then) =
-      _$SessionCopyWithImpl<$Res>;
+      _$SessionCopyWithImpl<$Res, Session>;
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'dust_box_id') int dustBoxId,
@@ -45,38 +46,41 @@ abstract class $SessionCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SessionCopyWithImpl<$Res> implements $SessionCopyWith<$Res> {
+class _$SessionCopyWithImpl<$Res, $Val extends Session>
+    implements $SessionCopyWith<$Res> {
   _$SessionCopyWithImpl(this._value, this._then);
 
-  final Session _value;
   // ignore: unused_field
-  final $Res Function(Session) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? dustBoxId = freezed,
-    Object? createdAt = freezed,
+    Object? id = null,
+    Object? dustBoxId = null,
+    Object? createdAt = null,
     Object? completedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      dustBoxId: dustBoxId == freezed
+      dustBoxId: null == dustBoxId
           ? _value.dustBoxId
           : dustBoxId // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      completedAt: completedAt == freezed
+      completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -86,6 +90,7 @@ abstract class _$$_SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
           _$_Session value, $Res Function(_$_Session) then) =
       __$$_SessionCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'dust_box_id') int dustBoxId,
@@ -94,35 +99,34 @@ abstract class _$$_SessionCopyWith<$Res> implements $SessionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SessionCopyWithImpl<$Res> extends _$SessionCopyWithImpl<$Res>
+class __$$_SessionCopyWithImpl<$Res>
+    extends _$SessionCopyWithImpl<$Res, _$_Session>
     implements _$$_SessionCopyWith<$Res> {
   __$$_SessionCopyWithImpl(_$_Session _value, $Res Function(_$_Session) _then)
-      : super(_value, (v) => _then(v as _$_Session));
+      : super(_value, _then);
 
-  @override
-  _$_Session get _value => super._value as _$_Session;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? dustBoxId = freezed,
-    Object? createdAt = freezed,
+    Object? id = null,
+    Object? dustBoxId = null,
+    Object? createdAt = null,
     Object? completedAt = freezed,
   }) {
     return _then(_$_Session(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      dustBoxId: dustBoxId == freezed
+      dustBoxId: null == dustBoxId
           ? _value.dustBoxId
           : dustBoxId // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      completedAt: completedAt == freezed
+      completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -165,30 +169,31 @@ class _$_Session extends _Session {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Session &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.dustBoxId, dustBoxId) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality()
-                .equals(other.completedAt, completedAt));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.dustBoxId, dustBoxId) ||
+                other.dustBoxId == dustBoxId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.completedAt, completedAt) ||
+                other.completedAt == completedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(dustBoxId),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(completedAt));
+  int get hashCode =>
+      Object.hash(runtimeType, id, dustBoxId, createdAt, completedAt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SessionCopyWith<_$_Session> get copyWith =>
       __$$_SessionCopyWithImpl<_$_Session>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SessionToJson(this);
+    return _$$_SessionToJson(
+      this,
+    );
   }
 }
 
@@ -206,16 +211,16 @@ abstract class _Session extends Session {
   factory _Session.fromJson(Map<String, dynamic> json) = _$_Session.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(name: 'dust_box_id')
-  int get dustBoxId => throw _privateConstructorUsedError;
+  int get dustBoxId;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @override
   @JsonKey(name: 'completed_at')
-  DateTime? get completedAt => throw _privateConstructorUsedError;
+  DateTime? get completedAt;
   @override
   @JsonKey(ignore: true)
   _$$_SessionCopyWith<_$_Session> get copyWith =>

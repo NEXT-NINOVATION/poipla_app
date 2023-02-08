@@ -5,6 +5,7 @@ import 'package:poipla_app/models/entities/session/session.dart';
 import 'package:poipla_app/models/entities/token/token.dart';
 import 'package:poipla_app/models/entities/user/user.dart';
 import 'package:poipla_app/models/services/token_service.dart';
+import 'package:poipla_app/models/shop_costume/shop_costume.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -38,6 +39,9 @@ abstract class PoiplaApiService {
     @Path('boxId') String boxId,
     @Path('sessionId') String sessionId,
   );
+
+  @GET('/api/shops')
+  Future<List<ShopCostume>> getShopCostumes();
 }
 
 PoiplaApiService create(TokenService service,

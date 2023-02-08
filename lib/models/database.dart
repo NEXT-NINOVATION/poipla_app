@@ -17,8 +17,11 @@ class Costume {
 }
 
 Future<http.Response> getCostume() async {
-  var url = Uri.https('poipla.yumekiti.net', '/api/shops/4');
-  final response = await http.post(url);
+  var url = Uri.https(
+    'poipla.yumekiti.net',
+    '/api/shops',
+  );
+  final response = await http.get(url);
 
   print(json.decode(response.body));
   print(response.statusCode);

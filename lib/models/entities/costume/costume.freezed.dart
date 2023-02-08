@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'costume.dart';
 
@@ -41,7 +41,8 @@ mixin _$Costume {
 /// @nodoc
 abstract class $CostumeCopyWith<$Res> {
   factory $CostumeCopyWith(Costume value, $Res Function(Costume) then) =
-      _$CostumeCopyWithImpl<$Res>;
+      _$CostumeCopyWithImpl<$Res, Costume>;
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'costume_name') String costumeName,
@@ -54,58 +55,61 @@ abstract class $CostumeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CostumeCopyWithImpl<$Res> implements $CostumeCopyWith<$Res> {
+class _$CostumeCopyWithImpl<$Res, $Val extends Costume>
+    implements $CostumeCopyWith<$Res> {
   _$CostumeCopyWithImpl(this._value, this._then);
 
-  final Costume _value;
   // ignore: unused_field
-  final $Res Function(Costume) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? costumeName = freezed,
-    Object? image = freezed,
+    Object? id = null,
+    Object? costumeName = null,
+    Object? image = null,
     Object? rarity = freezed,
     Object? description = freezed,
-    Object? animalType = freezed,
+    Object? animalType = null,
     Object? prefId = freezed,
     Object? eventId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      costumeName: costumeName == freezed
+      costumeName: null == costumeName
           ? _value.costumeName
           : costumeName // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      rarity: rarity == freezed
+      rarity: freezed == rarity
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
               as int?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      animalType: animalType == freezed
+      animalType: null == animalType
           ? _value.animalType
           : animalType // ignore: cast_nullable_to_non_nullable
               as String,
-      prefId: prefId == freezed
+      prefId: freezed == prefId
           ? _value.prefId
           : prefId // ignore: cast_nullable_to_non_nullable
               as int?,
-      eventId: eventId == freezed
+      eventId: freezed == eventId
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -115,6 +119,7 @@ abstract class _$$_CostumeCopyWith<$Res> implements $CostumeCopyWith<$Res> {
           _$_Costume value, $Res Function(_$_Costume) then) =
       __$$_CostumeCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'costume_name') String costumeName,
@@ -127,55 +132,54 @@ abstract class _$$_CostumeCopyWith<$Res> implements $CostumeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CostumeCopyWithImpl<$Res> extends _$CostumeCopyWithImpl<$Res>
+class __$$_CostumeCopyWithImpl<$Res>
+    extends _$CostumeCopyWithImpl<$Res, _$_Costume>
     implements _$$_CostumeCopyWith<$Res> {
   __$$_CostumeCopyWithImpl(_$_Costume _value, $Res Function(_$_Costume) _then)
-      : super(_value, (v) => _then(v as _$_Costume));
+      : super(_value, _then);
 
-  @override
-  _$_Costume get _value => super._value as _$_Costume;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? costumeName = freezed,
-    Object? image = freezed,
+    Object? id = null,
+    Object? costumeName = null,
+    Object? image = null,
     Object? rarity = freezed,
     Object? description = freezed,
-    Object? animalType = freezed,
+    Object? animalType = null,
     Object? prefId = freezed,
     Object? eventId = freezed,
   }) {
     return _then(_$_Costume(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      costumeName: costumeName == freezed
+      costumeName: null == costumeName
           ? _value.costumeName
           : costumeName // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      rarity: rarity == freezed
+      rarity: freezed == rarity
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
               as int?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      animalType: animalType == freezed
+      animalType: null == animalType
           ? _value.animalType
           : animalType // ignore: cast_nullable_to_non_nullable
               as String,
-      prefId: prefId == freezed
+      prefId: freezed == prefId
           ? _value.prefId
           : prefId // ignore: cast_nullable_to_non_nullable
               as int?,
-      eventId: eventId == freezed
+      eventId: freezed == eventId
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -230,40 +234,35 @@ class _$_Costume implements _Costume {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Costume &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.costumeName, costumeName) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
-            const DeepCollectionEquality().equals(other.rarity, rarity) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality()
-                .equals(other.animalType, animalType) &&
-            const DeepCollectionEquality().equals(other.prefId, prefId) &&
-            const DeepCollectionEquality().equals(other.eventId, eventId));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.costumeName, costumeName) ||
+                other.costumeName == costumeName) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.rarity, rarity) || other.rarity == rarity) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.animalType, animalType) ||
+                other.animalType == animalType) &&
+            (identical(other.prefId, prefId) || other.prefId == prefId) &&
+            (identical(other.eventId, eventId) || other.eventId == eventId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(costumeName),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(rarity),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(animalType),
-      const DeepCollectionEquality().hash(prefId),
-      const DeepCollectionEquality().hash(eventId));
+  int get hashCode => Object.hash(runtimeType, id, costumeName, image, rarity,
+      description, animalType, prefId, eventId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CostumeCopyWith<_$_Costume> get copyWith =>
       __$$_CostumeCopyWithImpl<_$_Costume>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CostumeToJson(this);
+    return _$$_CostumeToJson(
+      this,
+    );
   }
 }
 
@@ -281,25 +280,25 @@ abstract class _Costume implements Costume {
   factory _Costume.fromJson(Map<String, dynamic> json) = _$_Costume.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(name: 'costume_name')
-  String get costumeName => throw _privateConstructorUsedError;
+  String get costumeName;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
-  int? get rarity => throw _privateConstructorUsedError;
+  int? get rarity;
   @override
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @override
   @JsonKey(name: 'animal_type')
-  String get animalType => throw _privateConstructorUsedError;
+  String get animalType;
   @override
   @JsonKey(name: 'pref_id')
-  int? get prefId => throw _privateConstructorUsedError;
+  int? get prefId;
   @override
   @JsonKey(name: 'event_id')
-  int? get eventId => throw _privateConstructorUsedError;
+  int? get eventId;
   @override
   @JsonKey(ignore: true)
   _$$_CostumeCopyWith<_$_Costume> get copyWith =>
