@@ -8,18 +8,24 @@ part of 'shop_costume.dart';
 
 _$_ShopCostume _$$_ShopCostumeFromJson(Map<String, dynamic> json) =>
     _$_ShopCostume(
-      userId: json['user_id'] as String,
-      costumeId: json['costume_id'] as String,
-      updatedAt: DateTime.parse(json['updated_at'] as String),
-      createdAt: DateTime.parse(json['created_at'] as String),
-      id: json['id'] as String,
+      costumeName: json['costume_name'] as String,
+      animalType: json['animal_type'] as String,
+      reqLv: json['req_lv'] as int,
+      image: json['image'] as String,
+      rarity: json['rarity'] as int,
+      point: json['point'] as int,
+      hasCostume: json['has_costume'] as bool,
+      isBuyable: json['is_buyable'] as bool,
     );
 
 Map<String, dynamic> _$$_ShopCostumeToJson(_$_ShopCostume instance) =>
     <String, dynamic>{
-      'user_id': instance.userId,
-      'costume_id': instance.costumeId,
-      'updated_at': instance.updatedAt.toIso8601String(),
-      'created_at': instance.createdAt.toIso8601String(),
-      'id': instance.id,
+      'costume_name': instance.costumeName,
+      'animal_type': instance.animalType,
+      'req_lv': instance.reqLv,
+      'image': instance.image,
+      'rarity': instance.rarity,
+      'point': instance.point,
+      'has_costume': instance.hasCostume,
+      'is_buyable': instance.isBuyable,
     };

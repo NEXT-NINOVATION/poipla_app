@@ -20,16 +20,22 @@ ShopCostume _$ShopCostumeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ShopCostume {
-  @JsonKey(name: 'user_id')
-  String get userId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'costume_id')
-  String get costumeId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_at')
-  DateTime get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'id')
-  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'costume_name')
+  String get costumeName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'animal_type')
+  String get animalType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'req_lv')
+  int get reqLv => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image')
+  String get image => throw _privateConstructorUsedError;
+  @JsonKey(name: 'rarity')
+  int get rarity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'point')
+  int get point => throw _privateConstructorUsedError;
+  @JsonKey(name: 'has_costume')
+  bool get hasCostume => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_buyable')
+  bool get isBuyable => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,11 +50,14 @@ abstract class $ShopCostumeCopyWith<$Res> {
       _$ShopCostumeCopyWithImpl<$Res, ShopCostume>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'costume_id') String costumeId,
-      @JsonKey(name: 'updated_at') DateTime updatedAt,
-      @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'id') String id});
+      {@JsonKey(name: 'costume_name') String costumeName,
+      @JsonKey(name: 'animal_type') String animalType,
+      @JsonKey(name: 'req_lv') int reqLv,
+      @JsonKey(name: 'image') String image,
+      @JsonKey(name: 'rarity') int rarity,
+      @JsonKey(name: 'point') int point,
+      @JsonKey(name: 'has_costume') bool hasCostume,
+      @JsonKey(name: 'is_buyable') bool isBuyable});
 }
 
 /// @nodoc
@@ -64,33 +73,48 @@ class _$ShopCostumeCopyWithImpl<$Res, $Val extends ShopCostume>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
-    Object? costumeId = null,
-    Object? updatedAt = null,
-    Object? createdAt = null,
-    Object? id = null,
+    Object? costumeName = null,
+    Object? animalType = null,
+    Object? reqLv = null,
+    Object? image = null,
+    Object? rarity = null,
+    Object? point = null,
+    Object? hasCostume = null,
+    Object? isBuyable = null,
   }) {
     return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      costumeName: null == costumeName
+          ? _value.costumeName
+          : costumeName // ignore: cast_nullable_to_non_nullable
               as String,
-      costumeId: null == costumeId
-          ? _value.costumeId
-          : costumeId // ignore: cast_nullable_to_non_nullable
+      animalType: null == animalType
+          ? _value.animalType
+          : animalType // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      reqLv: null == reqLv
+          ? _value.reqLv
+          : reqLv // ignore: cast_nullable_to_non_nullable
+              as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
+      rarity: null == rarity
+          ? _value.rarity
+          : rarity // ignore: cast_nullable_to_non_nullable
+              as int,
+      point: null == point
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasCostume: null == hasCostume
+          ? _value.hasCostume
+          : hasCostume // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBuyable: null == isBuyable
+          ? _value.isBuyable
+          : isBuyable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -104,11 +128,14 @@ abstract class _$$_ShopCostumeCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'costume_id') String costumeId,
-      @JsonKey(name: 'updated_at') DateTime updatedAt,
-      @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'id') String id});
+      {@JsonKey(name: 'costume_name') String costumeName,
+      @JsonKey(name: 'animal_type') String animalType,
+      @JsonKey(name: 'req_lv') int reqLv,
+      @JsonKey(name: 'image') String image,
+      @JsonKey(name: 'rarity') int rarity,
+      @JsonKey(name: 'point') int point,
+      @JsonKey(name: 'has_costume') bool hasCostume,
+      @JsonKey(name: 'is_buyable') bool isBuyable});
 }
 
 /// @nodoc
@@ -122,33 +149,48 @@ class __$$_ShopCostumeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
-    Object? costumeId = null,
-    Object? updatedAt = null,
-    Object? createdAt = null,
-    Object? id = null,
+    Object? costumeName = null,
+    Object? animalType = null,
+    Object? reqLv = null,
+    Object? image = null,
+    Object? rarity = null,
+    Object? point = null,
+    Object? hasCostume = null,
+    Object? isBuyable = null,
   }) {
     return _then(_$_ShopCostume(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      costumeName: null == costumeName
+          ? _value.costumeName
+          : costumeName // ignore: cast_nullable_to_non_nullable
               as String,
-      costumeId: null == costumeId
-          ? _value.costumeId
-          : costumeId // ignore: cast_nullable_to_non_nullable
+      animalType: null == animalType
+          ? _value.animalType
+          : animalType // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      reqLv: null == reqLv
+          ? _value.reqLv
+          : reqLv // ignore: cast_nullable_to_non_nullable
+              as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
+      rarity: null == rarity
+          ? _value.rarity
+          : rarity // ignore: cast_nullable_to_non_nullable
+              as int,
+      point: null == point
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasCostume: null == hasCostume
+          ? _value.hasCostume
+          : hasCostume // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBuyable: null == isBuyable
+          ? _value.isBuyable
+          : isBuyable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -157,34 +199,46 @@ class __$$_ShopCostumeCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ShopCostume implements _ShopCostume {
   _$_ShopCostume(
-      {@JsonKey(name: 'user_id') required this.userId,
-      @JsonKey(name: 'costume_id') required this.costumeId,
-      @JsonKey(name: 'updated_at') required this.updatedAt,
-      @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'id') required this.id});
+      {@JsonKey(name: 'costume_name') required this.costumeName,
+      @JsonKey(name: 'animal_type') required this.animalType,
+      @JsonKey(name: 'req_lv') required this.reqLv,
+      @JsonKey(name: 'image') required this.image,
+      @JsonKey(name: 'rarity') required this.rarity,
+      @JsonKey(name: 'point') required this.point,
+      @JsonKey(name: 'has_costume') required this.hasCostume,
+      @JsonKey(name: 'is_buyable') required this.isBuyable});
 
   factory _$_ShopCostume.fromJson(Map<String, dynamic> json) =>
       _$$_ShopCostumeFromJson(json);
 
   @override
-  @JsonKey(name: 'user_id')
-  final String userId;
+  @JsonKey(name: 'costume_name')
+  final String costumeName;
   @override
-  @JsonKey(name: 'costume_id')
-  final String costumeId;
+  @JsonKey(name: 'animal_type')
+  final String animalType;
   @override
-  @JsonKey(name: 'updated_at')
-  final DateTime updatedAt;
+  @JsonKey(name: 'req_lv')
+  final int reqLv;
   @override
-  @JsonKey(name: 'created_at')
-  final DateTime createdAt;
+  @JsonKey(name: 'image')
+  final String image;
   @override
-  @JsonKey(name: 'id')
-  final String id;
+  @JsonKey(name: 'rarity')
+  final int rarity;
+  @override
+  @JsonKey(name: 'point')
+  final int point;
+  @override
+  @JsonKey(name: 'has_costume')
+  final bool hasCostume;
+  @override
+  @JsonKey(name: 'is_buyable')
+  final bool isBuyable;
 
   @override
   String toString() {
-    return 'ShopCostume(userId: $userId, costumeId: $costumeId, updatedAt: $updatedAt, createdAt: $createdAt, id: $id)';
+    return 'ShopCostume(costumeName: $costumeName, animalType: $animalType, reqLv: $reqLv, image: $image, rarity: $rarity, point: $point, hasCostume: $hasCostume, isBuyable: $isBuyable)';
   }
 
   @override
@@ -192,20 +246,24 @@ class _$_ShopCostume implements _ShopCostume {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ShopCostume &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.costumeId, costumeId) ||
-                other.costumeId == costumeId) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.costumeName, costumeName) ||
+                other.costumeName == costumeName) &&
+            (identical(other.animalType, animalType) ||
+                other.animalType == animalType) &&
+            (identical(other.reqLv, reqLv) || other.reqLv == reqLv) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.rarity, rarity) || other.rarity == rarity) &&
+            (identical(other.point, point) || other.point == point) &&
+            (identical(other.hasCostume, hasCostume) ||
+                other.hasCostume == hasCostume) &&
+            (identical(other.isBuyable, isBuyable) ||
+                other.isBuyable == isBuyable));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userId, costumeId, updatedAt, createdAt, id);
+  int get hashCode => Object.hash(runtimeType, costumeName, animalType, reqLv,
+      image, rarity, point, hasCostume, isBuyable);
 
   @JsonKey(ignore: true)
   @override
@@ -223,30 +281,43 @@ class _$_ShopCostume implements _ShopCostume {
 
 abstract class _ShopCostume implements ShopCostume {
   factory _ShopCostume(
-      {@JsonKey(name: 'user_id') required final String userId,
-      @JsonKey(name: 'costume_id') required final String costumeId,
-      @JsonKey(name: 'updated_at') required final DateTime updatedAt,
-      @JsonKey(name: 'created_at') required final DateTime createdAt,
-      @JsonKey(name: 'id') required final String id}) = _$_ShopCostume;
+          {@JsonKey(name: 'costume_name') required final String costumeName,
+          @JsonKey(name: 'animal_type') required final String animalType,
+          @JsonKey(name: 'req_lv') required final int reqLv,
+          @JsonKey(name: 'image') required final String image,
+          @JsonKey(name: 'rarity') required final int rarity,
+          @JsonKey(name: 'point') required final int point,
+          @JsonKey(name: 'has_costume') required final bool hasCostume,
+          @JsonKey(name: 'is_buyable') required final bool isBuyable}) =
+      _$_ShopCostume;
 
   factory _ShopCostume.fromJson(Map<String, dynamic> json) =
       _$_ShopCostume.fromJson;
 
   @override
-  @JsonKey(name: 'user_id')
-  String get userId;
+  @JsonKey(name: 'costume_name')
+  String get costumeName;
   @override
-  @JsonKey(name: 'costume_id')
-  String get costumeId;
+  @JsonKey(name: 'animal_type')
+  String get animalType;
   @override
-  @JsonKey(name: 'updated_at')
-  DateTime get updatedAt;
+  @JsonKey(name: 'req_lv')
+  int get reqLv;
   @override
-  @JsonKey(name: 'created_at')
-  DateTime get createdAt;
+  @JsonKey(name: 'image')
+  String get image;
   @override
-  @JsonKey(name: 'id')
-  String get id;
+  @JsonKey(name: 'rarity')
+  int get rarity;
+  @override
+  @JsonKey(name: 'point')
+  int get point;
+  @override
+  @JsonKey(name: 'has_costume')
+  bool get hasCostume;
+  @override
+  @JsonKey(name: 'is_buyable')
+  bool get isBuyable;
   @override
   @JsonKey(ignore: true)
   _$$_ShopCostumeCopyWith<_$_ShopCostume> get copyWith =>

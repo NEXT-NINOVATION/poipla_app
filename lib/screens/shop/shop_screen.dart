@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/database.dart';
+import 'package:poipla_app/providers/api_providers.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/shop/components/buy_modal.dart';
 
-class ShopScreen extends StatefulWidget {
+final shopCostumesFutureProvider = FutureProvider((ref) {
+  return ref.read(poiplaApiServiceProvider).getShopCostumes();
+});
+
+class ShopScreen extends ConsumerStatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
 
   @override
-  State<ShopScreen> createState() => _ShopScreen();
+  ConsumerState<ShopScreen> createState() => _ShopScreen();
 }
 
-class _ShopScreen extends State<ShopScreen> {
+class _ShopScreen extends ConsumerState<ShopScreen> {
   @override
   Widget build(BuildContext context) {
+    final costumeListState = ref.watch(shopCostumesFutureProvider);
+
+    final costumeList = costumeListState.whenOrNull(
+          data: (d) => d,
+        ) ??
+        [];
     var point = 1200;
-    final response = getCostume();
 
     return Container(
       decoration: const BoxDecoration(
