@@ -107,7 +107,7 @@ class SelectFishScreen extends StatelessWidget {
                                     text: "はやさ",
                                     star: (fish.speed / 100).round()),
                                 StatusDetails(text: "たいりょく", star: fish.health),
-                                const StatusDetails(text: "かっこよさ", star: 4),
+                                StatusDetails(text: fish.text, star: 4),
                               ],
                             ),
                           ),

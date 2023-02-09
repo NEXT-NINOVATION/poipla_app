@@ -65,17 +65,39 @@ class _AdventureScreenState extends State<AdventureScreen> {
                             costumeName: "シャチホコ",
                           ),
                         );
-                        // showDialog(
-                        //   // Dialogの周囲の黒い部分をタップしても閉じないようにする
-                        //   barrierDismissible: false,
-                        //   context: context,
-                        //   builder: (BuildContext context) =>
-                        //       const ResultModal(),
-                        // );
                       },
                       // 座標的なのを引数で渡す
-                      child: const PrefPointButton(),
+                      child: const PrefPointButton(
+                          top: 130,
+                          left: 5,
+                          bottom: 0,
+                          right: 0,
+                          isEnter: true),
                     ),
+                    PrefPointButton(
+                        top: 130,
+                        left: 5,
+                        bottom: 0,
+                        right: 80,
+                        isEnter: false),
+                    PrefPointButton(
+                        top: 130,
+                        left: 170,
+                        bottom: 200,
+                        right: 0,
+                        isEnter: false),
+                    PrefPointButton(
+                        top: 50,
+                        left: 160,
+                        bottom: 0,
+                        right: 0,
+                        isEnter: false),
+                    PrefPointButton(
+                        top: 170,
+                        left: 0,
+                        bottom: 0,
+                        right: 280,
+                        isEnter: false),
                   ],
                 ),
               ),
