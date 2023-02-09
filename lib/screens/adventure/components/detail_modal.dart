@@ -44,156 +44,105 @@ class DetailModal extends StatelessWidget {
       child: SizedBox(
         width: deviceW,
         height: deviceH,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              child: Column(
+        child: Container(
+          margin: const EdgeInsets.only(top: 50),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                kana,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: kFontColor,
+                  letterSpacing: 2.0,
+                ),
+              ),
+              Text(
+                prefName,
+                style: const TextStyle(
+                  fontSize: 24,
+                  color: kFontColor,
+                  letterSpacing: 2.0,
+                ),
+              ),
+              const SizedBox(height: 40),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    kana,
-                    style: const TextStyle(
-                      fontSize: 14,
+                    "きせかえでつかえる",
+                    style: TextStyle(
                       color: kFontColor,
-                      letterSpacing: 2.0,
+                      fontSize: 20,
                     ),
                   ),
-                  Text(
-                    prefName,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      color: kFontColor,
-                      letterSpacing: 2.0,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SvgPicture.asset(
-                            "assets/svg/check.svg",
-                            color: kIconColor,
-                          ),
-                          Text(
-                            "$earnPoint",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: kFontColorImportant,
-                              letterSpacing: 2.0,
-                            ),
-                          ),
-                          const Text(
-                            "ポイントゲット！",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: kFontColor,
-                              letterSpacing: 2.0,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "ポイント",
+                        style: TextStyle(
+                          color: Color(0xFFFFA63E),
+                          fontSize: 32,
+                        ),
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SvgPicture.asset(
-                            "assets/svg/check.svg",
-                            color: kIconColor,
+                      Container(
+                        margin: EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          "をゲットしよう！",
+                          style: TextStyle(
+                            color: kFontColor,
+                            fontSize: 20,
                           ),
-                          const Text(
-                            "けいけんちゲット！",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: kFontColor,
-                              letterSpacing: 2.0,
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SvgPicture.asset(
-                            "assets/svg/check.svg",
-                            color: kIconColor,
-                          ),
-                          Text(
-                            "「$costumeName」もらえるかも？",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: kFontColor,
-                              letterSpacing: 2.0,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
                   Container(
-                    margin: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(vertical: 60),
                     child: Image.asset(
                       "assets/svg/shachihoko.png",
                       width: deviceW * 0.45,
                     ),
                   ),
-                  const Text(
-                    "〇〇がかえってくるじかん",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: kFontColor,
-                      letterSpacing: 2.0,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(5),
-                    child: const Text(
-                      "18:30",
-                      style: TextStyle(
-                        fontSize: 40,
-                        color: kFontColorImportant,
-                        letterSpacing: 2.0,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: deviceW * 0.6,
+                        margin: const EdgeInsets.only(bottom: 24),
+                        child: GestureDetector(
+                          onTap: () async {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const SelectFishScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: const AppButton(text: "ぼうけんする", isPos: true),
+                        ),
                       ),
-                    ),
+                      Container(
+                        width: deviceW * 0.45,
+                        margin: const EdgeInsets.only(bottom: 40),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const AppButton(text: "とじる", isPos: false),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: deviceW * 0.6,
-                  margin: const EdgeInsets.only(bottom: 24),
-                  child: GestureDetector(
-                    onTap: () async {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const SelectFishScreen();
-                          },
-                        ),
-                      );
-                    },
-                    child: const AppButton(text: "ぼうけんする", isPos: true),
-                  ),
-                ),
-                Container(
-                  width: deviceW * 0.45,
-                  margin: const EdgeInsets.only(bottom: 40),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const AppButton(text: "とじる", isPos: false),
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

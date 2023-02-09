@@ -179,7 +179,7 @@ class AdventureGame extends FlameGame
 
     // スコアテキストを初期化
     _scoreText = TextComponent(
-      text: '0',
+      text: '',
       position: Vector2(camera.gameSize.x - 100, 94),
       textRenderer: TextPaint(
         style: const TextStyle(
@@ -230,15 +230,14 @@ class AdventureGame extends FlameGame
     _addLaterCommandList.clear();
 
     if (_player.isMounted) {
-      // スコアとヘルスコンポーネントを最新の値で更新する。
-      _scoreText.text = '${_player.score}こ';
-      scoreResult = _player.score;
-
       if (_isStarted == false) {
         pauseEngine();
         overlays.add(StartCountDown.id);
         _isStarted = true;
       }
+      // スコアとヘルスコンポーネントを最新の値で更新する。
+      _scoreText.text = '${_player.score}こ';
+      scoreResult = _player.score;
 
       /// [Player.health] がゼロになり、カメラの揺れが止まると
       /// [GameOverMenu] を表示します。
@@ -261,9 +260,11 @@ class AdventureGame extends FlameGame
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
         if (_player.hIndex >= 0) {
-          pauseEngine();
-          overlays.remove(PauseButton.id);
-          overlays.add(PauseMenu.id);
+          if (overlays.isActive(StartCountDown.id) == false) {
+            pauseEngine();
+            overlays.remove(PauseButton.id);
+            overlays.add(PauseMenu.id);
+          }
         }
         break;
     }
