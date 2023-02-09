@@ -98,7 +98,7 @@ class AdventureGame extends FlameGame
 
       spriteSheet = SpriteSheet.fromColumnsAndRows(
         image: images.fromCache('poipla_tilesheet@2.png'),
-        columns: 10,
+        columns: 15,
         rows: 1,
       );
 

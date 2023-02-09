@@ -16,9 +16,19 @@ class FishTypeAdapter extends TypeAdapter<FishType> {
       case 0:
         return FishType.suu;
       case 1:
-        return FishType.sameko;
+        return FishType.takosuke;
       case 2:
+        return FishType.micchan;
+      case 3:
         return FishType.kamekiti;
+      case 4:
+        return FishType.lala;
+      case 5:
+        return FishType.sameko;
+      case 6:
+        return FishType.takoyaki;
+      case 7:
+        return FishType.osakaCastle;
       default:
         return FishType.suu;
     }
@@ -30,11 +40,26 @@ class FishTypeAdapter extends TypeAdapter<FishType> {
       case FishType.suu:
         writer.writeByte(0);
         break;
-      case FishType.sameko:
+      case FishType.takosuke:
         writer.writeByte(1);
         break;
-      case FishType.kamekiti:
+      case FishType.micchan:
         writer.writeByte(2);
+        break;
+      case FishType.kamekiti:
+        writer.writeByte(3);
+        break;
+      case FishType.lala:
+        writer.writeByte(4);
+        break;
+      case FishType.sameko:
+        writer.writeByte(5);
+        break;
+      case FishType.takoyaki:
+        writer.writeByte(6);
+        break;
+      case FishType.osakaCastle:
+        writer.writeByte(7);
         break;
     }
   }

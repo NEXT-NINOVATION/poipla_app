@@ -16,6 +16,9 @@ class Fish {
   // さかなの体力
   final int health;
 
+  // キャラの特徴
+  final String text;
+
   // ゲームでこのさかなを表示するために使用される SpriteId。
   final int spriteId;
 
@@ -30,6 +33,7 @@ class Fish {
     // required this.cost,
     required this.speed,
     required this.health,
+    required this.text,
     required this.spriteId,
     required this.assetPath,
     required this.level,
@@ -50,8 +54,29 @@ class Fish {
       // cost: 0,
       speed: 200,
       health: 3,
+      text: "かわいさ",
       spriteId: 0,
       assetPath: 'assets/images/suu.png',
+      level: 1,
+    ),
+    FishType.takosuke: Fish(
+      name: 'たこすけのきせかえ',
+      // cost: 0,
+      speed: 200,
+      health: 3,
+      text: "イカスミ",
+      spriteId: 1,
+      assetPath: 'assets/images/takosuke.png',
+      level: 1,
+    ),
+    FishType.micchan: Fish(
+      name: 'ミッちゃんのきせかえ',
+      // cost: 0,
+      speed: 300,
+      health: 2,
+      text: "ビリビリ",
+      spriteId: 1,
+      assetPath: 'assets/images/micchan.png',
       level: 1,
     ),
     FishType.kamekiti: Fish(
@@ -59,8 +84,19 @@ class Fish {
       // cost: 0,
       speed: 300,
       health: 4,
-      spriteId: 1,
+      text: "ながいき",
+      spriteId: 3,
       assetPath: 'assets/images/kamekiti.png',
+      level: 1,
+    ),
+    FishType.lala: Fish(
+      name: 'ララのきせかえ',
+      // cost: 0,
+      speed: 100,
+      health: 4,
+      text: "おおきさ",
+      spriteId: 4,
+      assetPath: 'assets/images/lala.png',
       level: 1,
     ),
     FishType.sameko: Fish(
@@ -68,8 +104,29 @@ class Fish {
       // cost: 0,
       speed: 400,
       health: 2,
-      spriteId: 2,
+      text: "かっこよさ",
+      spriteId: 5,
       assetPath: 'assets/images/sameko.png',
+      level: 1,
+    ),
+    FishType.takoyaki: Fish(
+      name: 'たこやきのきせかえ',
+      // cost: 0,
+      speed: 200,
+      health: 3,
+      text: "おいしさ",
+      spriteId: 6,
+      assetPath: 'assets/images/takoyaki.png',
+      level: 1,
+    ),
+    FishType.osakaCastle: Fish(
+      name: 'おおさかじょうのきせかえ',
+      // cost: 0,
+      speed: 200,
+      health: 3,
+      text: "れきし",
+      spriteId: 7,
+      assetPath: 'assets/images/osaka_castle.png',
       level: 1,
     ),
   };
@@ -82,8 +139,19 @@ enum FishType {
   suu,
 
   @HiveField(1)
-  sameko,
+  takosuke,
 
   @HiveField(2)
+  micchan,
+
+  @HiveField(3)
   kamekiti,
+  @HiveField(4)
+  lala,
+  @HiveField(5)
+  sameko,
+  @HiveField(6)
+  takoyaki,
+  @HiveField(7)
+  osakaCastle,
 }
