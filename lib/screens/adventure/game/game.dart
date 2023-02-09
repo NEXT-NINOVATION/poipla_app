@@ -234,9 +234,10 @@ class AdventureGame extends FlameGame
         pauseEngine();
         overlays.add(StartCountDown.id);
         _isStarted = true;
+      } else {
+        // スコアとヘルスコンポーネントを最新の値で更新する。
+        _scoreText.text = '${_player.score}こ';
       }
-      // スコアとヘルスコンポーネントを最新の値で更新する。
-      _scoreText.text = '${_player.score}こ';
       scoreResult = _player.score;
 
       /// [Player.health] がゼロになり、カメラの揺れが止まると
@@ -245,7 +246,6 @@ class AdventureGame extends FlameGame
         pauseEngine();
         overlays.remove(PauseButton.id);
         overlays.add(GameClearMenu.id);
-        _isStarted = false;
       }
     }
   }
