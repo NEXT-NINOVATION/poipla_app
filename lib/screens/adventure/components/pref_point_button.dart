@@ -36,7 +36,9 @@ class PrefPointButton extends StatelessWidget {
               boxShadow: [
                 // ボタンのシャドウ
                 BoxShadow(
-                  color: isEnter ? Color(0xFF854239) : Color(0xFF505050),
+                  color: isEnter
+                      ? const Color(0xFF854239)
+                      : const Color(0xFF505050),
                   offset: const Offset(0, 1.5),
                 ),
               ],
