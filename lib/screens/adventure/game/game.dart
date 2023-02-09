@@ -66,6 +66,8 @@ class AdventureGame extends FlameGame
   // スタート前のカウントダウン画面表示用
   bool _isStarted = false;
 
+  int scoreResult = 0;
+
   // このメソッドは、ゲームループが始まる前に Flame によって呼び出されます。
   // アセットのロードとコンポーネントの追加は、ここで行う必要がある。
   @override
@@ -230,6 +232,7 @@ class AdventureGame extends FlameGame
     if (_player.isMounted) {
       // スコアとヘルスコンポーネントを最新の値で更新する。
       _scoreText.text = '${_player.score}こ';
+      scoreResult = _player.score;
 
       if (_isStarted == false) {
         pauseEngine();
@@ -292,5 +295,13 @@ class AdventureGame extends FlameGame
     children.whereType<Plastic>().forEach((plastic) {
       plastic.removeFromParent();
     });
+  }
+
+  List<int> getResult() {
+    final pla = scoreResult;
+    final point = scoreResult * 2;
+    final totalScore = 200 + scoreResult;
+
+    return [pla, point, totalScore];
   }
 }
