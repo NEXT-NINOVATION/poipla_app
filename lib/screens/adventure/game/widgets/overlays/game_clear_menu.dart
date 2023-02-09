@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
 import 'package:poipla_app/screens/adventure/game/player.dart';
@@ -31,9 +32,9 @@ class GameClearMenu extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 1.1,
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 50),
-              child: Image.asset(
-                'assets/images/trush.png',
+              margin: const EdgeInsets.only(bottom: 20, left: 18),
+              child: Lottie.asset(
+                'assets/animation/trush.json',
                 width: MediaQuery.of(context).size.width / 1.4,
               ),
             ),
