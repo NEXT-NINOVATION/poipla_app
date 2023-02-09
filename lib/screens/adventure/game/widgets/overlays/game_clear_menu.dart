@@ -1,5 +1,8 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
+import 'package:poipla_app/screens/adventure/game/player.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/start_count_down.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/home/home_screen.dart';
@@ -41,11 +44,11 @@ class GameClearMenu extends StatelessWidget {
                 gameRef.removeFromParent();
                 gameRef.reset();
                 gameRef.resumeEngine();
+                final List result = gameRef.getResult();
 
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                    (_) => false);
+                // Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.of(context).pop();
+                Navigator.pop(context, result);
               },
               child: const AppButton(text: "おうちへかえる", isPos: false),
             ),

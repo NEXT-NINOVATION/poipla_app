@@ -137,7 +137,7 @@ class ObstacleManager extends Component
     ObstacleData(
       point: 1,
       speed: 200,
-      spriteId: 6,
+      spriteId: 11,
       // level: 1,
       hMove: false,
       objectType: 1,
@@ -146,7 +146,7 @@ class ObstacleManager extends Component
     ObstacleData(
       point: 1,
       speed: 250,
-      spriteId: 7,
+      spriteId: 12,
       // level: 2,
       hMove: false,
       objectType: 1,
@@ -155,7 +155,7 @@ class ObstacleManager extends Component
     ObstacleData(
       point: 1,
       speed: 250,
-      spriteId: 8,
+      spriteId: 13,
       // level: 2,
       hMove: false,
       objectType: 1,
@@ -164,7 +164,7 @@ class ObstacleManager extends Component
     ObstacleData(
       point: 1,
       speed: 250,
-      spriteId: 9,
+      spriteId: 14,
       // level: 2,
       hMove: false,
       objectType: 1,

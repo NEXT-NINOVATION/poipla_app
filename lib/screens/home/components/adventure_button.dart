@@ -2,15 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
+import 'package:poipla_app/screens/adventure/adventure_screen.dart';
+import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 
 class AdventureButton extends StatelessWidget {
-  const AdventureButton({Key? key}) : super(key: key);
+  const AdventureButton({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        GoRouter.of(context).push('/adventure');
+      onTap: () async {
+        // GoRouter.of(context).push('/adventure');
+        final result = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return AdventureScreen();
+            },
+          ),
+        );
+        print("result:$result");
+        if (result != null) {
+          showDialog(
+            // Dialogの周囲の黒い部分をタップしても閉じないようにする
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) => ResultModal(
+              pla: result[0],
+              point: result[1],
+              totalScore: result[2],
+            ),
+          );
+        }
       },
       child: Container(
         width: 120,
