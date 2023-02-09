@@ -28,8 +28,13 @@ class DetailModal extends StatelessWidget {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
 
+    WidgetsFlutterBinding.ensureInitialized();
+
     // This opens the app in fullscreen mode.
     Flame.device.fullScreen();
+
+    // Initialize hive.
+    initHive();
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -173,7 +178,46 @@ class DetailModal extends StatelessWidget {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) {
-                            return const SelectFishScreen();
+                            return MultiProvider(
+                              providers: [
+                                FutureProvider<PlayerData>(
+                                  create: (BuildContext context) =>
+                                      getPlayerData(),
+                                  initialData: PlayerData.fromMap(
+                                      PlayerData.defaultData),
+                                ),
+                                FutureProvider<Settings>(
+                                  create: (BuildContext context) =>
+                                      getSettings(),
+                                  initialData: Settings(
+                                      soundEffects: false,
+                                      backgroundMusic: false),
+                                ),
+                              ],
+                              builder: (context, child) {
+                                // 必要なオブジェクトは上流の FutureProviders によって既に作成されて
+                                // いるため、ここでは .value コンストラクターを使用します。
+                                return MultiProvider(
+                                  providers: [
+                                    ChangeNotifierProvider<PlayerData>.value(
+                                      value: Provider.of<PlayerData>(context),
+                                    ),
+                                    ChangeNotifierProvider<Settings>.value(
+                                      value: Provider.of<Settings>(context),
+                                    ),
+                                  ],
+                                  child: child,
+                                );
+                              },
+                              child: MaterialApp(
+                                debugShowCheckedModeBanner: false,
+                                // 「BungeeInline」フォントのカスタム テーマを使用。
+                                theme: ThemeData(
+                                  fontFamily: 'LightNovelPOPv2',
+                                ),
+                                home: const SelectFishScreen(),
+                              ),
+                            );
                           },
                         ),
                       );
@@ -198,50 +242,49 @@ class DetailModal extends StatelessWidget {
       ),
     );
   } // アプリのドキュメント ディレクトリでハイブを初期化し、すべての
+
+  // ハイブ アダプターも登録する関数。
+  Future<void> initHive() async {
+    await Hive.initFlutter();
+
+    Hive.registerAdapter(PlayerDataAdapter());
+    Hive.registerAdapter(FishTypeAdapter());
+    Hive.registerAdapter(SettingsAdapter());
+  }
+
+  /// 保存されている [PlayerData] をディスクから読み込む関数
+  Future<PlayerData> getPlayerData() async {
+    // プレーヤーデータボックスを開き、そこからプレーヤーデータを読み取る。
+    final box = await Hive.openBox<PlayerData>(PlayerData.playerDataBox);
+    final playerData = box.get(PlayerData.playerDataKey);
+
+    // プレイヤーデータが null の場合、これはゲームの新規起動であることを意味します。
+    // このような場合、最初にデフォルトのプレーヤーデータをプレーヤーデータボックスに
+    // 保存してから、同じものを返す。
+    if (playerData == null) {
+      box.put(
+        PlayerData.playerDataKey,
+        PlayerData.fromMap(PlayerData.defaultData),
+      );
+    }
+
+    return box.get(PlayerData.playerDataKey)!;
+  }
+
+  /// 保存されている [Settings] をディスクから読み込む関数。
+  Future<Settings> getSettings() async {
+    // 設定ボックスを開き、そこから設定を読み取ります。
+    final box = await Hive.openBox<Settings>(Settings.settingsBox);
+    final settings = box.get(Settings.settingsKey);
+
+    // 設定が null の場合、これはゲームの新規起動であることを意味します。
+    // このような場合、最初にデフォルト設定を設定ボックスに保存してから
+    // 同じ設定を返します。
+    if (settings == null) {
+      box.put(Settings.settingsKey,
+          Settings(soundEffects: true, backgroundMusic: true));
+    }
+
+    return box.get(Settings.settingsKey)!;
+  }
 }
-
-// // ハイブ アダプターも登録する関数。
-// Future<void> initHive() async {
-//   await Hive.initFlutter();
-
-//   Hive.registerAdapter(PlayerDataAdapter());
-//   Hive.registerAdapter(FishTypeAdapter());
-//   Hive.registerAdapter(SettingsAdapter());
-// }
-
-//   /// 保存されている [PlayerData] をディスクから読み込む関数
-//   Future<PlayerData> getPlayerData() async {
-//     // プレーヤーデータボックスを開き、そこからプレーヤーデータを読み取る。
-//     final box = await Hive.openBox<PlayerData>(PlayerData.playerDataBox);
-//     final playerData = box.get(PlayerData.playerDataKey);
-
-//     // プレイヤーデータが null の場合、これはゲームの新規起動であることを意味します。
-//     // このような場合、最初にデフォルトのプレーヤーデータをプレーヤーデータボックスに
-//     // 保存してから、同じものを返す。
-//     if (playerData == null) {
-//       box.put(
-//         PlayerData.playerDataKey,
-//         PlayerData.fromMap(PlayerData.defaultData),
-//       );
-//     }
-
-//     return box.get(PlayerData.playerDataKey)!;
-//   }
-
-//   /// 保存されている [Settings] をディスクから読み込む関数。
-//   Future<Settings> getSettings() async {
-//     // 設定ボックスを開き、そこから設定を読み取ります。
-//     final box = await Hive.openBox<Settings>(Settings.settingsBox);
-//     final settings = box.get(Settings.settingsKey);
-
-//     // 設定が null の場合、これはゲームの新規起動であることを意味します。
-//     // このような場合、最初にデフォルト設定を設定ボックスに保存してから
-//     // 同じ設定を返します。
-//     if (settings == null) {
-//       box.put(Settings.settingsKey,
-//           Settings(soundEffects: true, backgroundMusic: true));
-//     }
-
-//     return box.get(Settings.settingsKey)!;
-//   }
-// }

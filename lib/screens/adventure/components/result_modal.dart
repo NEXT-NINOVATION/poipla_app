@@ -7,26 +7,24 @@ import 'package:poipla_app/screens/adventure/game/models/player_data.dart';
 import 'package:poipla_app/screens/adventure/game/models/settings.dart';
 import 'package:poipla_app/screens/app_button.dart';
 
-class ResultModal extends StatefulWidget {
+class ResultModal extends StatelessWidget {
   const ResultModal({
     Key? key,
-    required this.pla,
-    required this.point,
-    required this.totalScore,
   }) : super(key: key);
 
-  final int pla, point, totalScore;
-
-  @override
-  State<ResultModal> createState() => _ResultModalState();
-}
-
-class _ResultModalState extends State<ResultModal> {
   @override
   Widget build(BuildContext context) {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
+
+    WidgetsFlutterBinding.ensureInitialized();
+
+    // This opens the app in fullscreen mode.
+    Flame.device.fullScreen();
+
+    // Initialize hive.
+    initHive();
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -84,7 +82,7 @@ class _ResultModalState extends State<ResultModal> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "${widget.pla}",
+                            "10",
                             style: TextStyle(
                               fontSize: 56,
                               color: kFontColorRed,
@@ -121,7 +119,7 @@ class _ResultModalState extends State<ResultModal> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            "${widget.point}",
+                            "1",
                             style: TextStyle(
                               fontSize: 56,
                               color: kFontColorImportant,
@@ -158,7 +156,7 @@ class _ResultModalState extends State<ResultModal> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            "${widget.totalScore}",
+                            "100000",
                             style: TextStyle(
                               fontSize: 40,
                               color: kFontColorBlue,
@@ -194,5 +192,50 @@ class _ResultModalState extends State<ResultModal> {
         ),
       ),
     );
+  } // アプリのドキュメント ディレクトリでハイブを初期化し、すべての
+
+  // ハイブ アダプターも登録する関数。
+  Future<void> initHive() async {
+    await Hive.initFlutter();
+
+    Hive.registerAdapter(PlayerDataAdapter());
+    Hive.registerAdapter(FishTypeAdapter());
+    Hive.registerAdapter(SettingsAdapter());
+  }
+
+  /// 保存されている [PlayerData] をディスクから読み込む関数
+  Future<PlayerData> getPlayerData() async {
+    // プレーヤーデータボックスを開き、そこからプレーヤーデータを読み取る。
+    final box = await Hive.openBox<PlayerData>(PlayerData.playerDataBox);
+    final playerData = box.get(PlayerData.playerDataKey);
+
+    // プレイヤーデータが null の場合、これはゲームの新規起動であることを意味します。
+    // このような場合、最初にデフォルトのプレーヤーデータをプレーヤーデータボックスに
+    // 保存してから、同じものを返す。
+    if (playerData == null) {
+      box.put(
+        PlayerData.playerDataKey,
+        PlayerData.fromMap(PlayerData.defaultData),
+      );
+    }
+
+    return box.get(PlayerData.playerDataKey)!;
+  }
+
+  /// 保存されている [Settings] をディスクから読み込む関数。
+  Future<Settings> getSettings() async {
+    // 設定ボックスを開き、そこから設定を読み取ります。
+    final box = await Hive.openBox<Settings>(Settings.settingsBox);
+    final settings = box.get(Settings.settingsKey);
+
+    // 設定が null の場合、これはゲームの新規起動であることを意味します。
+    // このような場合、最初にデフォルト設定を設定ボックスに保存してから
+    // 同じ設定を返します。
+    if (settings == null) {
+      box.put(Settings.settingsKey,
+          Settings(soundEffects: true, backgroundMusic: true));
+    }
+
+    return box.get(Settings.settingsKey)!;
   }
 }

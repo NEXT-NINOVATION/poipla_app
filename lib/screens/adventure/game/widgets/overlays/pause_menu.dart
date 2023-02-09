@@ -74,9 +74,10 @@ class PauseMenu extends StatelessWidget {
                 gameRef.reset();
                 gameRef.resumeEngine();
 
-                // Navigator.popUntil(context, (route) => route.isFirst);
-                Navigator.of(context).pop();
-                Navigator.pop(context, null);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    (_) => false);
               },
               child: const Text('おうちへもどる'),
             ),

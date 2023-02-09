@@ -6,8 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/providers/costume_provider.dart';
-import 'package:poipla_app/screens/adventure/components/result_modal.dart';
-import 'package:poipla_app/screens/adventure/game/game_result.dart';
 import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/adventure_result_modal.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
@@ -37,8 +35,6 @@ final myCostumesFutureProvider = FutureProvider.autoDispose((ref) {
 });
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
-
   @override
   Widget build(BuildContext context) {
     // デバイスサイズ

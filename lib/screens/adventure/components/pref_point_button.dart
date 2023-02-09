@@ -1,27 +1,12 @@
 import 'package:flutter/material.dart';
 
 class PrefPointButton extends StatelessWidget {
-  const PrefPointButton({
-    required this.top,
-    required this.left,
-    required this.bottom,
-    required this.right,
-    required this.isEnter,
-    Key? key,
-  }) : super(key: key);
-
-  final double top, left, bottom, right;
-  final bool isEnter;
+  const PrefPointButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        top: top,
-        left: left,
-        bottom: bottom,
-        right: right,
-      ),
+      margin: const EdgeInsets.only(top: 130, left: 5),
       alignment: Alignment.center,
       child: Stack(
         alignment: Alignment.center,
@@ -29,17 +14,14 @@ class PrefPointButton extends StatelessWidget {
           Container(
             width: 15,
             height: 15,
-            decoration: BoxDecoration(
-              color:
-                  isEnter ? const Color(0xFFF26957) : const Color(0xFF7B7B7B),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF26957),
               shape: BoxShape.circle,
               boxShadow: [
                 // ボタンのシャドウ
                 BoxShadow(
-                  color: isEnter
-                      ? const Color(0xFF854239)
-                      : const Color(0xFF505050),
-                  offset: const Offset(0, 1.5),
+                  color: Color(0xFF854239),
+                  offset: Offset(0, 1.5),
                 ),
               ],
             ),

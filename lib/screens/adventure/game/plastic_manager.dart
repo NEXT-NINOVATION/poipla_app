@@ -132,7 +132,7 @@ class PlasticManager extends Component
     PlasticData(
       point: 1,
       speed: 200,
-      spriteId: 8,
+      spriteId: 3,
       // level: 1,
       hMove: false,
       objectType: 0,
@@ -141,7 +141,7 @@ class PlasticManager extends Component
     PlasticData(
       point: 1,
       speed: 200,
-      spriteId: 9,
+      spriteId: 4,
       // level: 1,
       hMove: false,
       objectType: 0,
@@ -150,7 +150,7 @@ class PlasticManager extends Component
     PlasticData(
       point: 1,
       speed: 200,
-      spriteId: 10,
+      spriteId: 5,
       // level: 1,
       hMove: false,
       objectType: 0,
