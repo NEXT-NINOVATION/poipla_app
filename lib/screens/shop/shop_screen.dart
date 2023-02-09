@@ -145,28 +145,31 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                   costumeList.length,
                   (index) => GestureDetector(
                     onTap: () {
-                      showDialog(
-                        // Dialogの周囲の黒い部分をタップしても閉じないようにする
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (BuildContext context) => BuyModal(
-                            costumeId: costumeList[index].costumeId,
-                            nowPoint: point,
-                            costumeName: costumeList[index].costumeName,
-                            imageName: '${costumeList[index].image}.svg',
-                            point: costumeList[index].point ?? 0),
-                      );
+                      if (costumeList[index].hasCostume == false) {
+                        showDialog(
+                          // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (BuildContext context) => BuyModal(
+                              costumeId: costumeList[index].costumeId,
+                              nowPoint: point,
+                              costumeName: costumeList[index].costumeName,
+                              imageName: '${costumeList[index].image}.svg',
+                              point: costumeList[index].point ?? 0),
+                        );
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: costumeList[index].isBuyable
-                            ? Colors.white
-                            : Colors.grey,
+                        color: costumeList[index].hasCostume
+                            ? Colors.grey
+                            : Colors.white,
                       ),
                       child: Stack(
                         children: [
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
@@ -200,11 +203,16 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                               ),
                             ],
                           ),
-                          costumeList[index].isBuyable == false
+                          costumeList[index].hasCostume
                               ? Container(
                                   alignment: Alignment.center,
-                                  child:
-                                      SvgPicture.asset("assets/svg/lock.svg"),
+                                  child: const Text(
+                                    "もってるよ！",
+                                    style: TextStyle(
+                                      color: kAppBarFontColor,
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 )
                               : Container(),
                         ],
