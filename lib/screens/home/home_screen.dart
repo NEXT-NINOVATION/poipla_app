@@ -6,10 +6,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/providers/costume_provider.dart';
+import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/adventure_result_modal.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
 import 'package:poipla_app/screens/home/components/come_back_timer.dart';
+import 'package:poipla_app/screens/home/components/game_score.dart';
 import 'package:poipla_app/screens/home/components/present_modal.dart';
 import 'package:poipla_app/screens/home/components/put_in_modal.dart';
 import 'package:poipla_app/screens/home/components/qr_camera_modal.dart';
@@ -34,6 +36,8 @@ final myCostumesFutureProvider = FutureProvider.autoDispose((ref) {
 });
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
+
   @override
   Widget build(BuildContext context) {
     // デバイスサイズ
@@ -47,7 +51,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final costumes = ref.watch(myCostumeStoreProvider).myCostumes;
     ref.watch(myCostumesFutureProvider);
-
     final authStore = ref.watch(accountStoreProvider);
 
     final currentCostume = costumes.firstWhereOrNull(
@@ -93,6 +96,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         body: Stack(
           children: [
+            GameScore(totalPla: (authStore.currentUser?.totalPet)!.toInt()),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -1,23 +1,51 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
+import 'package:poipla_app/data/dao/user_dao.dart';
+import 'package:poipla_app/data/retrofit/service.dart';
 import 'package:poipla_app/models/database.dart';
+import 'package:poipla_app/models/repositories/user_repository.dart';
+import 'package:poipla_app/providers/api_providers.dart';
+import 'package:poipla_app/providers/token_providers.dart';
+import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/shop/components/buy_modal.dart';
 
-class ShopScreen extends StatefulWidget {
+final shopCostumesFutureProvider = FutureProvider((ref) {
+  return ref
+      .read(poiplaApiServiceProvider)
+      .getShopCostumes()
+      .catchError((e, st) {
+    log('fetch shop error', error: e, stackTrace: st);
+  });
+});
+
+class ShopScreen extends ConsumerStatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
 
   @override
-  State<ShopScreen> createState() => _ShopScreen();
+  ConsumerState<ShopScreen> createState() => _ShopScreen();
 }
 
-class _ShopScreen extends State<ShopScreen> {
+class _ShopScreen extends ConsumerState<ShopScreen> {
   @override
   Widget build(BuildContext context) {
-    var point = 1200;
+    final costumeListState = ref.watch(shopCostumesFutureProvider);
+
+    final costumeList = (costumeListState.whenOrNull(
+              data: (d) => d,
+            ) ??
+            [])
+        .where((element) => element.point != null && element.reqLv != null)
+        .toList();
+    final user = ref.watch(accountStoreProvider).currentUser;
+    print('costumes: $costumeList');
+    print(user!.point);
 
     return Container(
       decoration: const BoxDecoration(
@@ -83,7 +111,7 @@ class _ShopScreen extends State<ShopScreen> {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      "$point",
+                      "${user.point}",
                       style: const TextStyle(
                         color: kFontColorImportant,
                         fontSize: 32,
@@ -120,43 +148,47 @@ class _ShopScreen extends State<ShopScreen> {
                 crossAxisSpacing: 16,
                 crossAxisCount: 2,
                 children: List.generate(
-                  costume_list.length,
+                  costumeList.length,
                   (index) => GestureDetector(
                     onTap: () {
-                      showDialog(
-                        // Dialogの周囲の黒い部分をタップしても閉じないようにする
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (BuildContext context) => BuyModal(
-                            nowPoint: point,
-                            costumeName: costume_list[index].title,
-                            imageName: costume_list[index].image,
-                            point: costume_list[index].point),
-                      );
+                      if (costumeList[index].hasCostume == false) {
+                        showDialog(
+                          // Dialogの周囲の黒い部分をタップしても閉じないようにする
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (BuildContext context) => BuyModal(
+                              costumeId: costumeList[index].costumeId,
+                              nowPoint: user.point,
+                              costumeName: costumeList[index].costumeName,
+                              imageName: '${costumeList[index].image}.svg',
+                              point: costumeList[index].point ?? 0),
+                        );
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: costume_list[index].buyable_flag == true
-                            ? Colors.white
-                            : Colors.grey,
+                        color: costumeList[index].hasCostume
+                            ? Colors.grey
+                            : Colors.white,
                       ),
                       child: Stack(
                         children: [
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
                                 padding: const EdgeInsets.only(left: 5, top: 5),
                                 child: Text(
-                                  costume_list[index].title,
+                                  costumeList[index].costumeName,
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
                               ),
                               SvgPicture.asset(
-                                "assets/svg/${costume_list[index].image}",
+                                "assets/svg/${costumeList[index].image}.svg",
                               ),
                               Container(
                                 padding:
@@ -166,7 +198,7 @@ class _ShopScreen extends State<ShopScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      "${costume_list[index].point}",
+                                      "${costumeList[index].point}",
                                       style: const TextStyle(
                                         fontSize: 20,
                                       ),
@@ -177,11 +209,16 @@ class _ShopScreen extends State<ShopScreen> {
                               ),
                             ],
                           ),
-                          costume_list[index].buyable_flag == false
+                          costumeList[index].hasCostume
                               ? Container(
                                   alignment: Alignment.center,
-                                  child:
-                                      SvgPicture.asset("assets/svg/lock.svg"),
+                                  child: const Text(
+                                    "もってるよ！",
+                                    style: TextStyle(
+                                      color: kAppBarFontColor,
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 )
                               : Container(),
                         ],

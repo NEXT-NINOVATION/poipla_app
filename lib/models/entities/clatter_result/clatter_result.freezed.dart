@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'clatter_result.dart';
 
@@ -44,7 +44,8 @@ mixin _$ClatterResult {
 abstract class $ClatterResultCopyWith<$Res> {
   factory $ClatterResultCopyWith(
           ClatterResult value, $Res Function(ClatterResult) then) =
-      _$ClatterResultCopyWithImpl<$Res>;
+      _$ClatterResultCopyWithImpl<$Res, ClatterResult>;
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'costume_id') int? costumeId,
@@ -58,64 +59,67 @@ abstract class $ClatterResultCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ClatterResultCopyWithImpl<$Res>
+class _$ClatterResultCopyWithImpl<$Res, $Val extends ClatterResult>
     implements $ClatterResultCopyWith<$Res> {
   _$ClatterResultCopyWithImpl(this._value, this._then);
 
-  final ClatterResult _value;
   // ignore: unused_field
-  final $Res Function(ClatterResult) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? costumeId = freezed,
-    Object? sessionId = freezed,
+    Object? sessionId = null,
     Object? earnExp = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? costume = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      costumeId: costumeId == freezed
+      costumeId: freezed == costumeId
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      sessionId: sessionId == freezed
+      sessionId: null == sessionId
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as int,
-      earnExp: earnExp == freezed
+      earnExp: freezed == earnExp
           ? _value.earnExp
           : earnExp // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: updatedAt == freezed
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      costume: costume == freezed
+      costume: freezed == costume
           ? _value.costume
           : costume // ignore: cast_nullable_to_non_nullable
               as Costume?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CostumeCopyWith<$Res>? get costume {
     if (_value.costume == null) {
       return null;
     }
 
     return $CostumeCopyWith<$Res>(_value.costume!, (value) {
-      return _then(_value.copyWith(costume: value));
+      return _then(_value.copyWith(costume: value) as $Val);
     });
   }
 }
@@ -127,6 +131,7 @@ abstract class _$$_ClatterResultCopyWith<$Res>
           _$_ClatterResult value, $Res Function(_$_ClatterResult) then) =
       __$$_ClatterResultCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'costume_id') int? costumeId,
@@ -142,51 +147,49 @@ abstract class _$$_ClatterResultCopyWith<$Res>
 
 /// @nodoc
 class __$$_ClatterResultCopyWithImpl<$Res>
-    extends _$ClatterResultCopyWithImpl<$Res>
+    extends _$ClatterResultCopyWithImpl<$Res, _$_ClatterResult>
     implements _$$_ClatterResultCopyWith<$Res> {
   __$$_ClatterResultCopyWithImpl(
       _$_ClatterResult _value, $Res Function(_$_ClatterResult) _then)
-      : super(_value, (v) => _then(v as _$_ClatterResult));
+      : super(_value, _then);
 
-  @override
-  _$_ClatterResult get _value => super._value as _$_ClatterResult;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? costumeId = freezed,
-    Object? sessionId = freezed,
+    Object? sessionId = null,
     Object? earnExp = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? costume = freezed,
   }) {
     return _then(_$_ClatterResult(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      costumeId: costumeId == freezed
+      costumeId: freezed == costumeId
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      sessionId: sessionId == freezed
+      sessionId: null == sessionId
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as int,
-      earnExp: earnExp == freezed
+      earnExp: freezed == earnExp
           ? _value.earnExp
           : earnExp // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: updatedAt == freezed
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      costume: costume == freezed
+      costume: freezed == costume
           ? _value.costume
           : costume // ignore: cast_nullable_to_non_nullable
               as Costume?,
@@ -240,35 +243,35 @@ class _$_ClatterResult implements _ClatterResult {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ClatterResult &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.costumeId, costumeId) &&
-            const DeepCollectionEquality().equals(other.sessionId, sessionId) &&
-            const DeepCollectionEquality().equals(other.earnExp, earnExp) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            const DeepCollectionEquality().equals(other.costume, costume));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.costumeId, costumeId) ||
+                other.costumeId == costumeId) &&
+            (identical(other.sessionId, sessionId) ||
+                other.sessionId == sessionId) &&
+            (identical(other.earnExp, earnExp) || other.earnExp == earnExp) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.costume, costume) || other.costume == costume));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(costumeId),
-      const DeepCollectionEquality().hash(sessionId),
-      const DeepCollectionEquality().hash(earnExp),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt),
-      const DeepCollectionEquality().hash(costume));
+  int get hashCode => Object.hash(runtimeType, id, costumeId, sessionId,
+      earnExp, createdAt, updatedAt, costume);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ClatterResultCopyWith<_$_ClatterResult> get copyWith =>
       __$$_ClatterResultCopyWithImpl<_$_ClatterResult>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ClatterResultToJson(this);
+    return _$$_ClatterResultToJson(
+      this,
+    );
   }
 }
 
@@ -287,25 +290,25 @@ abstract class _ClatterResult implements ClatterResult {
       _$_ClatterResult.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(name: 'costume_id')
-  int? get costumeId => throw _privateConstructorUsedError;
+  int? get costumeId;
   @override
   @JsonKey(name: 'session_id')
-  int get sessionId => throw _privateConstructorUsedError;
+  int get sessionId;
   @override
   @JsonKey(name: 'earn_exp')
-  int? get earnExp => throw _privateConstructorUsedError;
+  int? get earnExp;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt;
   @override
   @JsonKey(name: 'costume')
-  Costume? get costume => throw _privateConstructorUsedError;
+  Costume? get costume;
   @override
   @JsonKey(ignore: true)
   _$$_ClatterResultCopyWith<_$_ClatterResult> get copyWith =>

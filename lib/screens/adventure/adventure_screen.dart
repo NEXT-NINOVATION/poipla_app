@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/adventure/components/detail_modal.dart';
 import 'package:poipla_app/screens/adventure/components/pref_point_button.dart';
+import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
 
 class AdventureScreen extends StatefulWidget {
@@ -66,8 +67,37 @@ class _AdventureScreenState extends State<AdventureScreen> {
                         );
                       },
                       // 座標的なのを引数で渡す
-                      child: const PrefPointButton(),
+                      child: const PrefPointButton(
+                          top: 130,
+                          left: 5,
+                          bottom: 0,
+                          right: 0,
+                          isEnter: true),
                     ),
+                    PrefPointButton(
+                        top: 130,
+                        left: 5,
+                        bottom: 0,
+                        right: 80,
+                        isEnter: false),
+                    PrefPointButton(
+                        top: 130,
+                        left: 170,
+                        bottom: 200,
+                        right: 0,
+                        isEnter: false),
+                    PrefPointButton(
+                        top: 50,
+                        left: 160,
+                        bottom: 0,
+                        right: 0,
+                        isEnter: false),
+                    PrefPointButton(
+                        top: 170,
+                        left: 0,
+                        bottom: 0,
+                        right: 280,
+                        isEnter: false),
                   ],
                 ),
               ),

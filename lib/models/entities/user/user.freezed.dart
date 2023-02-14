@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user.dart';
 
@@ -39,7 +39,8 @@ mixin _$User {
 /// @nodoc
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
+      _$UserCopyWithImpl<$Res, User>;
+  @useResult
   $Res call(
       {int id,
       int level,
@@ -54,68 +55,72 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+class _$UserCopyWithImpl<$Res, $Val extends User>
+    implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._value, this._then);
 
-  final User _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? level = freezed,
-    Object? exp = freezed,
-    Object? point = freezed,
+    Object? id = null,
+    Object? level = null,
+    Object? exp = null,
+    Object? point = null,
     Object? name = freezed,
-    Object? totalPet = freezed,
+    Object? totalPet = null,
     Object? costumeId = freezed,
     Object? costume = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      level: level == freezed
+      level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int,
-      exp: exp == freezed
+      exp: null == exp
           ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
               as int,
-      point: point == freezed
+      point: null == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      totalPet: totalPet == freezed
+      totalPet: null == totalPet
           ? _value.totalPet
           : totalPet // ignore: cast_nullable_to_non_nullable
               as int,
-      costumeId: costumeId == freezed
+      costumeId: freezed == costumeId
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      costume: costume == freezed
+      costume: freezed == costume
           ? _value.costume
           : costume // ignore: cast_nullable_to_non_nullable
               as Costume?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CostumeCopyWith<$Res>? get costume {
     if (_value.costume == null) {
       return null;
     }
 
     return $CostumeCopyWith<$Res>(_value.costume!, (value) {
-      return _then(_value.copyWith(costume: value));
+      return _then(_value.copyWith(costume: value) as $Val);
     });
   }
 }
@@ -125,6 +130,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       int level,
@@ -140,55 +146,53 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     implements _$$_UserCopyWith<$Res> {
   __$$_UserCopyWithImpl(_$_User _value, $Res Function(_$_User) _then)
-      : super(_value, (v) => _then(v as _$_User));
+      : super(_value, _then);
 
-  @override
-  _$_User get _value => super._value as _$_User;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? level = freezed,
-    Object? exp = freezed,
-    Object? point = freezed,
+    Object? id = null,
+    Object? level = null,
+    Object? exp = null,
+    Object? point = null,
     Object? name = freezed,
-    Object? totalPet = freezed,
+    Object? totalPet = null,
     Object? costumeId = freezed,
     Object? costume = freezed,
   }) {
     return _then(_$_User(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      level: level == freezed
+      level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int,
-      exp: exp == freezed
+      exp: null == exp
           ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
               as int,
-      point: point == freezed
+      point: null == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      totalPet: totalPet == freezed
+      totalPet: null == totalPet
           ? _value.totalPet
           : totalPet // ignore: cast_nullable_to_non_nullable
               as int,
-      costumeId: costumeId == freezed
+      costumeId: freezed == costumeId
           ? _value.costumeId
           : costumeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      costume: costume == freezed
+      costume: freezed == costume
           ? _value.costume
           : costume // ignore: cast_nullable_to_non_nullable
               as Costume?,
@@ -241,37 +245,34 @@ class _$_User extends _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.level, level) &&
-            const DeepCollectionEquality().equals(other.exp, exp) &&
-            const DeepCollectionEquality().equals(other.point, point) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.totalPet, totalPet) &&
-            const DeepCollectionEquality().equals(other.costumeId, costumeId) &&
-            const DeepCollectionEquality().equals(other.costume, costume));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.level, level) || other.level == level) &&
+            (identical(other.exp, exp) || other.exp == exp) &&
+            (identical(other.point, point) || other.point == point) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.totalPet, totalPet) ||
+                other.totalPet == totalPet) &&
+            (identical(other.costumeId, costumeId) ||
+                other.costumeId == costumeId) &&
+            (identical(other.costume, costume) || other.costume == costume));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(level),
-      const DeepCollectionEquality().hash(exp),
-      const DeepCollectionEquality().hash(point),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(totalPet),
-      const DeepCollectionEquality().hash(costumeId),
-      const DeepCollectionEquality().hash(costume));
+      runtimeType, id, level, exp, point, name, totalPet, costumeId, costume);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToJson(this);
+    return _$$_UserToJson(
+      this,
+    );
   }
 }
 
@@ -290,23 +291,23 @@ abstract class _User extends User {
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  int get level => throw _privateConstructorUsedError;
+  int get level;
   @override
-  int get exp => throw _privateConstructorUsedError;
+  int get exp;
   @override
-  int get point => throw _privateConstructorUsedError;
+  int get point;
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
   @JsonKey(name: 'total_pet')
-  int get totalPet => throw _privateConstructorUsedError;
+  int get totalPet;
   @override
   @JsonKey(name: 'costume_id')
-  int? get costumeId => throw _privateConstructorUsedError;
+  int? get costumeId;
   @override
-  Costume? get costume => throw _privateConstructorUsedError;
+  Costume? get costume;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

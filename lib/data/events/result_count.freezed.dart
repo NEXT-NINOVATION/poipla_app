@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'result_count.dart';
 
@@ -33,41 +33,46 @@ mixin _$ResultCount {
 abstract class $ResultCountCopyWith<$Res> {
   factory $ResultCountCopyWith(
           ResultCount value, $Res Function(ResultCount) then) =
-      _$ResultCountCopyWithImpl<$Res>;
+      _$ResultCountCopyWithImpl<$Res, ResultCount>;
+  @useResult
   $Res call({int count, Session session});
 
   $SessionCopyWith<$Res> get session;
 }
 
 /// @nodoc
-class _$ResultCountCopyWithImpl<$Res> implements $ResultCountCopyWith<$Res> {
+class _$ResultCountCopyWithImpl<$Res, $Val extends ResultCount>
+    implements $ResultCountCopyWith<$Res> {
   _$ResultCountCopyWithImpl(this._value, this._then);
 
-  final ResultCount _value;
   // ignore: unused_field
-  final $Res Function(ResultCount) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = freezed,
-    Object? session = freezed,
+    Object? count = null,
+    Object? session = null,
   }) {
     return _then(_value.copyWith(
-      count: count == freezed
+      count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      session: session == freezed
+      session: null == session
           ? _value.session
           : session // ignore: cast_nullable_to_non_nullable
               as Session,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SessionCopyWith<$Res> get session {
     return $SessionCopyWith<$Res>(_value.session, (value) {
-      return _then(_value.copyWith(session: value));
+      return _then(_value.copyWith(session: value) as $Val);
     });
   }
 }
@@ -79,6 +84,7 @@ abstract class _$$_ResultCountCopyWith<$Res>
           _$_ResultCount value, $Res Function(_$_ResultCount) then) =
       __$$_ResultCountCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int count, Session session});
 
   @override
@@ -86,26 +92,25 @@ abstract class _$$_ResultCountCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ResultCountCopyWithImpl<$Res> extends _$ResultCountCopyWithImpl<$Res>
+class __$$_ResultCountCopyWithImpl<$Res>
+    extends _$ResultCountCopyWithImpl<$Res, _$_ResultCount>
     implements _$$_ResultCountCopyWith<$Res> {
   __$$_ResultCountCopyWithImpl(
       _$_ResultCount _value, $Res Function(_$_ResultCount) _then)
-      : super(_value, (v) => _then(v as _$_ResultCount));
+      : super(_value, _then);
 
-  @override
-  _$_ResultCount get _value => super._value as _$_ResultCount;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = freezed,
-    Object? session = freezed,
+    Object? count = null,
+    Object? session = null,
   }) {
     return _then(_$_ResultCount(
-      count: count == freezed
+      count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      session: session == freezed
+      session: null == session
           ? _value.session
           : session // ignore: cast_nullable_to_non_nullable
               as Session,
@@ -136,25 +141,25 @@ class _$_ResultCount implements _ResultCount {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ResultCount &&
-            const DeepCollectionEquality().equals(other.count, count) &&
-            const DeepCollectionEquality().equals(other.session, session));
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.session, session) || other.session == session));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(count),
-      const DeepCollectionEquality().hash(session));
+  int get hashCode => Object.hash(runtimeType, count, session);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ResultCountCopyWith<_$_ResultCount> get copyWith =>
       __$$_ResultCountCopyWithImpl<_$_ResultCount>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ResultCountToJson(this);
+    return _$$_ResultCountToJson(
+      this,
+    );
   }
 }
 
@@ -167,9 +172,9 @@ abstract class _ResultCount implements ResultCount {
       _$_ResultCount.fromJson;
 
   @override
-  int get count => throw _privateConstructorUsedError;
+  int get count;
   @override
-  Session get session => throw _privateConstructorUsedError;
+  Session get session;
   @override
   @JsonKey(ignore: true)
   _$$_ResultCountCopyWith<_$_ResultCount> get copyWith =>

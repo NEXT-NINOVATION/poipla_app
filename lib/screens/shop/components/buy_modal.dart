@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/parser.dart';
 import 'package:poipla_app/constants.dart';
+import 'package:poipla_app/providers/api_providers.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:ruby_text/ruby_text.dart';
 
-class BuyModal extends StatelessWidget {
+class BuyModal extends ConsumerWidget {
   const BuyModal(
       {Key? key,
+      required this.costumeId,
       required this.nowPoint,
       required this.costumeName,
       required this.imageName,
@@ -15,10 +18,10 @@ class BuyModal extends StatelessWidget {
       : super(key: key);
 
   final String costumeName, imageName;
-  final int point, nowPoint;
+  final int costumeId, point, nowPoint;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
@@ -118,6 +121,9 @@ class BuyModal extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
+                    ref
+                        .read(poiplaApiServiceProvider)
+                        .buyShopCostume(costumeId.toString());
                     Navigator.popUntil(context, (route) => route.isFirst);
                   },
                   child: SizedBox(
