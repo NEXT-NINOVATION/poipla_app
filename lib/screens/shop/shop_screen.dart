@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
+import 'package:poipla_app/data/dao/user_dao.dart';
+import 'package:poipla_app/data/retrofit/service.dart';
 import 'package:poipla_app/models/database.dart';
+import 'package:poipla_app/models/repositories/user_repository.dart';
 import 'package:poipla_app/providers/api_providers.dart';
+import 'package:poipla_app/providers/token_providers.dart';
+import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
@@ -38,8 +43,9 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
             [])
         .where((element) => element.point != null && element.reqLv != null)
         .toList();
-    var point = 1200;
+    final user = ref.watch(accountStoreProvider).currentUser;
     print('costumes: $costumeList');
+    print(user!.point);
 
     return Container(
       decoration: const BoxDecoration(
@@ -105,7 +111,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      "$point",
+                      "${user.point}",
                       style: const TextStyle(
                         color: kFontColorImportant,
                         fontSize: 32,
@@ -152,7 +158,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                           context: context,
                           builder: (BuildContext context) => BuyModal(
                               costumeId: costumeList[index].costumeId,
-                              nowPoint: point,
+                              nowPoint: user.point,
                               costumeName: costumeList[index].costumeName,
                               imageName: '${costumeList[index].image}.svg',
                               point: costumeList[index].point ?? 0),

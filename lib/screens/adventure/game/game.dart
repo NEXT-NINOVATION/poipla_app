@@ -301,7 +301,7 @@ class AdventureGame extends FlameGame
   List<int> getResult() {
     final pla = scoreResult;
     final point = scoreResult * 2;
-    final totalScore = 200 + scoreResult;
+    final totalScore = scoreResult;
 
     return [pla, point, totalScore];
   }

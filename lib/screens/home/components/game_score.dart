@@ -3,7 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:poipla_app/constants.dart';
 
 class GameScore extends StatefulWidget {
-  GameScore({Key? key}) : super(key: key);
+  GameScore({
+    Key? key,
+    required this.totalPla,
+  }) : super(key: key);
+
+  final int totalPla;
 
   @override
   State<GameScore> createState() => _GameScoreState();
@@ -43,7 +48,7 @@ class _GameScoreState extends State<GameScore> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            "10000",
+                            "${widget.totalPla}",
                             style: TextStyle(
                               color: kFontColorRed,
                               fontSize: 18,

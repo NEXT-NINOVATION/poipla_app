@@ -64,7 +64,7 @@ class Fish {
       // cost: 0,
       speed: 200,
       health: 3,
-      text: "イカスミ",
+      text: "タコスミ",
       spriteId: 1,
       assetPath: 'assets/images/takosuke.png',
       level: 1,

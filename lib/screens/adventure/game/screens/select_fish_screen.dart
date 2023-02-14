@@ -160,7 +160,9 @@ class _SelectFishScreenState extends ConsumerState<SelectFishScreen> {
                           );
                         },
                         onSlideChanged: (value) {
-                          _fishType = Fish.fishes.entries.elementAt(value).key;
+                          _fishType = Fish.fishes.entries
+                              .elementAt(myCostumeList[value])
+                              .key;
                         },
                       ),
                     ),

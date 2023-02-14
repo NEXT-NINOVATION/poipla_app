@@ -51,7 +51,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final costumes = ref.watch(myCostumeStoreProvider).myCostumes;
     ref.watch(myCostumesFutureProvider);
-
     final authStore = ref.watch(accountStoreProvider);
 
     final currentCostume = costumes.firstWhereOrNull(
@@ -97,7 +96,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         body: Stack(
           children: [
-            GameScore(),
+            GameScore(totalPla: (authStore.currentUser?.totalPet)!.toInt()),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
