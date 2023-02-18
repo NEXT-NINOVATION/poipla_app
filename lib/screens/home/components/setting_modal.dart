@@ -46,6 +46,7 @@ class _SettingModalState extends ConsumerState<SettingModal> {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
+    final authStore = ref.watch(accountStoreProvider);
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -71,7 +72,7 @@ class _SettingModalState extends ConsumerState<SettingModal> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "おなまえの変更",
+                      "おなまえ",
                       style: TextStyle(
                         fontSize: 18,
                         color: kFontColor,
@@ -81,13 +82,15 @@ class _SettingModalState extends ConsumerState<SettingModal> {
                       margin: const EdgeInsets.only(top: 8),
                       width: deviceW * 0.75,
                       child: TextField(
+                        readOnly: true,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: kFontColor,
                         ),
                         maxLength: 8,
                         maxLengthEnforcement: MaxLengthEnforcement.none,
-                        controller: TextEditingController(text: "kokoko"),
+                        controller: TextEditingController(
+                            text: authStore.currentUser?.name),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -134,9 +137,9 @@ class _SettingModalState extends ConsumerState<SettingModal> {
                           overlayShape: const RoundSliderOverlayShape(
                             overlayRadius: 1,
                           ),
-                          trackShape: const CustomRoundedRectSliderTrackShape(
-                            Radius.circular(5),
-                          ),
+                          // trackShape: const CustomRoundedRectSliderTrackShape(
+                          //   Radius.circular(5),
+                          // ),
                         ),
                         child: Slider(
                           onChanged: (double value) {
@@ -226,107 +229,107 @@ class _SettingModalState extends ConsumerState<SettingModal> {
   }
 }
 
-class CustomRoundedRectSliderTrackShape extends SliderTrackShape
-    with BaseSliderTrackShape {
-  final Radius trackRadius;
-  const CustomRoundedRectSliderTrackShape(this.trackRadius);
+// class CustomRoundedRectSliderTrackShape extends SliderTrackShape
+//     with BaseSliderTrackShape {
+//   final Radius trackRadius;
+//   const CustomRoundedRectSliderTrackShape(this.trackRadius);
 
-  @override
-  void paint(
-    PaintingContext context,
-    Offset offset, {
-    required RenderBox parentBox,
-    required SliderThemeData sliderTheme,
-    required Animation<double> enableAnimation,
-    required TextDirection textDirection,
-    required Offset thumbCenter,
-    bool isDiscrete = false,
-    bool isEnabled = false,
-    double additionalActiveTrackHeight = 2,
-  }) {
-    assert(sliderTheme.disabledActiveTrackColor != null);
-    assert(sliderTheme.disabledInactiveTrackColor != null);
-    assert(sliderTheme.activeTrackColor != null);
-    assert(sliderTheme.inactiveTrackColor != null);
-    assert(sliderTheme.thumbShape != null);
-    if (sliderTheme.trackHeight == null || sliderTheme.trackHeight! <= 0) {
-      return;
-    }
+//   @override
+//   void paint(
+//     PaintingContext context,
+//     Offset offset, {
+//     required RenderBox parentBox,
+//     required SliderThemeData sliderTheme,
+//     required Animation<double> enableAnimation,
+//     required TextDirection textDirection,
+//     required Offset thumbCenter,
+//     bool isDiscrete = false,
+//     bool isEnabled = false,
+//     double additionalActiveTrackHeight = 2,
+//   }) {
+//     assert(sliderTheme.disabledActiveTrackColor != null);
+//     assert(sliderTheme.disabledInactiveTrackColor != null);
+//     assert(sliderTheme.activeTrackColor != null);
+//     assert(sliderTheme.inactiveTrackColor != null);
+//     assert(sliderTheme.thumbShape != null);
+//     if (sliderTheme.trackHeight == null || sliderTheme.trackHeight! <= 0) {
+//       return;
+//     }
 
-    final ColorTween activeTrackColorTween = ColorTween(
-        begin: sliderTheme.disabledActiveTrackColor,
-        end: sliderTheme.activeTrackColor);
-    final ColorTween inactiveTrackColorTween = ColorTween(
-        begin: sliderTheme.disabledInactiveTrackColor,
-        end: sliderTheme.inactiveTrackColor);
-    final Paint leftTrackPaint = Paint()
-      ..color = activeTrackColorTween.evaluate(enableAnimation)!;
-    final Paint rightTrackPaint = Paint()
-      ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
+//     final ColorTween activeTrackColorTween = ColorTween(
+//         begin: sliderTheme.disabledActiveTrackColor,
+//         end: sliderTheme.activeTrackColor);
+//     final ColorTween inactiveTrackColorTween = ColorTween(
+//         begin: sliderTheme.disabledInactiveTrackColor,
+//         end: sliderTheme.inactiveTrackColor);
+//     final Paint leftTrackPaint = Paint()
+//       ..color = activeTrackColorTween.evaluate(enableAnimation)!;
+//     final Paint rightTrackPaint = Paint()
+//       ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
 
-    final Rect trackRect = getPreferredRect(
-      parentBox: parentBox,
-      offset: offset,
-      sliderTheme: sliderTheme,
-      isEnabled: isEnabled,
-      isDiscrete: isDiscrete,
-    );
+//     final Rect trackRect = getPreferredRect(
+//       parentBox: parentBox,
+//       offset: offset,
+//       sliderTheme: sliderTheme,
+//       isEnabled: isEnabled,
+//       isDiscrete: isDiscrete,
+//     );
 
-    var activeRect = RRect.fromLTRBAndCorners(
-      trackRect.left,
-      trackRect.top,
-      thumbCenter.dx,
-      trackRect.bottom,
-      topLeft: trackRadius,
-      bottomLeft: trackRadius,
-    );
-    var inActiveRect = RRect.fromLTRBAndCorners(
-      thumbCenter.dx,
-      trackRect.top,
-      trackRect.right,
-      trackRect.bottom,
-      topRight: trackRadius,
-      bottomRight: trackRadius,
-    );
-    var percent =
-        ((activeRect.width / (activeRect.width + inActiveRect.width)) * 100)
-            .toInt();
-    if (percent > 99) {
-      activeRect = RRect.fromLTRBAndCorners(
-        trackRect.left,
-        trackRect.top - (additionalActiveTrackHeight / 2),
-        thumbCenter.dx,
-        trackRect.bottom + (additionalActiveTrackHeight / 2),
-        topLeft: trackRadius,
-        bottomLeft: trackRadius,
-        bottomRight: trackRadius,
-        topRight: trackRadius,
-      );
-    }
+//     var activeRect = RRect.fromLTRBAndCorners(
+//       trackRect.left,
+//       trackRect.top,
+//       thumbCenter.dx,
+//       trackRect.bottom,
+//       topLeft: trackRadius,
+//       bottomLeft: trackRadius,
+//     );
+//     var inActiveRect = RRect.fromLTRBAndCorners(
+//       thumbCenter.dx,
+//       trackRect.top,
+//       trackRect.right,
+//       trackRect.bottom,
+//       topRight: trackRadius,
+//       bottomRight: trackRadius,
+//     );
+//     var percent =
+//         ((activeRect.width / (activeRect.width + inActiveRect.width)) * 100)
+//             .toInt();
+//     if (percent > 99) {
+//       activeRect = RRect.fromLTRBAndCorners(
+//         trackRect.left,
+//         trackRect.top - (additionalActiveTrackHeight / 2),
+//         thumbCenter.dx,
+//         trackRect.bottom + (additionalActiveTrackHeight / 2),
+//         topLeft: trackRadius,
+//         bottomLeft: trackRadius,
+//         bottomRight: trackRadius,
+//         topRight: trackRadius,
+//       );
+//     }
 
-    if (percent < 1) {
-      inActiveRect = RRect.fromLTRBAndCorners(
-        thumbCenter.dx,
-        trackRect.top,
-        trackRect.right,
-        trackRect.bottom,
-        topRight: trackRadius,
-        bottomRight: trackRadius,
-        bottomLeft: trackRadius,
-        topLeft: trackRadius,
-      );
-    }
-    context.canvas.drawRRect(
-      activeRect,
-      leftTrackPaint,
-    );
+//     if (percent < 1) {
+//       inActiveRect = RRect.fromLTRBAndCorners(
+//         thumbCenter.dx,
+//         trackRect.top,
+//         trackRect.right,
+//         trackRect.bottom,
+//         topRight: trackRadius,
+//         bottomRight: trackRadius,
+//         bottomLeft: trackRadius,
+//         topLeft: trackRadius,
+//       );
+//     }
+//     context.canvas.drawRRect(
+//       activeRect,
+//       leftTrackPaint,
+//     );
 
-    context.canvas.drawRRect(
-      inActiveRect,
-      rightTrackPaint,
-    );
-  }
-}
+//     context.canvas.drawRRect(
+//       inActiveRect,
+//       rightTrackPaint,
+//     );
+//   }
+// }
 
 class SliderThumbImage extends SliderComponentShape {
   final ui.Image image;
