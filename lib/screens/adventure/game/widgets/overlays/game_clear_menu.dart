@@ -10,6 +10,7 @@ import 'package:poipla_app/screens/home/home_screen.dart';
 
 import '../../screens/main_menu_screen.dart';
 import 'pause_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 // This class represents the game over menu overlay.
 class GameClearMenu extends StatelessWidget {

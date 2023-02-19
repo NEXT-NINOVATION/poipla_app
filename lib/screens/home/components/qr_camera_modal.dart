@@ -10,6 +10,7 @@ import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/home/components/qr_loading_modal.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class QRCameraModal extends ConsumerStatefulWidget {
   const QRCameraModal({Key? key}) : super(key: key);
@@ -52,6 +53,11 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
     var scanArea = min(deviceW, deviceH) / 2;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
+
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -96,7 +102,8 @@ class _QRCameraModalState extends ConsumerState<QRCameraModal> {
           alignment: Alignment.bottomCenter,
           margin: const EdgeInsets.only(bottom: 40),
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
+              await soundEffect.resume();
               Navigator.pop(context);
             },
             child: const AppButton(text: "やめる", isPos: false),

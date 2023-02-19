@@ -15,6 +15,7 @@ import 'package:poipla_app/screens/custom_back_button.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/shop/components/buy_modal.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 final shopCostumesFutureProvider = FutureProvider((ref) {
   return ref
@@ -47,6 +48,10 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
     print('costumes: $costumeList');
     print(user!.point);
 
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -75,6 +80,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
           actions: [
             GestureDetector(
               onTap: () {
+                soundEffect.resume();
                 showDialog(
                   // Dialogの周囲の黒い部分をタップしても閉じないようにする
                   barrierDismissible: false,

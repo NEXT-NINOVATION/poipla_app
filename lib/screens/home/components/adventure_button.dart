@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:poipla_app/screens/adventure/adventure_screen.dart';
 import 'package:poipla_app/screens/adventure/components/result_modal.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class AdventureButton extends StatelessWidget {
   const AdventureButton({
@@ -12,8 +12,13 @@ class AdventureButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    final bgm = AudioPlayer(playerId: "poipla");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     return GestureDetector(
       onTap: () async {
+        soundEffect.resume();
         // GoRouter.of(context).push('/adventure');
         final result = await Navigator.of(context).push(
           MaterialPageRoute(
@@ -23,6 +28,7 @@ class AdventureButton extends StatelessWidget {
           ),
         );
         print("result:$result");
+        await bgm.resume();
         if (result != null) {
           showDialog(
             // Dialogの周囲の黒い部分をタップしても閉じないようにする

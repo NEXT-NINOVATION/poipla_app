@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
-import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/providers/costume_provider.dart';
-import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 import 'package:poipla_app/screens/home/components/adventure_button.dart';
 import 'package:poipla_app/screens/home/components/adventure_result_modal.dart';
 import 'package:poipla_app/screens/home/components/change_costume_button.dart';
 import 'package:poipla_app/screens/home/components/come_back_timer.dart';
 import 'package:poipla_app/screens/home/components/game_score.dart';
 import 'package:poipla_app/screens/home/components/present_modal.dart';
-import 'package:poipla_app/screens/home/components/put_in_modal.dart';
 import 'package:poipla_app/screens/home/components/qr_camera_modal.dart';
-import 'package:poipla_app/screens/home/components/qr_completed_modal.dart';
-import 'package:poipla_app/screens/home/components/qr_loading_modal.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/home/components/shop_button.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:collection/collection.dart';
 import 'package:lottie/lottie.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -35,8 +30,23 @@ final myCostumesFutureProvider = FutureProvider.autoDispose((ref) {
   return ref.read(myCostumeStoreProvider).fetchAll();
 });
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
   final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
+  @override
+  void initState() {
+    super.initState();
+
+    // bgm();
+    //LOOPの設定
+    // audioPlayer.setReleaseMode(ReleaseMode.loop);
+
+    // //再生中か停止中かの状態を取得
+    // audioPlayer.onPlayerStateChanged.listen((state) {
+    //   setState(() {
+    //     isPlaying = state == PlayerState.playing;
+    //   });
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +65,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final currentCostume = costumes.firstWhereOrNull(
         (element) => element.id == authStore.currentUser?.costumeId);
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
+
+    final bgm = AudioPlayer(playerId: "poipla");
+    bgm.setSourceAsset("audio/home.mp3");
+    bgm.setVolume(1.0);
+    bgm.setReleaseMode(ReleaseMode.loop);
+    bgm.resume();
 
     return Container(
       decoration: const BoxDecoration(
@@ -83,6 +103,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           actions: [
             GestureDetector(
               onTap: () {
+                soundEffect.resume();
                 showDialog(
                   // Dialogの周囲の黒い部分をタップしても閉じないようにする
                   barrierDismissible: false,
@@ -108,6 +129,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       // ToDo:コンポーネント化する
                       GestureDetector(
                         onTap: () {
+                          soundEffect.resume();
                           showDialog(
                             // Dialogの周囲の黒い部分をタップしても閉じないようにする
                             barrierDismissible: false,
@@ -164,6 +186,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       // QRボタン
                       GestureDetector(
                         onTap: () {
+                          soundEffect.resume();
                           showDialog(
                             // Dialogの周囲の黒い部分をタップしても閉じないようにする
                             barrierDismissible: false,

@@ -12,6 +12,7 @@ import '../models/player_data.dart';
 import '../models/character_details.dart';
 
 import 'game_play_screen.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 // Represents the fish selection menu from where player can
 // change current fish or buy a new one.
@@ -41,6 +42,10 @@ class _SelectFishScreenState extends ConsumerState<SelectFishScreen> {
   Widget build(BuildContext context) {
     FishType _fishType = Fish.fishes.entries.elementAt(0).key;
     final asyncMyCostumes = ref.watch(myCostumeFutureProvider);
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Scaffold(
         appBar: AppBar(
@@ -188,7 +193,10 @@ class _SelectFishScreenState extends ConsumerState<SelectFishScreen> {
                 provider.Consumer<PlayerData>(
                   builder: (context, playerData, child) {
                     return GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        await soundEffect.resume();
+                        final bgm = AudioPlayer(playerId: "poipla");
+                        await bgm.stop();
                         playerData.equip(_fishType);
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(

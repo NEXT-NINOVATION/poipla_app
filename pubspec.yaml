@@ -37,6 +37,7 @@ dependencies:
   hive_flutter: 1.1.0
   flutter_carousel_slider: ^1.0.9
   file: ^6.1.4
+  audioplayers: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -59,3 +60,4 @@ flutter:
     - assets/svg/
     - assets/animation/
     - assets/images/
+    - assets/audio/

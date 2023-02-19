@@ -5,12 +5,16 @@ import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/bubble.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class StartScreen extends ConsumerWidget {
   const StartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -47,7 +51,8 @@ class StartScreen extends ConsumerWidget {
             Container(
               margin: const EdgeInsets.only(bottom: 120),
               child: GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  await soundEffect.resume();
                   ref.read(accountStoreProvider).register();
                 },
                 child: const AppButton(

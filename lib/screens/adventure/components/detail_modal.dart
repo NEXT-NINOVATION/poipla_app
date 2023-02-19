@@ -10,6 +10,7 @@ import 'package:poipla_app/screens/adventure/game/screens/main_menu_screen.dart'
 import 'package:poipla_app/screens/adventure/game/screens/select_fish_screen.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:provider/provider.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class DetailModal extends StatelessWidget {
   const DetailModal({
@@ -30,6 +31,10 @@ class DetailModal extends StatelessWidget {
 
     // This opens the app in fullscreen mode.
     Flame.device.fullScreen();
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -116,6 +121,7 @@ class DetailModal extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 24),
                         child: GestureDetector(
                           onTap: () async {
+                            await soundEffect.resume();
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 builder: (context) {
@@ -131,7 +137,8 @@ class DetailModal extends StatelessWidget {
                         width: deviceW * 0.45,
                         margin: const EdgeInsets.only(bottom: 40),
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            await soundEffect.resume();
                             Navigator.pop(context);
                           },
                           child: const AppButton(text: "とじる", isPos: false),

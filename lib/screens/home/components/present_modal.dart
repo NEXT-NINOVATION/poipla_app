@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/database.dart';
 import 'package:poipla_app/screens/app_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class PresentModal extends StatefulWidget {
   PresentModal({Key? key}) : super(key: key);
@@ -16,6 +17,11 @@ class _PresentModalState extends State<PresentModal> {
   Widget build(BuildContext context) {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
+
     return Dialog(
       alignment: Alignment.bottomCenter,
       insetPadding: const EdgeInsets.only(
@@ -135,7 +141,8 @@ class _PresentModalState extends State<PresentModal> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  await soundEffect.resume();
                   Navigator.pop(context);
                 },
                 child: const AppButton(text: "とじる", isPos: false),

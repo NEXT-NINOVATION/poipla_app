@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:video_player/video_player.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class GachaAnimationScreen extends StatefulWidget {
   const GachaAnimationScreen({
@@ -57,6 +58,9 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -83,7 +87,8 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> {
                 ? Positioned(
                     bottom: 144,
                     child: GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        await soundEffect.resume();
                         // 動画を再生
                         _controller.play();
                         setState(() {
