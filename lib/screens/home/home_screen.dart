@@ -30,6 +30,10 @@ final myCostumesFutureProvider = FutureProvider.autoDispose((ref) {
   return ref.read(myCostumeStoreProvider).fetchAll();
 });
 
+final accountFutureProvider = FutureProvider.autoDispose((ref) {
+  return ref.read(accountStoreProvider).fetch();
+});
+
 class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
   final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
   @override
@@ -61,10 +65,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
 
     final costumes = ref.watch(myCostumeStoreProvider).myCostumes;
     ref.watch(myCostumesFutureProvider);
-    final authStore = ref.watch(accountStoreProvider);
+    var authStore = ref.watch(accountStoreProvider).currentUser;
+    ref.watch(accountFutureProvider);
 
-    final currentCostume = costumes.firstWhereOrNull(
-        (element) => element.id == authStore.currentUser?.costumeId);
+    final currentCostume = costumes
+        .firstWhereOrNull((element) => element.id == authStore?.costumeId);
 
     final soundEffect = AudioPlayer(playerId: "soundEffect");
     soundEffect.setSourceAsset("audio/button_press.mp3");
@@ -117,7 +122,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
         ),
         body: Stack(
           children: [
-            GameScore(totalPla: (authStore.currentUser?.totalPet)!.toInt()),
+            GameScore(totalPla: (authStore?.totalPet)!.toInt()),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

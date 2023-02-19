@@ -27,6 +27,9 @@ abstract class PoiplaApiService {
   @POST('/dust-boxes/{boxId}/sessions')
   Future<Session> createSession(@Path('boxId') String boxId);
 
+  @POST('/me/points')
+  Future<User> postGameResult(@Body() Map<String, dynamic> body);
+
   @PUT('/dust-boxes/{boxId}/sessions/{sessionId}')
   Future<List<ClatterResult>> completeSession(
       @Path('boxId') String boxId, @Path('sessionId') String sessionId);
