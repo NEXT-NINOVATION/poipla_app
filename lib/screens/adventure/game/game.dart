@@ -141,6 +141,8 @@ class AdventureGame extends FlameGame
       _plasticManager = PlasticManager(spriteSheet: spriteSheet);
       add(_plasticManager);
 
+      // _pauseButton = PauseButton(gameRef: this);
+
       // final subText = TextComponent(
       //   text: '0こ',
       //   position: _scoreText.positionOfAnchor(Anchor.centerRight),
@@ -244,7 +246,7 @@ class AdventureGame extends FlameGame
       /// [GameOverMenu] を表示します。
       if (_player.hIndex < 0 && (!camera.shaking)) {
         pauseEngine();
-        overlays.remove(PauseButton.id);
+        // overlays.remove(PauseButton.id);
         overlays.add(GameClearMenu.id);
       }
     }
@@ -262,7 +264,7 @@ class AdventureGame extends FlameGame
         if (_player.hIndex >= 0) {
           if (overlays.isActive(StartCountDown.id) == false) {
             pauseEngine();
-            overlays.remove(PauseButton.id);
+            // overlays.remove(PauseButton.id);
             overlays.add(PauseMenu.id);
           }
         }
