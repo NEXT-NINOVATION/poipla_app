@@ -24,7 +24,9 @@ class GameClearMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authStore = ref.watch(accountStoreProvider);
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     return Scaffold(
       backgroundColor: Colors.black54,
       body: Center(
@@ -45,6 +47,7 @@ class GameClearMenu extends ConsumerWidget {
             ),
             GestureDetector(
               onTap: () async {
+                await soundEffect.resume();
                 final result = gameRef.getResult();
 
                 final post = await ref

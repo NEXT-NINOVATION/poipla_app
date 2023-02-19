@@ -44,6 +44,18 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
     });
   }
 
+  final bgm = AudioPlayer(playerId: "poipla_tutorial");
+
+  @override
+  void initState() {
+    super.initState();
+
+    bgm.setSourceAsset("audio/tutorial.mp3");
+    bgm.setVolume(1.0);
+    bgm.setReleaseMode(ReleaseMode.loop);
+    bgm.resume();
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(accountStoreProvider).currentUser;
@@ -229,6 +241,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                             index = 4;
                             funcKey++;
                           } else {
+                            bgm.stop();
                             ref.read(accountStoreProvider).completeTutorial();
                             GoRouter.of(context).go('/');
                           }

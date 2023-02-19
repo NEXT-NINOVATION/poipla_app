@@ -44,6 +44,8 @@ class Player extends SpriteComponent
   late PlayerData _playerData;
   int get score => _playerData.currentScore;
 
+  late AudioPlayerComponent _audioPlayerComponent;
+
   // 生成した乱数を保持する。
   final _random = Random();
 
@@ -74,6 +76,9 @@ class Player extends SpriteComponent
   void onMount() {
     super.onMount();
 
+    _audioPlayerComponent = AudioPlayerComponent();
+    add(_audioPlayerComponent);
+
     // コンポーネントサイズの最小寸法の0.8倍の半径を持つ円形をヒットボックスとして追加する。
     final shape = CircleHitbox.relative(
       0.8,
@@ -93,6 +98,7 @@ class Player extends SpriteComponent
 
     // 他のエンティティが敵の場合、体力を1減らす。
     if (other is Obstacle && !hitByObstacle) {
+      _audioPlayerComponent.playSfx('hit_obstacle.mp3');
       // 画面を揺らす処理
       gameRef.camera.shake(intensity: 20);
 
@@ -106,6 +112,7 @@ class Player extends SpriteComponent
         // }
       }
     } else if (other is Plastic) {
+      _audioPlayerComponent.playSfx('get_pla.mp3');
       _playerData.currentScore += 1;
     }
   }
