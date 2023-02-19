@@ -36,20 +36,16 @@ final accountFutureProvider = FutureProvider.autoDispose((ref) {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
   final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
+  final bgm = AudioPlayer(playerId: "poipla");
+
   @override
   void initState() {
     super.initState();
 
-    // bgm();
-    //LOOPの設定
-    // audioPlayer.setReleaseMode(ReleaseMode.loop);
-
-    // //再生中か停止中かの状態を取得
-    // audioPlayer.onPlayerStateChanged.listen((state) {
-    //   setState(() {
-    //     isPlaying = state == PlayerState.playing;
-    //   });
-    // });
+    bgm.setSourceAsset("audio/home.mp3");
+    bgm.setVolume(1.0);
+    bgm.setReleaseMode(ReleaseMode.loop);
+    bgm.resume();
   }
 
   @override
@@ -74,12 +70,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
     final soundEffect = AudioPlayer(playerId: "soundEffect");
     soundEffect.setSourceAsset("audio/button_press.mp3");
     soundEffect.setVolume(1.0);
-
-    final bgm = AudioPlayer(playerId: "poipla");
-    bgm.setSourceAsset("audio/home.mp3");
-    bgm.setVolume(1.0);
-    bgm.setReleaseMode(ReleaseMode.loop);
-    bgm.resume();
 
     return Container(
       decoration: const BoxDecoration(
