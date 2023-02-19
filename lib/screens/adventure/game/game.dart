@@ -52,7 +52,7 @@ class AdventureGame extends FlameGame
   // 右上にヘルスバーを表示
   late HealthBar _healthBar;
 
-  // late AudioPlayerComponent _audioPlayerComponent;
+  late AudioPlayerComponent _audioPlayerComponent;
 
   // 現在の更新で処理されるコマンドのリスト。
   final _commandList = List<Command>.empty(growable: true);
@@ -85,8 +85,8 @@ class AdventureGame extends FlameGame
         'health_unavailable.png',
       ]);
 
-      // _audioPlayerComponent = AudioPlayerComponent();
-      // add(_audioPlayerComponent);
+      _audioPlayerComponent = AudioPlayerComponent();
+      add(_audioPlayerComponent);
 
       final bubble = await ParallaxComponent.load(
         [ParallaxImageData('bubble_A.png'), ParallaxImageData('bubble_B.png')],
@@ -200,13 +200,13 @@ class AdventureGame extends FlameGame
       // プレーヤーの現在の魚の種類を更新します。
       _player.setFishType(playerData.fishType);
     }
-    // _audioPlayerComponent.playBgm('9. Space Invaders.wav');
+    _audioPlayerComponent.playBgm('game.mp3');
     super.onAttach();
   }
 
   @override
   void onDetach() {
-    // _audioPlayerComponent.stopBgm();
+    _audioPlayerComponent.stopBgm();
     super.onDetach();
   }
 

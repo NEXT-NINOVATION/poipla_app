@@ -6,6 +6,7 @@ import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/providers/api_providers.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:ruby_text/ruby_text.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class BuyModal extends ConsumerWidget {
   const BuyModal(
@@ -25,6 +26,10 @@ class BuyModal extends ConsumerWidget {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Dialog(
       insetPadding: const EdgeInsets.only(
@@ -120,7 +125,8 @@ class BuyModal extends ConsumerWidget {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await soundEffect.resume();
                     ref
                         .read(poiplaApiServiceProvider)
                         .buyShopCostume(costumeId.toString());
@@ -133,7 +139,8 @@ class BuyModal extends ConsumerWidget {
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await soundEffect.resume();
                     Navigator.pop(context);
                   },
                   child: Container(

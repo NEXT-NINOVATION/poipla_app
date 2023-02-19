@@ -10,12 +10,11 @@ class AudioPlayerComponent extends Component with HasGameRef<AdventureGame> {
   Future<void>? onLoad() async {
     FlameAudio.bgm.initialize();
 
-    await FlameAudio.audioCache
-        .loadAll(['laser1.ogg', 'powerUp6.ogg', 'laserSmall_001.ogg']);
+    await FlameAudio.audioCache.loadAll(['game.mp3']);
 
     try {
       await FlameAudio.audioCache.load(
-        '9. Space Invaders.wav',
+        'game.mp3',
       );
     } catch (_) {
       // ignore: avoid_print

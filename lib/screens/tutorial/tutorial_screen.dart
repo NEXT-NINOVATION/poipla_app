@@ -8,6 +8,7 @@ import 'package:poipla_app/screens/bubble.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/tutorial/components/prologue_phase.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class TutorialScreen extends ConsumerStatefulWidget {
   const TutorialScreen({Key? key}) : super(key: key);
@@ -46,6 +47,10 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(accountStoreProvider).currentUser;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     // セリフ
     List<String> wordsList = [
       "こんにちは、ぼくは\nスー。\nきみのおなまえは？",
@@ -176,7 +181,8 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        await soundEffect.resume();
                         if (funcKey == 1) {
                           ref
                               .read(accountStoreProvider)

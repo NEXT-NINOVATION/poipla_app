@@ -5,6 +5,7 @@ import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/models/entities/clatter_result/clatter_result.dart';
 import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/screens/app_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ResultDetailModal extends StatefulWidget {
   const ResultDetailModal({Key? key, required this.results}) : super(key: key);
@@ -30,6 +31,10 @@ class _ResultDetailModal extends State<ResultDetailModal> {
 
     final costumes =
         widget.results.map((e) => e.costume).whereType<Costume>().toList();
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -247,7 +252,8 @@ class _ResultDetailModal extends State<ResultDetailModal> {
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 40),
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
+                await soundEffect.resume();
                 GoRouter.of(context).go('/');
               },
               child: SizedBox(

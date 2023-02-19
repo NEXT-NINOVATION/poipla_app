@@ -6,6 +6,7 @@ import 'package:poipla_app/screens/adventure/game/models/character_details.dart'
 import 'package:poipla_app/screens/adventure/game/models/player_data.dart';
 import 'package:poipla_app/screens/adventure/game/models/settings.dart';
 import 'package:poipla_app/screens/app_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ResultModal extends StatefulWidget {
   const ResultModal({
@@ -27,6 +28,10 @@ class _ResultModalState extends State<ResultModal> {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -179,7 +184,8 @@ class _ResultModalState extends State<ResultModal> {
                       Container(
                         margin: EdgeInsets.only(top: 50),
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            await soundEffect.resume();
                             Navigator.pop(context);
                           },
                           child: const AppButton(text: "とじる", isPos: false),

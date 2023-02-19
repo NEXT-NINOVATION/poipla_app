@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ShopButton extends StatelessWidget {
   const ShopButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     return GestureDetector(
       onTap: () {
+        soundEffect.resume();
         GoRouter.of(context).push('/shop');
       },
       child: Container(

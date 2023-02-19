@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/app_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class PutInModal extends StatefulWidget {
   PutInModal({Key? key}) : super(key: key);
@@ -16,6 +17,10 @@ class _PutInModalState extends State<PutInModal> {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
     int sum = 0;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -104,7 +109,8 @@ class _PutInModalState extends State<PutInModal> {
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 40),
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
+                await soundEffect.resume();
                 Navigator.pop(context);
               },
               child: SizedBox(

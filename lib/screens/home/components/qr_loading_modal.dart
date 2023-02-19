@@ -7,6 +7,7 @@ import 'package:poipla_app/models/entities/session/session.dart';
 import 'package:poipla_app/providers/session_event_provider.dart';
 import 'package:poipla_app/providers/session_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class QRModalLoadingWidget extends StatelessWidget {
   const QRModalLoadingWidget({Key? key}) : super(key: key);
@@ -113,6 +114,10 @@ class QRModalCounterWidgetState extends ConsumerState<QRModalCounterWidget> {
     if (!isShowCounter) {
       return QRModalConnectedWidget();
     }
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     return Stack(
       children: [
         Column(
@@ -189,7 +194,8 @@ class QRModalCounterWidgetState extends ConsumerState<QRModalCounterWidget> {
           alignment: Alignment.bottomCenter,
           margin: const EdgeInsets.only(bottom: 40),
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
+              await soundEffect.resume();
               widget.onGoToNextStep();
             },
             child: SizedBox(
@@ -217,6 +223,10 @@ class BeforeGachaWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double deviceW = MediaQuery.of(context).size.width;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Stack(
       children: [
@@ -273,7 +283,8 @@ class BeforeGachaWidget extends ConsumerWidget {
           alignment: Alignment.bottomCenter,
           margin: const EdgeInsets.only(bottom: 40),
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
+              await soundEffect.resume();
               ref
                   .read(sessionRepositoryProvider)
                   .complete(session)

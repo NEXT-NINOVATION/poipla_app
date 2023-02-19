@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bordered_text/bordered_text.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ChangeCostumeButton extends StatelessWidget {
   const ChangeCostumeButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await soundEffect.resume();
         GoRouter.of(context).push('/change_costume');
       },
       child: Container(

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
+
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await soundEffect.resume();
         Navigator.pop(context);
       },
       child: Stack(

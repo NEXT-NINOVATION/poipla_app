@@ -5,6 +5,7 @@ import 'package:poipla_app/screens/adventure/components/detail_modal.dart';
 import 'package:poipla_app/screens/adventure/components/pref_point_button.dart';
 import 'package:poipla_app/screens/adventure/components/result_modal.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class AdventureScreen extends StatefulWidget {
   AdventureScreen({Key? key}) : super(key: key);
@@ -16,6 +17,10 @@ class AdventureScreen extends StatefulWidget {
 class _AdventureScreenState extends State<AdventureScreen> {
   @override
   Widget build(BuildContext context) {
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -53,7 +58,8 @@ class _AdventureScreenState extends State<AdventureScreen> {
                   children: [
                     SvgPicture.asset("assets/svg/japan_map.svg"),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        await soundEffect.resume();
                         showDialog(
                           // Dialogの周囲の黒い部分をタップしても閉じないようにする
                           barrierDismissible: false,

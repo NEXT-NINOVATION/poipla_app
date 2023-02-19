@@ -8,6 +8,7 @@ import 'package:poipla_app/models/entities/costume/costume.dart';
 import 'package:poipla_app/providers/clatter_result_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/gacha_result/components/result_detail_modal.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class GachaResultScreen extends ConsumerStatefulWidget {
   const GachaResultScreen({
@@ -65,6 +66,10 @@ class _GachaResultScreenState extends ConsumerState<GachaResultScreen> {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Container(
       decoration: const BoxDecoration(
@@ -227,7 +232,8 @@ class _GachaResultScreenState extends ConsumerState<GachaResultScreen> {
                           ? Container(
                               margin: const EdgeInsets.only(bottom: 120),
                               child: GestureDetector(
-                                onTap: () {
+                                onTap: () async {
+                                  await soundEffect.resume();
                                   setState(() {
                                     isVisible = false;
                                   });
@@ -242,7 +248,8 @@ class _GachaResultScreenState extends ConsumerState<GachaResultScreen> {
                           : Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
+                                    await soundEffect.resume();
                                     if (index < costumes.length - 1) {
                                       setState(() {
                                         index++;
@@ -270,7 +277,8 @@ class _GachaResultScreenState extends ConsumerState<GachaResultScreen> {
                                 Container(
                                   margin: const EdgeInsets.only(bottom: 35),
                                   child: GestureDetector(
-                                    onTap: () {
+                                    onTap: () async {
+                                      await soundEffect.resume();
                                       setState(() {
                                         isVisible = false;
                                       });

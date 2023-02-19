@@ -8,6 +8,7 @@ import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ChangeCostumeScreen extends ConsumerStatefulWidget {
   const ChangeCostumeScreen({Key? key}) : super(key: key);
@@ -38,6 +39,10 @@ class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
 
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -66,6 +71,7 @@ class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
             actions: [
               GestureDetector(
                 onTap: () {
+                  soundEffect.resume();
                   showDialog(
                     // Dialogの周囲の黒い部分をタップしても閉じないようにする
                     barrierDismissible: false,
@@ -102,7 +108,8 @@ class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        await soundEffect.resume();
                         ref
                             .read(accountStoreProvider)
                             .changeCurrentCostume(costumeId: selectedCosId);
@@ -116,7 +123,8 @@ class _ChangeCostumeScreenState extends ConsumerState<ChangeCostumeScreen> {
                     ),
                     SizedBox(width: deviceW * 0.05),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        await soundEffect.resume();
                         Navigator.pop(context);
                       },
                       child: SizedBox(

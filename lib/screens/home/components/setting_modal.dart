@@ -9,6 +9,7 @@ import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/change_costume/change_cosutme_screen.dart';
 import 'package:poipla_app/screens/home/components/service_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class SettingModal extends ConsumerStatefulWidget {
   const SettingModal({Key? key}) : super(key: key);
@@ -47,6 +48,10 @@ class _SettingModalState extends ConsumerState<SettingModal> {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
     final authStore = ref.watch(accountStoreProvider);
+
+    final soundEffect = AudioPlayer(playerId: "soundEffect");
+    soundEffect.setSourceAsset("audio/button_press.mp3");
+    soundEffect.setVolume(1.0);
 
     return Dialog(
       alignment: Alignment.bottomCenter,
@@ -217,7 +222,8 @@ class _SettingModalState extends ConsumerState<SettingModal> {
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.only(bottom: 40),
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
+                await soundEffect.resume();
                 Navigator.pop(context);
               },
               child: const AppButton(text: "とじる", isPos: false),
