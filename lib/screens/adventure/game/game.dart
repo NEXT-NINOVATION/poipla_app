@@ -245,6 +245,8 @@ class AdventureGame extends FlameGame
       /// [Player.health] がゼロになり、カメラの揺れが止まると
       /// [GameOverMenu] を表示します。
       if (_player.hIndex < 0 && (!camera.shaking)) {
+        _audioPlayerComponent.stopBgm();
+        _audioPlayerComponent.playSfx("game_clear.mp3");
         pauseEngine();
         // overlays.remove(PauseButton.id);
         overlays.add(GameClearMenu.id);
