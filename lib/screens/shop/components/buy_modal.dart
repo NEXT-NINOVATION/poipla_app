@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/parser.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/providers/api_providers.dart';
+import 'package:poipla_app/providers/costume_provider.dart';
+import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:ruby_text/ruby_text.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -127,9 +129,12 @@ class BuyModal extends ConsumerWidget {
                 GestureDetector(
                   onTap: () async {
                     await soundEffect.resume();
-                    ref
-                        .read(poiplaApiServiceProvider)
-                        .buyShopCostume(costumeId.toString());
+                    // ref
+                    //     .read(poiplaApiServiceProvider)
+                    //     .buyShopCostume(costumeId.toString());
+
+                    ref.read(myCostumeStoreProvider).update(costumeId);
+                    print(ref.read(accountStoreProvider).fetch());
                     Navigator.popUntil(context, (route) => route.isFirst);
                   },
                   child: SizedBox(

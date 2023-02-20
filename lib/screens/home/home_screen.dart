@@ -61,11 +61,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
 
     final costumes = ref.watch(myCostumeStoreProvider).myCostumes;
     ref.watch(myCostumesFutureProvider);
-    var authStore = ref.watch(accountStoreProvider).currentUser;
+    final authStore = ref.watch(accountStoreProvider).currentUser;
     ref.watch(accountFutureProvider);
 
     final currentCostume = costumes
         .firstWhereOrNull((element) => element.id == authStore?.costumeId);
+
+    final currentScore = authStore!.totalPet;
 
     final soundEffect = AudioPlayer(playerId: "soundEffect");
     soundEffect.setSourceAsset("audio/button_press.mp3");
@@ -112,7 +114,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with RouteAware {
         ),
         body: Stack(
           children: [
-            GameScore(totalPla: (authStore?.totalPet)!.toInt()),
+            GameScore(totalPla: currentScore.toInt()),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
