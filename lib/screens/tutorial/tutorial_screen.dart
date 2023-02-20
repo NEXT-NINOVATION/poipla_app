@@ -29,7 +29,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
 
   bool showPrologueFlag = false;
 
-  String fishSvgName = "fish_default.svg";
+  String fishSvgName = "fish_tutorial_dafault.svg";
   String buttonText = "こたえる";
   int index = 0;
   int funcKey = 0;
@@ -231,7 +231,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                             funcKey++;
                             index++;
                           } else if (funcKey == 3) {
-                            fishSvgName = "fish_default.svg";
+                            fishSvgName = "fish_tutorial_default.svg";
                             buttonText = "いいよ！";
                             funcKey++;
                             index++;
