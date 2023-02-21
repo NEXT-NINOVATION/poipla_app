@@ -10,7 +10,8 @@ class AudioPlayerComponent extends Component with HasGameRef<AdventureGame> {
   Future<void>? onLoad() async {
     FlameAudio.bgm.initialize();
 
-    await FlameAudio.audioCache.loadAll(['game.mp3']);
+    await FlameAudio.audioCache
+        .loadAll(['game.mp3', 'get_pla.mp3', 'hit_obstacle.mp3']);
 
     try {
       await FlameAudio.audioCache.load(
@@ -37,11 +38,44 @@ class AudioPlayerComponent extends Component with HasGameRef<AdventureGame> {
     }
   }
 
-  void playSfx(String filename) {
+  void playPoiplaBgm() {
+    if (!FlameAudio.audioCache.loadedFiles.containsKey('game.mp3')) return;
+
+    if (gameRef.buildContext != null) {
+      if (Provider.of<Settings>(gameRef.buildContext!, listen: false)
+          .backgroundMusic) {
+        FlameAudio.bgm.play('game.mp3');
+        // FlameAudio.loop('game.mp3');
+      }
+    }
+  }
+
+  void playGetPlaSfx() async {
     if (gameRef.buildContext != null) {
       if (Provider.of<Settings>(gameRef.buildContext!, listen: false)
           .soundEffects) {
-        FlameAudio.play(filename);
+        // await FlameAudio.audioCache.load('get_pla.mp3');
+        await FlameAudio.play('get_pla.mp3');
+        print(FlameAudio.audioCache.loadedFiles);
+      }
+    }
+  }
+
+  void playHitObstacleSfx() async {
+    if (gameRef.buildContext != null) {
+      if (Provider.of<Settings>(gameRef.buildContext!, listen: false)
+          .soundEffects) {
+        await FlameAudio.play('hit_obstacle.mp3');
+        print(FlameAudio.audioCache.loadedFiles);
+      }
+    }
+  }
+
+  void playSfx(String filename) async {
+    if (gameRef.buildContext != null) {
+      if (Provider.of<Settings>(gameRef.buildContext!, listen: false)
+          .soundEffects) {
+        await FlameAudio.play(filename);
       }
     }
   }
