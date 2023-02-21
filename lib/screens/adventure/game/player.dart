@@ -98,7 +98,9 @@ class Player extends SpriteComponent
 
     // 他のエンティティが敵の場合、体力を1減らす。
     if (other is Obstacle && !hitByObstacle) {
-      _audioPlayerComponent.playSfx('hit_obstacle.mp3');
+      // gameRef.addCommand(Command<AudioPlayerComponent>(action: (audioPlayer) {
+      //   audioPlayer.playHitObstacleSfx();
+      // }));
       // 画面を揺らす処理
       gameRef.camera.shake(intensity: 20);
 
@@ -107,12 +109,11 @@ class Player extends SpriteComponent
         hit(hIndex);
         health[hIndex] = false;
         hIndex -= 1;
-        // if (_hIndex < 0) {
-        //   _hIndex = 0;
-        // }
       }
     } else if (other is Plastic) {
-      _audioPlayerComponent.playSfx('get_pla.mp3');
+      // gameRef.addCommand(Command<AudioPlayerComponent>(action: (audioPlayer) {
+      //   audioPlayer.playGetPlaSfx();
+      // }));
       _playerData.currentScore += 1;
     }
   }
