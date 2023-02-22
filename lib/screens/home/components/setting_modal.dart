@@ -211,6 +211,8 @@ class _SettingModalState extends ConsumerState<SettingModal> {
                 ),
                 TextButton(
                     onPressed: () async {
+                      final bgm = AudioPlayer(playerId: "poipla");
+                      await bgm.dispose();
                       await ref.read(accountStoreProvider).withdrawal();
                       ref.refresh(myCostumeFutureProvider);
                     },
