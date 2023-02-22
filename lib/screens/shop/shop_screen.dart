@@ -166,7 +166,7 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                               costumeId: costumeList[index].costumeId,
                               nowPoint: user.point,
                               costumeName: costumeList[index].costumeName,
-                              imageName: '${costumeList[index].image}.svg',
+                              imageName: costumeList[index].image,
                               point: costumeList[index].point ?? 0),
                         );
                       }
