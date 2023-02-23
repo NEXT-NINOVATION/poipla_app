@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/bubble.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final bgm = AudioPlayer(playerId: "poipla");
+    bgm.dispose();
+    final tutorialBgm = AudioPlayer(playerId: "poipla_tutorial");
+    tutorialBgm.dispose();
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(

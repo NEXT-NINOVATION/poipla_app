@@ -146,9 +146,6 @@ class _BuyModalState extends ConsumerState<BuyModal> {
                           await ref
                               .read(myCostumeStoreProvider)
                               .update(widget.costumeId);
-                          await ref.read(accountStoreProvider).fetch();
-                          ref.refresh(shopCostumesFutureProvider);
-                          // Navigator.popUntil(context, (route) => route.isFirst);
                         },
                         child: SizedBox(
                           width: deviceW * 0.6,
@@ -172,23 +169,27 @@ class _BuyModalState extends ConsumerState<BuyModal> {
                 ),
               ],
             )
-          : _BoughtModal(
-              widget: widget, soundEffect: soundEffect, deviceW: deviceW),
+          : BoughtModal(
+              widget: widget,
+              soundEffect: soundEffect,
+              deviceW: deviceW,
+              ref: ref),
     );
   }
 }
 
-class _BoughtModal extends StatelessWidget {
-  const _BoughtModal({
-    super.key,
-    required this.widget,
-    required this.soundEffect,
-    required this.deviceW,
-  });
+class BoughtModal extends StatelessWidget {
+  const BoughtModal(
+      {super.key,
+      required this.widget,
+      required this.soundEffect,
+      required this.deviceW,
+      required this.ref});
 
   final BuyModal widget;
   final AudioPlayer soundEffect;
   final double deviceW;
+  final WidgetRef ref;
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +215,9 @@ class _BoughtModal extends StatelessWidget {
               GestureDetector(
                 onTap: () async {
                   await soundEffect.resume();
-                  Navigator.popUntil(context, (route) => route.isFirst);
+                  await ref.read(accountStoreProvider).fetch();
+                  ref.refresh(shopCostumesFutureProvider);
+                  GoRouter.of(context).go('/');
                   GoRouter.of(context).push('/change_costume');
                 },
                 child: SizedBox(
@@ -226,7 +229,9 @@ class _BoughtModal extends StatelessWidget {
               GestureDetector(
                 onTap: () async {
                   await soundEffect.resume();
-                  Navigator.popUntil(context, (route) => route.isFirst);
+                  await ref.read(accountStoreProvider).fetch();
+                  ref.refresh(shopCostumesFutureProvider);
+                  GoRouter.of(context).go('/');
                 },
                 child: Container(
                   alignment: Alignment.bottomCenter,
