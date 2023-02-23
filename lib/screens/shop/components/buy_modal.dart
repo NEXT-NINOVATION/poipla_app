@@ -2,13 +2,15 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/providers/costume_provider.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/shop/shop_screen.dart';
 
-class BuyModal extends ConsumerWidget {
+class BuyModal extends ConsumerStatefulWidget {
   const BuyModal(
       {Key? key,
       required this.costumeId,
@@ -22,7 +24,13 @@ class BuyModal extends ConsumerWidget {
   final int costumeId, point, nowPoint;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BuyModal> createState() => _BuyModalState();
+}
+
+class _BuyModalState extends ConsumerState<BuyModal> {
+  bool isBought = false;
+  @override
+  Widget build(BuildContext context) {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
 
@@ -39,124 +47,197 @@ class BuyModal extends ConsumerWidget {
       ),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0)), //this right here
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    costumeName,
-                    style: TextStyle(fontSize: 20, color: kFontColor),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      "$point",
-                      style: TextStyle(fontSize: 32, color: kFontColor),
-                    ),
-                  ),
-                  const Text(
-                    "ポイント",
-                    style: TextStyle(fontSize: 20, color: kFontColor),
-                  ),
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 24, bottom: 35),
-                child: SvgPicture.asset("assets/svg/$imageName",
-                    height: 180, width: 180),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "$nowPoint",
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: kFontColorImportant,
-                        ),
-                      ),
-                      Text(
-                        "ポイント",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: kFontColor,
-                        ),
-                      )
-                    ],
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 12, right: 12),
-                    child: SvgPicture.asset("assets/svg/arrow_right.svg"),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "${nowPoint - point}",
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: kFontColorImportant,
-                        ),
-                      ),
-                      Text(
-                        "ポイント",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: kFontColor,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: 25,
-            ),
-            child: Column(
+      child: isBought == false
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
-                  onTap: () async {
-                    await soundEffect.resume();
-                    // ref
-                    //     .read(poiplaApiServiceProvider)
-                    //     .buyShopCostume(costumeId.toString());
-
-                    await ref.read(myCostumeStoreProvider).update(costumeId);
-                    await ref.read(accountStoreProvider).fetch();
-                    ref.refresh(shopCostumesFutureProvider);
-                    Navigator.of(context).pop();
-                  },
-                  child: SizedBox(
-                    width: deviceW * 0.6,
-                    child: const AppButton(text: "かう！", isPos: true),
-                  ),
+                Column(
+                  children: [
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.costumeName,
+                          style: TextStyle(fontSize: 20, color: kFontColor),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            "${widget.point}",
+                            style: TextStyle(fontSize: 32, color: kFontColor),
+                          ),
+                        ),
+                        const Text(
+                          "ポイント",
+                          style: TextStyle(fontSize: 20, color: kFontColor),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 24, bottom: 35),
+                      child: SvgPicture.asset(
+                          "assets/svg/${widget.imageName}.svg",
+                          height: 180,
+                          width: 180),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "${widget.nowPoint}",
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: kFontColorImportant,
+                              ),
+                            ),
+                            Text(
+                              "ポイント",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: kFontColor,
+                              ),
+                            )
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 12, right: 12),
+                          child: SvgPicture.asset("assets/svg/arrow_right.svg"),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "${widget.nowPoint - widget.point}",
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: kFontColorImportant,
+                              ),
+                            ),
+                            Text(
+                              "ポイント",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: kFontColor,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () async {
-                    await soundEffect.resume();
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    width: deviceW * 0.45,
-                    child: const AppButton(text: "やめる", isPos: false),
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 25,
+                  ),
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            isBought = true;
+                          });
+                          await soundEffect.resume();
+                          // await ref
+                          //     .read(poiplaApiServiceProvider)
+                          //     .buyShopCostume(widget.costumeId.toString());
+                          await ref
+                              .read(myCostumeStoreProvider)
+                              .update(widget.costumeId);
+                          await ref.read(accountStoreProvider).fetch();
+                          ref.refresh(shopCostumesFutureProvider);
+                          // Navigator.popUntil(context, (route) => route.isFirst);
+                        },
+                        child: SizedBox(
+                          width: deviceW * 0.6,
+                          child: const AppButton(text: "かう！", isPos: true),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () async {
+                          await soundEffect.resume();
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          alignment: Alignment.bottomCenter,
+                          width: deviceW * 0.45,
+                          child: const AppButton(text: "やめる", isPos: false),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
-            ),
+            )
+          : _BoughtModal(
+              widget: widget, soundEffect: soundEffect, deviceW: deviceW),
+    );
+  }
+}
+
+class _BoughtModal extends StatelessWidget {
+  const _BoughtModal({
+    super.key,
+    required this.widget,
+    required this.soundEffect,
+    required this.deviceW,
+  });
+
+  final BuyModal widget;
+  final AudioPlayer soundEffect;
+  final double deviceW;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const SizedBox(height: 24),
+        const Text(
+          "ゲットしたよ！",
+          style: TextStyle(fontSize: 24, color: kFontColorImportant),
+        ),
+        const Text(
+          "いますぐきせかえする？",
+          style: TextStyle(fontSize: 20, color: kFontColor),
+        ),
+        Lottie.asset("assets/animation/fish_${widget.imageName}.json"),
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: 25,
           ),
-        ],
-      ),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () async {
+                  await soundEffect.resume();
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                  GoRouter.of(context).push('/change_costume');
+                },
+                child: SizedBox(
+                  width: deviceW * 0.6,
+                  child: const AppButton(text: "きせかえする", isPos: true),
+                ),
+              ),
+              const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () async {
+                  await soundEffect.resume();
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                },
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  width: deviceW * 0.45,
+                  child: const AppButton(text: "おうちへ", isPos: false),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

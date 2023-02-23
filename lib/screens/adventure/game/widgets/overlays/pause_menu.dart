@@ -19,9 +19,9 @@ class PauseMenu extends StatelessWidget {
     double deviceW = MediaQuery.of(context).size.width;
     double deviceH = MediaQuery.of(context).size.height;
 
-    final soundEffect = AudioPlayer(playerId: "soundEffect");
-    soundEffect.setSourceAsset("audio/button_press.mp3");
-    soundEffect.setVolume(1.0);
+    // final soundEffect = AudioPlayer(playerId: "soundEffect");
+    // soundEffect.setSourceAsset("audio/button_press.mp3");
+    // soundEffect.setVolume(1.0);
 
     return Scaffold(
       backgroundColor: Colors.black45,
@@ -69,7 +69,7 @@ class PauseMenu extends StatelessWidget {
               // const SizedBox(height: 32),
               GestureDetector(
                 onTap: () async {
-                  await soundEffect.resume();
+                  // await soundEffect.resume();
                   gameRef.overlays.remove(PauseMenu.id);
                   gameRef.reset();
                   gameRef.resumeEngine();
@@ -83,7 +83,7 @@ class PauseMenu extends StatelessWidget {
               const SizedBox(height: 40),
               GestureDetector(
                 onTap: () async {
-                  await soundEffect.resume();
+                  // await soundEffect.resume();
                   gameRef.resumeEngine();
                   gameRef.overlays.remove(PauseMenu.id);
                   gameRef.overlays.add(PauseButton.id);

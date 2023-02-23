@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -7,6 +6,8 @@ import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/start_count_down.dart';
 import 'package:poipla_app/screens/app_button.dart';
+
+import 'package:audioplayers/audioplayers.dart';
 
 // This class represents the game over menu overlay.
 class GameClearMenu extends ConsumerWidget {
@@ -17,9 +18,10 @@ class GameClearMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final soundEffect = AudioPlayer(playerId: "soundEffect");
-    soundEffect.setSourceAsset("audio/button_press.mp3");
-    soundEffect.setVolume(1.0);
+    // final soundEffect = AudioPlayer(playerId: "soundEffect");
+    // soundEffect.setSourceAsset("audio/button_press.mp3");
+    // soundEffect.setVolume(1.0);
+
     return Scaffold(
       backgroundColor: Colors.black54,
       body: Center(
@@ -40,7 +42,7 @@ class GameClearMenu extends ConsumerWidget {
             ),
             GestureDetector(
               onTap: () async {
-                await soundEffect.resume();
+                // await soundEffect.resume();
                 final result = gameRef.getResult();
 
                 final post = await ref

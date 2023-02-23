@@ -4,6 +4,7 @@ import 'package:flame/parallax.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:poipla_app/screens/adventure/game/models/character_details.dart';
 import 'package:poipla_app/screens/adventure/game/models/player_data.dart';
 import 'package:poipla_app/screens/adventure/game/player_score.dart';
@@ -203,6 +204,9 @@ class AdventureGame extends FlameGame
       _player.setFishType(playerData.fishType);
     }
     _audioPlayerComponent.playBgm('game.mp3');
+    // addCommand(Command<AudioPlayerComponent>(action: (audioPlayer) {
+    //   audioPlayer.playPoiplaBgm();
+    // }));
     super.onAttach();
   }
 

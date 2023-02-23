@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
 import 'package:quiver/async.dart'; // ①quiver.asyncライブラリを利用
+import 'package:audioplayers/audioplayers.dart';
 
 // This class represents the game over menu overlay.
 class StartCountDown extends StatefulWidget {
@@ -19,6 +20,7 @@ class _StartCountDownState extends State<StartCountDown> {
   int _current = 3;
   bool _isStart = true;
 
+  // final soundEffect = AudioPlayer(playerId: "whistle");
   // ③ カウントダウン処理を行う関数を定義
   void startTimer() {
     CountdownTimer countDownTimer = new CountdownTimer(
@@ -27,14 +29,18 @@ class _StartCountDownState extends State<StartCountDown> {
     );
 
     var sub = countDownTimer.listen(null);
-    sub.onData((duration) {
+    sub.onData((duration) async {
+      // await soundEffect.setSourceAsset("audio/whistle_short.mp3");
+      // soundEffect.resume();
       setState(() {
         _current = _start - duration.elapsed.inSeconds; //毎秒減らしていく
       });
     });
 
     // 終了時の処理
-    sub.onDone(() {
+    sub.onDone(() async {
+      // await soundEffect.setSourceAsset("audio/whistle_long.mp3");
+      // soundEffect.resume();
       sub.cancel();
       _current = 0;
     });

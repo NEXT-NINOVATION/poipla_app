@@ -28,7 +28,7 @@ class ObstacleManager extends Component
 
   ObstacleManager({required this.spriteSheet}) : super() {
     // タイマーが明示的に停止するまで、1 秒ごとに _spawnEnemy() を呼び出すようにタイマーを設定。
-    _timer = Timer(1, onTick: _spawnEnemy, repeat: true);
+    _timer = Timer(2.7, onTick: _spawnEnemy, repeat: true);
 
     // フリーズ時間を2秒に設定します。2秒後にスポーンタイマーが再び開始されます。
     _freezeTimer = Timer(2, onTick: () {
