@@ -1,14 +1,12 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/parser.dart';
 import 'package:poipla_app/constants.dart';
-import 'package:poipla_app/providers/api_providers.dart';
 import 'package:poipla_app/providers/costume_provider.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
-import 'package:ruby_text/ruby_text.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:poipla_app/screens/shop/shop_screen.dart';
 
 class BuyModal extends ConsumerWidget {
   const BuyModal(
@@ -27,7 +25,6 @@ class BuyModal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // デバイスサイズ
     double deviceW = MediaQuery.of(context).size.width;
-    double deviceH = MediaQuery.of(context).size.height;
 
     final soundEffect = AudioPlayer(playerId: "soundEffect");
     soundEffect.setSourceAsset("audio/button_press.mp3");
@@ -133,9 +130,10 @@ class BuyModal extends ConsumerWidget {
                     //     .read(poiplaApiServiceProvider)
                     //     .buyShopCostume(costumeId.toString());
 
-                    ref.read(myCostumeStoreProvider).update(costumeId);
-                    print(ref.read(accountStoreProvider).fetch());
-                    Navigator.popUntil(context, (route) => route.isFirst);
+                    await ref.read(myCostumeStoreProvider).update(costumeId);
+                    await ref.read(accountStoreProvider).fetch();
+                    ref.refresh(shopCostumesFutureProvider);
+                    Navigator.of(context).pop();
                   },
                   child: SizedBox(
                     width: deviceW * 0.6,
