@@ -85,7 +85,7 @@ class Fish {
       speed: 100,
       health: 4,
       text: "おおきさ",
-      spriteId: 3,
+      spriteId: 4,
       assetPath: 'assets/images/lala.png',
       level: 1,
     ),
