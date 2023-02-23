@@ -12,4 +12,9 @@ class MyCostumeStore extends ChangeNotifier {
     notifyListeners();
     return myCostumes;
   }
+
+  Future update(int costumeId) async {
+    await costumeRepository.buyShopCostume(costumeId);
+    notifyListeners();
+  }
 }

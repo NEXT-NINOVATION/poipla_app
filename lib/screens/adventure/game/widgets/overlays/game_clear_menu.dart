@@ -1,8 +1,8 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:poipla_app/providers/api_providers.dart';
+import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
 import 'package:poipla_app/screens/adventure/game/widgets/overlays/start_count_down.dart';
 import 'package:poipla_app/screens/app_button.dart';
@@ -49,6 +49,7 @@ class GameClearMenu extends ConsumerWidget {
                     .read(poiplaApiServiceProvider)
                     .postGameResult(
                         {'point': result[1], 'total_pet': result[0]});
+                await ref.read(accountStoreProvider).fetch();
 
                 print(post);
 

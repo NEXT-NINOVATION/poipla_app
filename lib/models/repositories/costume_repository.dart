@@ -4,4 +4,8 @@ class CostumeRepository {
   Future<List<Costume>> getMyCostumes() async {
     throw UnimplementedError();
   }
+
+  Future buyShopCostume(int costumeId) async {
+    throw UnimplementedError();
+  }
 }

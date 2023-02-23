@@ -2,19 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:poipla_app/constants.dart';
 
-class GameScore extends StatefulWidget {
-  GameScore({
-    Key? key,
-    required this.totalPla,
-  }) : super(key: key);
-
+class GameScore extends StatelessWidget {
+  const GameScore({Key? key, required this.totalPla}) : super(key: key);
   final int totalPla;
-
-  @override
-  State<GameScore> createState() => _GameScoreState();
-}
-
-class _GameScoreState extends State<GameScore> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -48,7 +38,7 @@ class _GameScoreState extends State<GameScore> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            "${widget.totalPla}",
+                            "$totalPla",
                             style: TextStyle(
                               color: kFontColorRed,
                               fontSize: 18,
