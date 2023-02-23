@@ -1,9 +1,10 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/screens/adventure/game/game.dart';
 import 'package:poipla_app/screens/app_button.dart';
+
 import 'pause_button.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 // This class represents the pause menu overlay.
 class PauseMenu extends StatelessWidget {
