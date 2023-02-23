@@ -38,6 +38,8 @@ class _BuyModalState extends ConsumerState<BuyModal> {
     soundEffect.setSourceAsset("audio/button_press.mp3");
     soundEffect.setVolume(1.0);
 
+    final bool isLack = widget.nowPoint - widget.point < 0;
+
     return Dialog(
       insetPadding: const EdgeInsets.only(
         bottom: 120,
@@ -81,92 +83,132 @@ class _BuyModalState extends ConsumerState<BuyModal> {
                           height: 180,
                           width: 180),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "${widget.nowPoint}",
-                              style: TextStyle(
-                                fontSize: 24,
-                                color: kFontColorImportant,
+                    isLack == false
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "${widget.nowPoint}",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: kFontColorImportant,
+                                    ),
+                                  ),
+                                  Text(
+                                    "ポイント",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: kFontColor,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ),
-                            Text(
-                              "ポイント",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: kFontColor,
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(left: 12, right: 12),
+                                child: SvgPicture.asset(
+                                    "assets/svg/arrow_right.svg"),
                               ),
-                            )
-                          ],
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 12, right: 12),
-                          child: SvgPicture.asset("assets/svg/arrow_right.svg"),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "${widget.nowPoint - widget.point}",
-                              style: TextStyle(
-                                fontSize: 24,
-                                color: kFontColorImportant,
+                              Row(
+                                children: [
+                                  Text(
+                                    "${widget.nowPoint - widget.point}",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: kFontColorImportant,
+                                    ),
+                                  ),
+                                  Text(
+                                    "ポイント",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: kFontColor,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ),
-                            Text(
-                              "ポイント",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: kFontColor,
+                            ],
+                          )
+                        : Column(
+                            children: const [
+                              Text(
+                                "ポイントがたりないよ…",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: kFontColor,
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                              Text(
+                                "ぼうけんへいくとポイントがもらえるよ！",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: kFontColorImportant,
+                                ),
+                              ),
+                            ],
+                          ),
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 25,
-                  ),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          setState(() {
-                            isBought = true;
-                          });
-                          await soundEffect.resume();
-                          // await ref
-                          //     .read(poiplaApiServiceProvider)
-                          //     .buyShopCostume(widget.costumeId.toString());
-                          await ref
-                              .read(myCostumeStoreProvider)
-                              .update(widget.costumeId);
-                        },
-                        child: SizedBox(
-                          width: deviceW * 0.6,
-                          child: const AppButton(text: "かう！", isPos: true),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      GestureDetector(
-                        onTap: () async {
-                          await soundEffect.resume();
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          alignment: Alignment.bottomCenter,
-                          width: deviceW * 0.45,
-                          child: const AppButton(text: "やめる", isPos: false),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    margin: const EdgeInsets.only(
+                      bottom: 25,
+                    ),
+                    child: isLack == false
+                        ? Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () async {
+                                  setState(() {
+                                    isBought = true;
+                                  });
+                                  await soundEffect.resume();
+                                  // await ref
+                                  //     .read(poiplaApiServiceProvider)
+                                  //     .buyShopCostume(widget.costumeId.toString());
+                                  await ref
+                                      .read(myCostumeStoreProvider)
+                                      .update(widget.costumeId);
+                                },
+                                child: SizedBox(
+                                  width: deviceW * 0.6,
+                                  child:
+                                      const AppButton(text: "かう！", isPos: true),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              GestureDetector(
+                                onTap: () async {
+                                  await soundEffect.resume();
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  alignment: Alignment.bottomCenter,
+                                  width: deviceW * 0.45,
+                                  child: const AppButton(
+                                      text: "やめる", isPos: false),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () async {
+                                  await soundEffect.resume();
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  alignment: Alignment.bottomCenter,
+                                  width: deviceW * 0.45,
+                                  child: const AppButton(
+                                      text: "やめる", isPos: false),
+                                ),
+                              ),
+                              const SizedBox(height: 40),
+                            ],
+                          )),
               ],
             )
           : BoughtModal(
