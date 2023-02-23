@@ -1,21 +1,16 @@
 import 'dart:developer';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poipla_app/constants.dart';
-import 'package:poipla_app/data/dao/user_dao.dart';
-import 'package:poipla_app/data/retrofit/service.dart';
-import 'package:poipla_app/models/database.dart';
-import 'package:poipla_app/models/repositories/user_repository.dart';
 import 'package:poipla_app/providers/api_providers.dart';
-import 'package:poipla_app/providers/token_providers.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/custom_back_button.dart';
 import 'package:poipla_app/screens/home/components/setting_button.dart';
 import 'package:poipla_app/screens/home/components/setting_modal.dart';
 import 'package:poipla_app/screens/shop/components/buy_modal.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 final shopCostumesFutureProvider = FutureProvider((ref) {
   return ref
@@ -174,7 +169,8 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: costumeList[index].hasCostume
+                        color: costumeList[index].hasCostume ||
+                                ((costumeList[index].reqLv ?? 0) > user.level)
                             ? Colors.grey
                             : Colors.white,
                       ),
@@ -215,18 +211,33 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                               ),
                             ],
                           ),
-                          costumeList[index].hasCostume
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  child: const Text(
-                                    "もってるよ！",
-                                    style: TextStyle(
-                                      color: kAppBarFontColor,
-                                      fontSize: 20,
-                                    ),
+                          () {
+                            if (costumeList[index].hasCostume) {
+                              return Container(
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  "もってるよ！",
+                                  style: TextStyle(
+                                    color: kAppBarFontColor,
+                                    fontSize: 20,
                                   ),
-                                )
-                              : Container(),
+                                ),
+                              );
+                            } else if (!costumeList[index].isBuyable) {
+                              return Container(
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  "レベルが\n足りないよ!",
+                                  style: TextStyle(
+                                    color: kAppBarFontColor,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          }(),
                         ],
                       ),
                     ),
