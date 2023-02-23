@@ -169,10 +169,10 @@ class _ShopScreen extends ConsumerState<ShopScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: costumeList[index].hasCostume ||
-                                ((costumeList[index].reqLv ?? 0) > user.level)
-                            ? Colors.grey
-                            : Colors.white,
+                        color: costumeList[index].isBuyable &&
+                                !costumeList[index].hasCostume
+                            ? Colors.white
+                            : Colors.grey,
                       ),
                       child: Stack(
                         children: [
