@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,7 +6,7 @@ import 'package:poipla_app/constants.dart';
 import 'package:poipla_app/providers/user_provider.dart';
 import 'package:poipla_app/screens/app_button.dart';
 import 'package:poipla_app/screens/bubble.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:poipla_app/screens/shop/shop_screen.dart';
 
 class StartScreen extends ConsumerWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -53,7 +54,8 @@ class StartScreen extends ConsumerWidget {
               child: GestureDetector(
                 onTap: () async {
                   await soundEffect.resume();
-                  ref.read(accountStoreProvider).register();
+                  await ref.read(accountStoreProvider).register();
+                  ref.refresh(shopCostumesFutureProvider);
                 },
                 child: const AppButton(
                   text: "はじめる",
